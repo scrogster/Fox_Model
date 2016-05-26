@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+*.Rdata
+*.Rproj
+*.docx
+*.pdf
+RabbitFoxModel_II.Rproj
+Data/*
+Figures/*
+
