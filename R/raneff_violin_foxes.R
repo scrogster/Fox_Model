@@ -8,6 +8,8 @@ load("model_results.Rdata")
 
 sitelabs<-as.character(unique(obs_data$site))
 
+sitelabs[sitelabs=="Yarram/Woodside"]<-"Yarram"
+
 raneff_result_fox<-ggs(samp, family="^site.r.eff.centered\\[")
 param_names<-levels(raneff_result_fox$Parameter)
 
