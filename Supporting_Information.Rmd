@@ -1,0 +1,49 @@
+---
+title: Supporting Informaiton
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  word_document: 
+    fig_caption: yes
+    reference_docx: Template_Supporting.docx
+csl: journal-of-applied-ecology.csl
+bibliography: rabbit_refs.bib
+---
+
+```{r echo=FALSE, message=FALSE, results="asis"}
+load("model_results.Rdata")
+require(dplyr)
+require(xtable)
+
+obs_data2<-tbl_df(data.frame("sitename"=spotlight$Monitor.Site, obs_data))
+trans_summary<-obs_data2 %>%
+  group_by(sitename) %>%
+  summarise(firstsamp=round(min(year)), lastsamp=round(max(year)), total_surv=length(foxes.counted), years_samped=n_distinct(year), maxlength=max(trans.length)/1000, meanlength=round(mean(trans.length)/1000, 2))
+
+names(trans_summary)<-c("Transect", "Established", "Last survey", "Number of Surveys", "Years with survey", "Full length (km)", "Mean length (km)")
+#make the table
+#print(
+#  xtable(
+#  trans_summary, caption="Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.", 
+#  label="transect_summary", 
+#    digits=c(1, 0, 0, 0, 0, 0, 1, 1), align=c("c", "l", "c", "c", "c","c", "c", "c") ), 
+#include.rownames=FALSE, table.placement="p!", floating.environment="sidewaystable", caption.placement = "top")
+library(knitr)
+kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.",
+	align=c("c", "l", "c", "c", "c","c", "c", "c") )
+```
+<br>
+
+##JAGS Code for the Bayesian State Space Model
+```r
+`r paste(readLines('R/gompertz_heirarch_rain.txt'), collapse = '\n')`
+```
+
+![Figure S1. Posterior densities of the regression parameters.](Figures/beta_posterior_density.png) 
+
+![Figure S2. Posterior densities of the error terms $(\sigma)$.](Figures/sigma_posterior_density.png) 
+
+![Figure S3. Posterior densities for the site-level random effects terms for rates of increase of foxes](Figures/raneff_violin_foxes.png)
+
+![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits](Figures/raneff_violin_rabbits.png)
+
+![Figure S5. Half-yearly rainfall at the study sites over the course of the study](Figures/rain_graph.png)
