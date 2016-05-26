@@ -12,37 +12,45 @@ bibliography: rabbit_refs.bib
 ---
 
 Michael P. Scroggie [^1]
+
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
 David M. Forsyth
+
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
 David S.L. Ramsey
+
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
 Stephen R. McPhee
+
 Agricultural Technical Services Pty Lty, 48 Warooka Road, Yorketown South Australia 5576 Australia.
 
 John Matthews
+
 Agricultural Services and Biosecurity Operations Division, Department of Economic Development, Jobs, Training and Resources, Mt Napier Road, Hamilton Victoria 3300 Australia.
 
 Caleb Hurrell
+
 Agricultural Services and Biosecurity Operations Division, Department of Economic Development, Jobs, Training and Resources, Cnr Fenwick and Little Malop Streets, Geelong Victoria 3220 Australia.
 
 Kasey A. Stamation
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
 Michael Lindeman
+
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
 Ivor G. Stuart
+
 Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
 
 [^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au
 
 #Summary
 
-Managing ecosystems that include both predators and prey is often difficult because of the complex trophic and competitive interactions that are possible. Invasive red foxes *(Vulpes vulpes)* and European rabbits *(Oryctolagus cuniculus)8 are sympatric across c. 69 %  of mainland Australia, but there is uncertainty about the effects of changes in rabbit abundance on fox populations, relative to the effects of environmental variation and density-dependent population processes. 
+Managing ecosystems that include both predators and prey is often difficult because of the complex trophic and competitive interactions that are possible. Invasive red foxes *(Vulpes vulpes)* and European rabbits *(Oryctolagus cuniculus)* are sympatric across c. 69 %  of mainland Australia, but there is uncertainty about the effects of changes in rabbit abundance on fox populations, relative to the effects of environmental variation and density-dependent population processes. 
 
 We examined the extent to which rates of growth of fox populations varied with rabbit abundance by fitting a Bayesian hierarchical state-space model to spotlight counts of rabbits and foxes conducted on 21 transects throughout the State of Victoria between 1998 and 2015. The effects of rainfall and density-dependence on the population growth rates of both species were also evaluated. 
 
@@ -192,17 +200,30 @@ Table - summary statistics for posteriors of model parameters
 
 
 #Figures
-Figure  - map of study area
-Figure - Predicted fox r given rainfall, season and density. - definitely include
-Figure - Predicted and observed rabbit abundance. -definitely include
-Figure - Predicted and observed fox abundance. -definitely include
+![Figure 1. Map of south-eastern Australia, showing the location of the 21 monitoring sites within the State of Victoria, an d variation in mean annual rainfall across the study area. Inset: map of Australia, showing the location of the study area.](Figures/Site-map.png)
+
+![Figure 2. Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low, medium and high rainfall. The dashed lines denote the combinations of rabbit and fox abundance for which *r* = 0](Figures/predicted_fox_r.png)
+
+![Figure 3. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances.](Figures/fox_abund.png)
+
+![Figure 4. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances.](Figures/rabbit_abund.png)
 
 #Supporting Information
-Code for model
-Figure  - Beta densities 
-Figure - Sigma densities
-Figure - Random effects violin (foxes) 
-Figure - Random effects violin (rabbits)
-Figure - Rainfall time-series - supplementary material
+
+![Figure S1. Posterior densities of the regression parameters.](Figures/beta_posterior_density.png) 
+
+![Figure S2. Posterior densities of the error terms $(\sigma)$.](Figures/sigma_posterior_density.png) 
+
+![Figure S3. Posterior densities for the site-level random effects terms for rates of increase of foxes](Figures/raneff_violin_foxes.png)
+
+![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits](Figures/raneff_violin_rabbits.png)
+
+![Figure S5. Half-yearly rainfall at the study sites over the course of the study](Figures/rain_graph.png)
+
 
 #References
+
+
+
+
+
