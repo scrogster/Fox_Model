@@ -48,5 +48,5 @@ Figures/beta_traceplots.pdf: R/diagnostic_plots.R model_results.Rdata
 ###############################################################################	
 #generate the paper as a word document                                        #
 ###############################################################################
-Fox_model_paper.docx: R/render_script.R Fox_model_paper.Rmd rabbit_refs.bib Template.docx figures
+Fox_model_paper.docx: R/render_script.R Fox_model_paper.Rmd Supporting_Information.Rmd rabbit_refs.bib Template.docx figures
 	Rscript $<
