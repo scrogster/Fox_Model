@@ -1,0 +1,208 @@
+---
+title: Long-term, spatially extensive monitoring reveals effects of rainfall and density-dependence
+  on population dynamics of invasive European rabbits and red foxes in south-eastern
+  Australia
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  word_document: 
+    fig_caption: yes
+    reference_docx: Template.docx
+csl: journal-of-applied-ecology.csl
+bibliography: rabbit_refs.bib
+---
+
+Michael P. Scroggie [^1]
+Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
+
+David M. Forsyth
+Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
+
+David S.L. Ramsey
+Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
+
+Stephen R. McPhee
+Agricultural Technical Services Pty Lty, 48 Warooka Road, Yorketown South Australia 5576 Australia.
+
+John Matthews
+Agricultural Services and Biosecurity Operations Division, Department of Economic Development, Jobs, Training and Resources, Mt Napier Road, Hamilton Victoria 3300 Australia.
+
+Caleb Hurrell
+Agricultural Services and Biosecurity Operations Division, Department of Economic Development, Jobs, Training and Resources, Cnr Fenwick and Little Malop Streets, Geelong Victoria 3220 Australia.
+
+Kasey A. Stamation
+Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
+
+Michael Lindeman
+Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
+
+Ivor G. Stuart
+Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
+
+[^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au
+
+#Summary
+
+Managing ecosystems that include both predators and prey is often difficult because of the complex trophic and competitive interactions that are possible. Invasive red foxes *(Vulpes vulpes)* and European rabbits *(Oryctolagus cuniculus)8 are sympatric across c. 69 %  of mainland Australia, but there is uncertainty about the effects of changes in rabbit abundance on fox populations, relative to the effects of environmental variation and density-dependent population processes. 
+
+We examined the extent to which rates of growth of fox populations varied with rabbit abundance by fitting a Bayesian hierarchical state-space model to spotlight counts of rabbits and foxes conducted on 21 transects throughout the State of Victoria between 1998 and 2015. The effects of rainfall and density-dependence on the population growth rates of both species were also evaluated. 
+
+Our model fitted the observed data well. There was no evidence of a numerical response of foxes to changes in rabbit abundance. Rather, fox populations increased with increasing rainfall in the previous six months. Fox populations exhibited strongly negative density dependence. Rabbit populations also decreased with increasing rainfall and exhibited strongly negative density dependence. Our model indicated that in favourable conditions (high rainfall, high rabbit abundance) the equilibrium abundance of fox populations was $\sim 0.75$ foxes per spotlight km. Under low rainfall conditions in spring, carrying capacity was predicted to be <  0.1 fox per spotlight km. 
+
+*Synthesis and applications* Fox and rabbit populations responded differently to rainfall, with fox populations growing more rapidly under high rainfall, while rabbit populations grew more slowly. Our analysis provides the first evidence of density dependence in Australian fox populations. We conclude that both fox and rabbit abundances are determined by the interaction between rainfall and prevailing density, and that there is little numerical interaction between these species. Controlling rabbits to very low abundances is therefore not expected to substantially reduce fox abundances in south-eastern Australia.
+
+**Keywords:** Bayesian, biological control, joint model, kilometric index, numerical response, *Oryctolagus cuniculus*, predator-prey dynamics, rabbit haemmorhagic disease; rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
+
+
+#Introduction
+
+Managing ecosystems that include both predators and prey is difficult because of the complex trophic and competitive interactions that are possible in such systems [@ruscoe2011unexpected; @bode2015eradicating]. For example, there was much debate about the preferred order in which to eradicate invasive feral cats *(Felis catus)* and European rabbits *(Oryctolagus cuniculus)* from Macquarie Island [@bergstrom2009indirect; @dowding2009cats]. Although eradication of invasive mammalian predators and their invasive prey is now technically feasible for smaller islands (e.g. @bode2015eradicating), sustained control to low densities is currently the only feasible option for larger islands and continents [@ruscoe2011unexpected; @glen2013eradicating; @parkes_etal_submitted]. The need to rely on sustained control in such management contexts adds to the complexity of the decision making process, as managers with limited resources may have to continually evaluate the costs and benefits of controlling predators, prey or both in order to achieve desired management outcomes.
+
+Because there are often insufficient resources to simulataneously control multiple invasive taxa, a key question for managers is whether controlling only the predator or only the prey affects the abundance of the other species [i.e. via a numerical response, @bayliss2002numerical]. Because of the typically much smaller home-ranges of mammalian prey compared to predators, this question can be addressed using field experiments in which free-living predators have access to some experimental units containing prey but not others [@pech1992limits].  Field experiments that have excluded mammalian predators sometimes demonstrate significant increases in mammalian prey [@krebs1995impact; @salo2010predator], although the response in invasive predator-prey systems is often weak or non-existent  [e.g. @pech1992limits; @norbury2015pests]. Bottom-up processes such as food availability typically has a stronger positive effects on mammalian prey abundances than the negative effect of mammalian predators [@krebs1995impact;  @prevedello2013population].
+
+In contrast, the abundance of mammalian predators is believed to be primarily determined by food availability (i.e. bottom-up process), although there may be a ceiling on this effect due to territorial spacing or other behavioural constraints on abundance at high densities [@macdonald1983ecology; @lindstrom1989food; @moehlman1989intraspecific; @cariappa2011reappraisal]. However, because of the large spatial and temporal scales that mammalian predators operate at, experiments to test hypotheses about the ecological processes driving abundance of predators are logistically and financially difficult to implement [@krebs1995impact]. Long-term monitoring of predator-prey abundances provides an alternative approach to testing hypotheses about predator-prey dynamics [e.g., @dennis2000joint; @meserve2003thirteen]. An advantage of long-term population monitoring is that the influence of additional factors that vary during the study can also be assessed. For example, rainfall can be a particularly important driver of food availability for mammalian prey and/or predators, particularly in semi-arid and arid environments [@dennis2000joint; @meserve2003thirteen; @letnic2004responses; @letnic2011resources]. 
+
+Computational advances mean that hypotheses concerning potentially complex population dynamics can be evaluated from noisy, complex datasets by fitting hierarchical models to time series of animal abundances [e.g. @bjornstad2001noisy; @buckland2004state; @new2012modelling; @cruz2013modelling}]. Here, we use long-term and spatially extensive monitoring data from invasive European rabbit *(Oryctolagus cuniculus)* and red fox *(Vulpes vulpes)* populations to test hypotheses about the relationship between predator and prey abundances, together with the effects of rainfall and density dependence on their population growth rates in south-eastern Australia. 
+
+European rabbits  and red foxes are sympatric over c. 69 % of mainland Australia [@west2011australian], and are serious threats to both agriculture and native biodiversity [@williams1995managing; @mcleod2004counting; @cooke2012rabbits; @saunders2010impacts]. Substantial effort is expended on the control of both species using conventional methods such as warren ripping (for rabbits) and poison baiting (for foxes) [@reddiex2007control]. Two biological control agents (myxoma virus and rabbit haemorrhagic disease virus [RHDV]) have also been established to control of rabbits [@fenner1999biological; @mutze2008geographic; @mutze2010effect].  Because rabbits can be a major component of fox diet [@davis_foxdiet], there is much interest in understanding the interactions between these species [@Pech_alternativeprey; @norbury2015pests], and possibly exploiting these interaction to maximise the effectiveness of management for achieving agricultural production and biodiversity outcomes [@pedler2016rabbit].
+
+Rainfall is an important driver of mammalian herbivore abundances in large parts of Australia through its limiting effects on vegetation growth, and hence may also drive food availability for mammalian predators [@letnic2004responses; @letnic2011resources; @choquenot2013exploitation]. Population density may also at least partly determine the growth rate of rabbit [@fordham2012european] and fox [@lindstrom1989food; @saunders2010impacts] populations, through density dependent mechanisms. Field experiments indicate that foxes may be able to exert top-down regulation of rabbits only if rabbits are already reduced to rather low densities [a `predator-pit' effect, @newsome1989prolonged; @pech1992limits; @banks2000can]. Of particular management interest is the effect of controlling rabbits to low densities, through conventional and/or biological control, on fox populations [@pech1992limits; @holden2003impact]. If controlling rabbits to low densities substantially reduces fox abundances, then there may be a reduced need for specialised fox control. Conversely, if sustained control of rabbits to low abundance does not limit fox populations (perhaps because alternative prey are exploited when rabbits are scarce), then there may be a need to undertake simultaneous, integrated control of both rabbit and fox populations, to protect biodiversity and agricultural production. 
+
+#Materials and methods
+
+##Transect locations and rabbit management histories
+
+Twenty-one monitoring transects distributed throughout the state of Victoria were included in this study (Fig. \ref{fig:sitemap}). All transects were located on private livestock and cropping properties. Seventeen of these transects were established in 1998 to evaluate the effects of the establishment of RHDV on rabbit populations [@mcphee2010long]. An additional three transects were added to the study in 2001, 2007 and 2008. The transects were permanently marked, and varied in length from 5.0−-21.7 km (Table S1). Since the minimum distance between two transects (X km) greatly exceeded the home range sizes of both rabbits and foxes in south-eastern Australia [@williams1995managing; @saunders1995managing; @carter2012ecology], the transects were treated as demographically independent. The 21 transects encompassed a climatic and productivity gradient from cool, moist, highly productive sites in south to hot, dry, low-productivity sites in the north (Table SX). 
+
+The rabbit management history of transects varied. Following the establishment of RHDV in Victoria in 1996, the Victorian government subsidised rabbit managed at 14 properties with transects from 1996−-2002 [@mcphee2010long].  Management involved using heavy machinery to remove above-ground harbour and destroy warrens [for further details see @mcphee2010long]. Three properties were deliberately not subjected to this management [@mcphee2010long], although management was conducted at one of these properties (Ingliston) in 2010 [@forsyth_density-dependent_2015]. The removal of harbour and warren ripping substantially reduced rabbit abundance over and above the effects of RHDV [@mcphee2010long; @ramsey2014recolonisation].
+
+##Spotlight counts
+
+Spotlight counts were conducted between two and four times annually, with the majority of counts made during autumn and spring. Two replicate counts were made on each survey occasion, usually over two consecutive nights. Counts commenced shortly after sunset, and involved one observer standing in the tray of a slow-moving (10−-20 kmh<sup>-1</sup>, depending upon terrain) utility vehicle, searching 80−-100 m either side of the transect line using a hand-held 100W spotlight [@williams1995managing]. The numbers of rabbits and foxes seen along the transects were recorded. 
+
+##Statistical model and hypotheses
+We modelled the time-series of fox and rabbit counts from the 21 transects jointly, using an hierarchical, Bayesian state-space modelling approach [@buckland2004state]. To account for uneven timing and survey effort amongst sites, the spotlight counts of rabbits and foxes were temporally discretized into half-yearly intervals, depending on whether they were made in the first (January--June) or second (July--December) half of each calendar year.
+
+A Poisson observation model was assumed for the counts of both foxes and rabbits, where the number of individuals observed during each survey was dependent on underlying abundance, with a Poisson error structure for the observations. Transect lengths were included as offset terms in the expectation of the Poisson model, to allow for both within- and between-site variation in the lengths of the spotlight transects:
+
+$$
+C_{it} \sim Poisson(\mu_{t}l_{it})
+$$
+
+Where $C_{it}$ is the number of individuals observed during the $i^{th}$ replicate spotlight count at time $t$. $l_{it}$ were the corresponding lengths of transect surveyed during each census. 
+
+The transect-level abundances $(\mu_{t})$ of foxes at each site were modelled as a stochastic, density-dependent process:
+
+$$
+\mu_{t}=\mu_{t-1} e^{r_{t}}
+$$
+
+Where $\mu_{it}$ is the expected mean spotlight count at time $t$, and $r_{t}$ is the  rate-of-increase for the population during the interval $[t-1,t]$. We decomposed $r_{t}$ into components attributable to transect and survey-level covariates using a linear model, to account for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model, @cruz2013modelling], rainfall during the previous six months, season (summer vs winter), a random transect-effect, and residual errors:
+
+$$
+r_{t}=\bar{r} + \beta_{1}\log{R_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{t-1}+\beta_{4}\mbox{winter}_{t}+ \zeta_{i}+\epsilon_{t}
+$$
+
+Where $R_{t}$ is the estimate abundance of rabbits at time $t$, and $\beta_{1}-\beta_{4}$ are regression parameters describing the numerical response of the fox population to rabbit abundance, the strength of density dependence in the rate-of-increase of the fox population, the relationship between rate of increase and the lagged six-monthly rainfall, and whether or not the count was made in the second half of the calendar year. $\zeta_{i}$ are random site-level effects on the rate of increase of the fox population and $\epsilon_{t}$ are normally-distributed process-errors.
+
+The abundance of rabbits at the sites was modelled jointly with that of foxes, using a state-space model similar in form to that used for foxes, but without a term for numerical response of the rabbit populations to prey availability: 
+
+$$
+\begin{aligned}
+C_{i,t} &\sim Poisson(R_{t}L_{i,t}) \\
+R_{t} &=R_{t-1} e^{r_{t}} \\
+r_{t} &=\bar{r}  + \beta_{5}\log{\mu_{t-1}}+\beta_{6}\mbox{rain}_{t-1}+\beta_{7}\mbox{winter}_{t}+ \zeta_{i}+\epsilon_{t}
+\end{aligned}
+$$
+
+\subsection*{Model fitting, priors and goodness-of-fit}
+The model was fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software JAGS [@plummer2003jags]. The JAGS code for the model is given in Appendix 1\ref{app:code_appendix}. Vague, uniform priors $U(0, 5)$ were specified for the residual errors and transect-level random effects. We used vague $\mbox{Normal}(0, 0.001^{-\frac{1}{2}})$ priors for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of traceplots. A burn-in of 40000 iterations followed by sampling from three independant Markov chains with different starting values for 40000 further iterations. A total of 4000 samples from each of the chains were retained for inference after thinning.
+
+#Results
+
+##Data overview
+
+There were a total of \Sexpr{nrow(obs_data)} spotlight counts from 21 transects spanning the period autumn 1998 to autumn 2013 (Table S1). Numbers of foxes observed during spotlight counts varied from \Sexpr{round(min(obs_data$foxes.counted/(obs_data$trans.length/1000)), 2)} to \Sexpr{round(max(obs_data$foxes.counted/(obs_data$trans.length/1000)), 2)} per spotlight km. and rabbits from \Sexpr{round(min(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 2)} to \Sexpr{round(max(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 2)} per spotlight km, respectively. 
+
+There was a steep gradient in annual rainfall between the transects, but also wide seasonal and annual variability within transects (Figures \ref{fig:sitemap} and \ref{fig:rain_graph}). All except the most southern transects had low mean annual rainfall in X−X, but all transects had above-average rainfall in 2010. \todo{(will provide a bit more detail here).}
+
+##Model checking and fit
+
+Examination of trace plots for the regression parameters and error terms indicated that the Markov chains were well mixed (Figures \ref{fig:traceplot_beta} and \ref{fig:traceplot_sigma}). The Rubin-Gelman statistic was $\le 1.1$ for all parameters (Figures \ref{fig:gelman_diag_beta} and \ref{fig:gelman_diag_sigma}). Hence, satisfactory convergence of the Markov chains was judged to have been achieved. 
+
+##Determinants of the rate of increase of rabbits
+
+The estimated (posterior mean) rates of increase for rabbits ranged from −XX to XX (Figure \ref{fig:rabbit_pred_graph}). Three variables had significant effects on the rate of increase of rabbits: rabbit abundance in the preceding six months, rainfall and season (Table \ref{mcmc_summary}, Figure \ref{fig:mcmc_plot_beta}). Rabbit abundance in the preceding six months had a negative effect on the rate of increase (i.e. negative density-dependence, Table \ref{mcmc_summary}). Interestingly, there was a negative effect of rainfall during the preceding six months on the rate of increase of rabbits (Table \ref{mcmc_summary}). After accounting for the effects of both rabbit abundance and rainfall in the preceding six months, the rates of increase of rabbits were significantly higher during autumn to spring than from spring to autumn (Table \ref{mcmc_summary}). 
+
+##Determinants of the rate of increase of foxes
+
+The estimated rates of increase of foxes ranged from −XX to XX (Figure \ref{fig:fox_pred_graph}). There was no evidence that rabbit abundance had a significant positive effect on the rate of increase of foxes, with the 95\% CI for this parameter including zero (Table \ref{mcmc_summary}; Figure \ref{fig:mcmc_plot_beta}). However, there was a strongly negative effect of fox abundance in the preceding six months on the rate of increase of foxes, with the 95\% CI for this parameter (XX−XX) being much less than zero. Rainfall in the six months preceding a survey had a positive effect on the rate of increase of foxes (Table \ref{mcmc_summary}). After accounting for the effects of other variables, fox populations grew faster from spring to autumn than from autumn to spring (Table \ref{mcmc_summary}). 
+
+For foxes, there was very little evidence for a positive numerical response to the abundance of rabbits ($\beta_{1}>0$). (Figure \ref{fig:mcmc_plot_beta}, Tables \ref{mcmc_summary} and \ref{mcmc_summary}). Across the observed range of rabbit abundance, increased rabbit abundance were predicted to have only a very weakly positive effect on the rate of increase of fox populations relative to other influences. The analysis showed a strongly negative density dependant effect of fox abundance on the population rate of increase i.e. $(\beta_{2}<0)$ (Figure \ref{fig:mcmc_plot_beta}, Table \ref{mcmc_summary}).
+
+Greater rainfall at a nearby weather station in the six months preceding a survey resulted in a higher rate of increase for foxes ($\beta_{3}>0$, Table \ref{mcmc_summary}). After accounting for other influences on the rate of increase, populations of foxes were found to grow more slowly over the winter period than was the case during summer ($\beta_{4}<0$, Table \ref{mcmc_summary})
+
+Combining the above inferences, we were able to predict the expected rate of increase of a fox population under a range of fox and rabbit abundances, rainfall, and in summer and winter (Figure \ref{fig:prediction_plot}). These predictions clearly illustrate the dominating effects of fox density, rainfall and season on the prevailing rates of increase of fox populations, with only a very weak effect of rabbit abundance apparent. 
+	
+We also estimated the conditions under which fox populations would be at equilibrium (i.e. r = 0; Figure \ref{fig:prediction_plot}). Under presumed `optimal' conditions (i.e. high rainfall, in autumn) fox populations would be at carrying capacity at $\sim 0.75$ foxes per spotlight km (Figure \ref{fig:prediction_plot}). In contrast, under low rainfall conditions in spring, carrying capacity was predicted to be \textless 0.1 foxes per spotlight km (Figure \ref{fig:prediction_plot}). 
+
+*A priori,* we hypothesised that the effect of rabbit abundance on the rate of increase of foxes would either be positive $(\beta_{1}>0)$, as greater rabbit abundance would result in improved prey availability for foxes, or close to zero, if availability of accessible alternative prey sources meant that food did not become limiting when rabbit populations declined. We also expected that high fox abundances would result in reduced rates of increase for foxes $(\beta_{2}<0)$, due to increasingly strong density-dependent effects on survival and recruitment as abundance increased.
+
+##Sources of error in the population models
+The state-space model included both site-level and random sources of variation in the rates of increase for both species. Posterior distributions of these parameters are illustrated in Figure \ref{fig:mcmc_results_sigma}. Site-level variation in rates of increase was of greater magnitude than random error (Figure \ref{fig:mcmc_results_sigma}). Transect-level variation in rates of increase presumably reflects site-to-site variation in habitat quality and conditions, unexplained by the other parameters of the model.
+
+
+#Discussion
+
+There are few long-term studies of the population dynamics of invasive predator-prey systems, and our time series are notable because they are spatially extensive (21 transects throughout the State of Victoria) and involved twice-annual counts for up to 15 years. The conditions during our study included wet and dry summers and winters, and low and high rabbit and fox abundances. Our Bayesian hierarchical analysis revealed that the abundances of rabbits and foxes responded to rainfall (albeit in different ways), their respective densities in the preceding six months, and seasonal effects. Relative to these variables, rabbit abundance did not have a strong effect on the growth rates of fox populations. 
+
+##Rabbit and fox spotlight-count abundances
+
+The equilibrium densities of foxes in our study under the most favourable conditions were approximately 0.XX \todo{still need to calc. this for rabbits} and 0.75 per spotlight km, respectively. These are lower than recorded in parts of Australia prior to the establishment of RHDV in 1996−1998 [reviews in @saunders1995managing; @williams1995managing]. Our data were collected after the initial impacts of RHDV on rabbit abundances [@mutze2010effect; @mcphee2010long], and most of the transects were subjected to government-subsidised rabbit control (i.e. removal of surface harbour and warren ripping) during 1998−2002, which greatly reduced rabbit abundances [@mcphee2010long; @ramsey2014recolonisation]. It is possible that the absence of a significant numerical response of foxes to rabbits was partly due to our monitoring period coinciding with a period when rabbit abundances were at historically low levels. If rabbit abundances were markedly higher such as prior to the arrival of RHDV, fox populations may have been able to increase to higher abundances than were observed in our study. 
+
+The transect-based spotlight counts that we analysed are uncorrected indices of abundance. Although there is debate about the usefulness of uncorrected population indices [e.g. @hayward2014will; @nimmo2015forum], spotlight counts have long been used to monitor rabbits and foxes in Australia [e.g. @pech1992limits; @saunders1995managing; @williams1995managing; @mutze2010effect], and it was infeasible to use other monitoring methods in our monitoring program. For rabbits, spotlight counts have been found to be highly correlated with absolute abundance estimates [@marchandeau2006abundance; @barrio2010assessment], including at one of our monitoring transects [@ballinger2003validating]. Spotlight counts of red foxes have not been similarly evaluated, perhaps due to the difficulty of estimating absolute fox abundances at appropriate spatial scales [@coman1991home].  
+
+##Rainfall and rabbit/fox population dynamics
+
+Rainfall is thought to be a driver of the abundances of mammalian herbivores and predators in semi-arid and arid systems worldwide [@dennis2000joint; @letnic2004responses; @letnic2011resources; @shaw2012population]. Our 21 monitoring transects included a wide range of mean annual rainfalls (XXX−XXX mm)\todo{insert mean annual rainfalls}, spanning a gradient from semi-arid to temperate climates, and showed strong but opposing effects of rainfall in the preceding six months for rabbits and foxes. Contrary to expectations [@Pech_alternativeprey], increasing rainfall in the preceding six months had a negative effect. Our analysis cannot elucidate the reason for this effect on rainfall on rabbit abundances, but it could be due to increased mortality of rabbits by drowning in their warrens [@bowen1998population; @robson1993natural; @thompson1994european]. 
+
+In contrast, rainfall in the preceding six months had a positive effect on fox abundance. Foxes are omnivores, eating a wide range of mammal, reptile, bird, insect and plant material [for the State of Victoria see @davis_foxdiet], and readily switch between food sources as availability changes [@delibes2008feeding; @holden2003impact; @Kjellander_preyswit; @Leckie_preyswitch]. It is likely that periods of high rainfall led to increased availability of many of their key foods, with the likely exception of rabbits, and that this in turn led to increased survival and recruitment [see below, @saunders1995managing].
+
+
+##Density-dependence in fox and rabbit dynamics
+
+Analyses of time series of abundance have revealed that density dependence is widespread in mammal populations [@sibly2005regulation; @brook2006strength], but to our knowledge this is the first study to demonstrate negative effects of abundance on the growth rate of either rabbit or fox populations in Australia. Density-dependent reproduction has been reported in the native range of rabbits, [@rodel2004density] and in South Australia adult rabbit density negatively affected kitten and adult rabbit survival rates (through reduced food availability) and directly reduced juvenile rabbit survival [@fordham2012european]. There is also evidence that RHDV has a negative density-dependent effect on rabbit abundances in south-eastern Australia [@mutze2010effect]. Density-dependence in the red fox is thought to arise from suppression of reproduction in sub-dominant vixens via territoriality [@lindstrom1989food; @saunders1995managing]. \todo{Need a couple more sentences here. Dave, is there anything in the literature about food availability as a driver of DD in foxes? Saunders etal 1995}
+
+##Seasonal changes in rabbit and fox abundances
+
+The seasonal changes observed in rabbit and fox abundances are consistent with their reproductive biologies in south-eastern Australia. The peak of rabbit breeding is during winter, with low survival of kittens born in summer and autumn. Hence, growth in rabbit populations is likely to be observed over the winter months [@williams1995managing; @bowen1998population; @fordham2012european]. Conversely, for foxes, breeding occurs during the austral spring, with cubs emerging from their dens late in spring, and being weaned soon after [@coman1991home; @saunders1995managing]. Accordingly, increases in fox abundance due to reproduction should be most observable from difference in surveys that span the summer months. 
+
+##Management implications
+
+Our study tested the hypothesis that fox populations exhibit a numerical response to rabbit abundances [@Pech_alternativeprey; @norbury2015pests]. We found little support for this hypothesis. The management implication of this result is that rabbit control, whether by conventional or biological control [e.g. @cooke2003rabbit; @mutze2010effect; @ramsey2014recolonisation], should not be viewed as a substitute for fox control. Hence, managers who wish to maintain foxes at low densities to protect agricultural [e.g. @saunders2003observations] or biodiversity [e.g. @robley2014long; @pedler2016rabbit] values should probably conduct fox control independent of rabbit control. However, foxes may increase their consumption of alternative prey following large reductions in rabbit density [@holden2003impact; @delibes2008feeding; @Ferreras2011116], and hence a risk-averse approach for managers wishing to protect threatened prey of foxes would be to increase fox control following large reductions in rabbit abundance. Finally, our finding that fox abundances vary with rainfall in the preceding six months (particularly during spring to autumn) means that managers wishing to maintain foxes at low abundances in south-eastern Australia will need to be cognisant of prevailing climatic conditions and adjust control regimes accordingly.
+
+#Acknowledgements
+
+We thank the many landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who collected spotlight transect data. We thank the Victorian Department of Economic Development, Jobs, Training and Resources, and it's various predecessors for funding this work. Helpful comments on early drafts of the manuscript were provided by YYY.
+
+#Data Accessability
+Raw data and JAGS code for fitting the state-space model will be archived on DataDryad. DOI.
+
+#Tables
+Table - summary statistics for posteriors of model parameters
+
+
+#Figures
+Figure  - map of study area
+Figure - Predicted fox r given rainfall, season and density. - definitely include
+Figure - Predicted and observed rabbit abundance. -definitely include
+Figure - Predicted and observed fox abundance. -definitely include
+
+#Supporting Information
+Code for model
+Figure  - Beta densities 
+Figure - Sigma densities
+Figure - Random effects violin (foxes) 
+Figure - Random effects violin (rabbits)
+Figure - Rainfall time-series - supplementary material
+
+#References
