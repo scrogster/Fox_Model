@@ -1,9 +1,9 @@
 require("rjags")
 load.module("glm")
 NADAPT=250
-NITER=40000 #NITER=40000
-NBURN=40000 #NBURN=40000
-THIN=2 #THIN=10
+NITER=40000
+NBURN=40000
+THIN=10
 
 load("prepped_data.Rdata")
 
@@ -15,8 +15,8 @@ samp<-coda.samples(hier.mod,
 			    c('beta', 'sigma', 'r.mean', 'r.mean.rabbits', 
 			      'site.r.eff.centered', 'site.r.eff.rabbits.centered'), 
 			    n.iter=NITER, thin=THIN)
-dic.heirarch<-dic.samples(hier.mod, 4000)
-print(dic.heirarch)
+#dic.heirarch<-dic.samples(hier.mod, 4000)
+#print(dic.heirarch)
 
 #assembling a big string of abundance predictions
 st<-print(tapply(disctime_shifted, mod_data$site.code, min))
