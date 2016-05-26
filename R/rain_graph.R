@@ -1,5 +1,6 @@
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 
 load("model_results.Rdata")
 
@@ -8,9 +9,8 @@ rain_dat2<-rain_dat
 rain_dat2<-data.frame("SiteName"=row.names(rain_dat2), rain_dat2)
 row.names(rain_dat2)<-1:21
 
-library(tidyr)
-library(dplyr)
-library(ggplot2)
+
+
 
 rain_dat2<-tbl_df(rain_dat2)
 
