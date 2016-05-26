@@ -63,7 +63,8 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 		y = expression(paste("Rabbits km",phantom(0)^-1))) +
 	theme_classic() +
 	theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=0)) +
-	theme(legend.title.align=0.5)
+	theme(legend.title.align=0.5, legend.title=element_text(face="italic"))+
+	
 
 ggsave("Figures/predicted_fox_r.pdf")
-ggsave("Figures/predicted_fox_r.png")
+ggsave("Figures/predicted_fox_r.png", dpi=600)
