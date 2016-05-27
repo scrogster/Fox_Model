@@ -2,7 +2,6 @@
 title: Long-term, spatially extensive monitoring reveals effects of rainfall and density-dependence
   on population dynamics of invasive European rabbits and red foxes in south-eastern
   Australia
-date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
   word_document: 
     fig_caption: yes
@@ -10,6 +9,7 @@ output:
 csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
+
 
 Michael P. Scroggie [^1]
 
@@ -52,7 +52,7 @@ Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
 
 Suggested running title: *Density dependence and numerical responses of red fox populations*
 
-Word Counts: () Summary; () Main Text; () Acknowledgements; () References; () Tables; () Figure Legends.
+Word Counts: X Summary; X Main Text; X Acknowledgements; X References; X Tables; X Figure Legends.
 Number of Tables: 1.
 Number of Figures: 4.
 Number of References: X.
@@ -207,9 +207,8 @@ We thank the many landholders who provided access to the monitoring transects lo
 #Data Accessability
 Raw data and *JAGS* and *R* code for fitting the state-space model will be deposited in the Dryad Digital Depository doi:xxxxxxx.
 
-
 #Table
-Table 1 - summary statistics for posteriors of model parameters
+Table 1 - summary statistics for posteriors of model parameters. Mean - posterior mean, SD - posterior SD, Median - posterior median, q2.5/q97.5 - lower and upper 95% credible intervals.
 ```{r echo=FALSE, message=FALSE, results="asis"}
 require(dplyr)
 require(rjags)
@@ -231,7 +230,6 @@ tabout<-cbind(tab1[,1:2], tab2[,c(3, 1,5)])
 kable(tabout, caption=NULL,
 	align=c("l", "r", "r", "r", "r", "r"), digits=3 )
 ```
-
 
 #Figures
 ![Figure 1. Map of south-eastern Australia, showing the location of the 21 monitoring sites within the State of Victoria, an d variation in mean annual rainfall across the study area. Inset: map of Australia, showing the location of the State of Victoria (shaded black).](Figures/Site-map.png)
