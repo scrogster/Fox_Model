@@ -46,7 +46,14 @@ Ivor G. Stuart
 
 Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
 
-[^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au
+[^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au; Phone +61 3 9450 8643; Fax +61 3 9450 8799
+
+Suggested running title: *Density dependence and numerical responses of red fox populations*
+
+Word Counts: () Summary; () Main Text; () Acknowledgements; () References; () Tables; () Figure Legends.
+Number of Tables: 1.
+Number of Figures: 4.
+Number of References: X.
 
 *****************
 #Summary
@@ -59,7 +66,7 @@ Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
 
 4. *Synthesis and applications.* Fox and rabbit populations responded differently to rainfall, with fox populations growing more rapidly under high rainfall, while rabbit populations grew more slowly. Our analysis provides the first evidence of density dependence in Australian fox populations. We conclude that both fox and rabbit abundances are determined by the interaction between rainfall and prevailing density, and that there is little numerical interaction between these species. Controlling rabbits to very low abundances is therefore not expected to substantially reduce fox abundances in south-eastern Australia.
 
-**Keywords:** Bayesian, biological control, joint model, kilometric index, numerical response, *Oryctolagus cuniculus*, predator-prey dynamics, rabbit haemmorhagic disease; rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
+**Keywords:** kilometric index, numerical response, *Oryctolagus cuniculus*, predator-prey dynamics, rabbit haemmorhagic disease; rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
 
 
 #Introduction
@@ -80,7 +87,7 @@ Rainfall is an important driver of mammalian herbivore abundances in large parts
 
 ##Transect locations and rabbit management histories
 
-Twenty-one monitoring transects distributed throughout the state of Victoria were included in this study (Fig. \ref{fig:sitemap}). All transects were located on private livestock and cropping properties. Seventeen of these transects were established in 1998 to evaluate the effects of the establishment of RHDV on rabbit populations [@mcphee2010long]. An additional three transects were added to the study in 2001, 2007 and 2008. The transects were permanently marked, and varied in length from 5.0−-21.7 km (Table S1). Since the minimum distance between two transects (X km) greatly exceeded the home range sizes of both rabbits and foxes in south-eastern Australia [@williams1995managing; @saunders1995managing; @carter2012ecology], the transects were treated as demographically independent. The 21 transects encompassed a climatic and productivity gradient from cool, moist, highly productive sites in south to hot, dry, low-productivity sites in the north (Table SX). 
+Twenty-one monitoring transects distributed throughout the state of Victoria were included in this study (Fig. 1). All transects were located on private livestock and cropping properties. Seventeen of these transects were established in 1998 to evaluate the effects of the establishment of RHDV on rabbit populations [@mcphee2010long]. An additional three transects were added to the study in 2001, 2007 and 2008. The transects were permanently marked, and varied in length from 5.0−-21.7 km (Table S1). Since the minimum distance between two transects (X km) greatly exceeded the home range sizes of both rabbits and foxes in south-eastern Australia [@williams1995managing; @saunders1995managing; @carter2012ecology], the transects were treated as demographically independent. The 21 transects encompassed a climatic and productivity gradient from cool, moist, highly productive sites in south to hot, dry, low-productivity sites in the north (Table SX). 
 
 The rabbit management history of transects varied. Following the establishment of RHDV in Victoria in 1996, the Victorian government subsidised rabbit managed at 14 properties with transects from 1996−-2002 [@mcphee2010long].  Management involved using heavy machinery to remove above-ground harbour and destroy warrens [for further details see @mcphee2010long]. Three properties were deliberately not subjected to this management [@mcphee2010long], although management was conducted at one of these properties (Ingliston) in 2010 [@forsyth_density-dependent_2015]. The removal of harbour and warren ripping substantially reduced rabbit abundance over and above the effects of RHDV [@mcphee2010long; @ramsey2014recolonisation].
 
@@ -230,6 +237,32 @@ kable(tabout, caption=NULL,
 ![Figure 3. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances.](Figures/fox_abund.png)
 
 ![Figure 4. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances.](Figures/rabbit_abund.png)
+
+#Supporting Information
+Additional Supporting Information may be found in the online version of this article:
+
+**Table S1.** Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.
+
+**Appendix S1.** JAGS Code for the Bayesian State Space Model.
+
+**Figure S1.** Posterior densities of the regression parameters $(\beta)$.
+
+**Figure S2.** Posterior densities of the error terms $(\sigma)$.
+
+**Figure S3.** Posterior densities for the site-level random effects terms for rates of increase of foxes.
+
+**Figure S4.** Posterior densities for the site-level random effects terms for rates of increase of rabbits.
+
+**Figure S5.** Traceplots for the regression parameters $(\beta)$.
+
+**Figure S6.** Traceplots for the error terms $(\sigma)$.
+
+**Figure S7.** Gelman convergence diagnostics for regression parameters $(\beta)$.
+
+**Figure S8.** Traceplots for the regression parameters $(\sigma)$.
+
+**Figure S9.** Half-yearly rainfall at the study sites over the course of the study.
+
 
 
 #References
