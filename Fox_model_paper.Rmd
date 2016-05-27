@@ -48,6 +48,8 @@ Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
 
 [^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au; Phone +61 3 9450 8643; Fax +61 3 9450 8799
 
+*****************************************************************
+
 Suggested running title: *Density dependence and numerical responses of red fox populations*
 
 Word Counts: () Summary; () Main Text; () Acknowledgements; () References; () Tables; () Figure Legends.
@@ -55,7 +57,7 @@ Number of Tables: 1.
 Number of Figures: 4.
 Number of References: X.
 
-*****************
+*****************************************************************
 #Summary
 
 1. Managing ecosystems that include both predators and prey is often difficult because of the complex trophic and competitive interactions that are possible. Invasive red foxes *(Vulpes vulpes)* and European rabbits *(Oryctolagus cuniculus)* are sympatric across c. 69 %  of mainland Australia, but there is uncertainty about the effects of changes in rabbit abundance on fox populations, relative to the effects of environmental variation and density-dependent population processes. 
