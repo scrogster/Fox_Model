@@ -46,12 +46,15 @@ preddf$Rain[preddf$Rainfall==high_rain] <- "High"
 
 preddf$Rain <- factor(preddf$Rain, levels = c("Low", "Mean", "High"))
 
+preddf$Rainfall<-preddf$Rain
+
+
 preddf$Season[preddf$Winter==1] <-"Winter"
 preddf$Season[preddf$Winter==0] <-"Summer"
 
 b <- c(-1.5,-1,-0.5, 0, 0.5, 1, 1.5)
 ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
-	facet_grid(Rain ~ Season, labeller="label_both") +
+	facet_grid(Rainfall ~ Season, labeller="label_both") +
 	geom_raster(interpolate = TRUE) +
 	stat_contour(breaks=c(0), lty=2)+  #contour where r=0
 	scale_fill_gradientn(limits = c(-1.7,1.7),
@@ -59,12 +62,12 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 					 		"white", 
 					 		"green", "limegreen", "chartreuse4", "darkgreen"),
 					 breaks=b,labels=format(b))+
-	labs(x = expression(paste("Foxes km",phantom(0)^-1)), 
-		y = expression(paste("Rabbits km",phantom(0)^-1))) +
+	labs(x = expression(paste("Foxes km",phantom(0)^{-1})), 
+		y = expression(paste("Rabbits km",phantom(0)^{-1}))) +
 	theme_classic() +
 	theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=0)) +
-	theme(legend.title.align=0.5, legend.title=element_text(face="italic"))+
+	theme(legend.title.align=0.5, legend.title=element_text(face="italic"))
 	
 
 ggsave("Figures/predicted_fox_r.pdf")
-ggsave("Figures/predicted_fox_r.png", dpi=600)
+ggsave("Figures/predicted_fox_r.png", dpi=300)
