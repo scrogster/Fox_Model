@@ -14,6 +14,15 @@ row.names(rain_dat2)<-1:21
 
 rain_dat2<-tbl_df(rain_dat2)
 
+#Manual editing and overwrite of a few site names
+NewSiteNames<-as.character(rain_dat2$SiteName)
+NewSiteNames[NewSiteNames=="BlackRange"]<-"Black Range"
+NewSiteNames[NewSiteNames=="SpringHill"]<-"Spring Hill"
+NewSiteNames[NewSiteNames=="SwiftsCreek"]<-"Swifts Creek"
+NewSiteNames[NewSiteNames=="TelopeaDowns"]<-"Telopea Downs"
+
+rain_dat2$SiteName<-NewSiteNames
+
 #re-arrange and tidy the data
 rain_tidy<-rain_dat2 %>% 
 	gather("TimeCode", "Rainfall", starts_with("X")) %>%
