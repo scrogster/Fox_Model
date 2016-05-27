@@ -48,15 +48,16 @@ Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
 
 [^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au
 
+*****************
 #Summary
 
-Managing ecosystems that include both predators and prey is often difficult because of the complex trophic and competitive interactions that are possible. Invasive red foxes *(Vulpes vulpes)* and European rabbits *(Oryctolagus cuniculus)* are sympatric across c. 69 %  of mainland Australia, but there is uncertainty about the effects of changes in rabbit abundance on fox populations, relative to the effects of environmental variation and density-dependent population processes. 
+1. Managing ecosystems that include both predators and prey is often difficult because of the complex trophic and competitive interactions that are possible. Invasive red foxes *(Vulpes vulpes)* and European rabbits *(Oryctolagus cuniculus)* are sympatric across c. 69 %  of mainland Australia, but there is uncertainty about the effects of changes in rabbit abundance on fox populations, relative to the effects of environmental variation and density-dependent population processes. 
 
-We examined the extent to which rates of growth of fox populations varied with rabbit abundance by fitting a Bayesian hierarchical state-space model to spotlight counts of rabbits and foxes conducted on 21 transects throughout the State of Victoria between 1998 and 2015. The effects of rainfall and density-dependence on the population growth rates of both species were also evaluated. 
+2. We examined the extent to which rates of growth of fox populations varied with rabbit abundance by fitting a Bayesian hierarchical state-space model to spotlight counts of rabbits and foxes conducted on 21 transects throughout the State of Victoria between 1998 and 2015. The effects of rainfall and density-dependence on the population growth rates of both species were also evaluated. 
 
-Our model fitted the observed data well. There was no evidence of a numerical response of foxes to changes in rabbit abundance. Rather, fox populations increased with increasing rainfall in the previous six months. Fox populations exhibited strongly negative density dependence. Rabbit populations also decreased with increasing rainfall and exhibited strongly negative density dependence. Our model indicated that in favourable conditions (high rainfall, high rabbit abundance) the equilibrium abundance of fox populations was $\sim 0.75$ foxes per spotlight km. Under low rainfall conditions in spring, carrying capacity was predicted to be <  0.1 fox per spotlight km. 
+3. Our model fitted the observed data well. There was no evidence of a numerical response of foxes to changes in rabbit abundance. Rather, fox populations increased with increasing rainfall in the previous six months. Fox populations exhibited strongly negative density dependence. Rabbit populations also decreased with increasing rainfall and exhibited strongly negative density dependence. Our model indicated that in favourable conditions (high rainfall, high rabbit abundance) the equilibrium abundance of fox populations was $\sim 0.75$ foxes per spotlight km. Under low rainfall conditions in spring, carrying capacity was predicted to be <  0.1 fox per spotlight km. 
 
-*Synthesis and applications* Fox and rabbit populations responded differently to rainfall, with fox populations growing more rapidly under high rainfall, while rabbit populations grew more slowly. Our analysis provides the first evidence of density dependence in Australian fox populations. We conclude that both fox and rabbit abundances are determined by the interaction between rainfall and prevailing density, and that there is little numerical interaction between these species. Controlling rabbits to very low abundances is therefore not expected to substantially reduce fox abundances in south-eastern Australia.
+4. *Synthesis and applications.* Fox and rabbit populations responded differently to rainfall, with fox populations growing more rapidly under high rainfall, while rabbit populations grew more slowly. Our analysis provides the first evidence of density dependence in Australian fox populations. We conclude that both fox and rabbit abundances are determined by the interaction between rainfall and prevailing density, and that there is little numerical interaction between these species. Controlling rabbits to very low abundances is therefore not expected to substantially reduce fox abundances in south-eastern Australia.
 
 **Keywords:** Bayesian, biological control, joint model, kilometric index, numerical response, *Oryctolagus cuniculus*, predator-prey dynamics, rabbit haemmorhagic disease; rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
 
@@ -190,10 +191,11 @@ Our study tested the hypothesis that fox populations exhibit a numerical respons
 
 #Acknowledgements
 
-We thank the many landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who collected spotlight transect data. We thank the Victorian Department of Economic Development, Jobs, Training and Resources, and it's various predecessors for funding this work. Helpful comments on early drafts of the manuscript were provided by YYY.
+We thank the many landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who collected spotlight transect data. We thank the Victorian Department of Economic Development, Jobs, Training and Resources, and it's various predecessors for funding this work. Helpful comments on drafts of the manuscript were provided by YYY.
 
 #Data Accessability
-Raw data and JAGS code for fitting the state-space model will be archived on DataDryad. DOI.
+Raw data and *JAGS* and *R* code for fitting the state-space model will be deposited in the Dryad Digital Depository doi:xxxxxxx.
+
 
 #Table
 Table 1 - summary statistics for posteriors of model parameters
@@ -215,10 +217,6 @@ tabout<-cbind(tab1[,1:2], tab2[,c(3, 1,5)])
   names(tabout)<-c("Mean", "SD", "Median", "q2.5", "q97.5")
   row.names(tabout)<-param.names
 
-#print(xtable(
-#  tabout, caption="Summary statistics for the posterior distributions of the state-space model\'s parameters.", 
-#  label="mcmc_summary",
-#    digits=4, align=c("l", "r", "r", "r", "r", "r") ) ,  sanitize.text.function = function(x){x}, table.placement="p!", #caption.placement = "top")
 kable(tabout, caption=NULL,
 	align=c("l", "r", "r", "r", "r", "r"), digits=3 )
 ```
@@ -232,18 +230,6 @@ kable(tabout, caption=NULL,
 ![Figure 3. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances.](Figures/fox_abund.png)
 
 ![Figure 4. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances.](Figures/rabbit_abund.png)
-
-#Supporting Information
-
-![Figure S1. Posterior densities of the regression parameters.](Figures/beta_posterior_density.png) 
-
-![Figure S2. Posterior densities of the error terms $(\sigma)$.](Figures/sigma_posterior_density.png) 
-
-![Figure S3. Posterior densities for the site-level random effects terms for rates of increase of foxes](Figures/raneff_violin_foxes.png)
-
-![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits](Figures/raneff_violin_rabbits.png)
-
-![Figure S5. Half-yearly rainfall at the study sites over the course of the study](Figures/rain_graph.png)
 
 
 #References
