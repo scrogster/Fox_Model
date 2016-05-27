@@ -42,9 +42,17 @@ tidy_obs<-data.frame(
 	"time.orig"=1998 +(disctime_shifted-1)/2
 ) 
 
+#recode "Yarram/Woodside" to just "Yarram" in preddf and tidy_obs
+tempsites<-as.character(preddf$Sitename)
+tempsites[tempsites=="Yarram/Woodside"]<-"Yarram"
+preddf$Sitename<-factor(tempsites)
+
+tempsites<-as.character(tidy_obs$Sitename)
+tempsites[tempsites=="Yarram/Woodside"]<-"Yarram"
+tidy_obs$Sitename<-factor(tempsites)
+
 ## ----fox_pred_graph, cache=FALSE, echo=FALSE, fig.height=9.5, fig.width=7.5, fig.cap='Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid line is the posterior median, and shaded polygons are the 95\\% credible intervals of the mean expected abundances.', fig.pos="p!"----
 #plotting estimated trajectories of all fox populations.
-require(dplyr)
 preddf %>%
 	filter(Param=="mu.fox") %>%
 	ggplot(aes(x=time.orig, y=post.med))+
@@ -58,7 +66,7 @@ preddf %>%
 	theme_classic() #classic 
 
 ggsave("Figures/fox_abund.pdf", width=7, height=10)
-ggsave("Figures/fox_abund.png", width=7, height=10, dpi=600)
+ggsave("Figures/fox_abund.png", width=7, height=10, dpi=300)
 
 ## ----rabbit_pred_graph, cache=FALSE, echo=FALSE, message=FALSE, fig.height=9.5, fig.width=7.5, fig.cap='Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid line is the posterior median, and shaded polygons are the 95\\% credible intervals of the mean expected abundances.', fig.pos="p!"----
 #plotting estimated trajectories of all rabbit populations.
@@ -76,4 +84,4 @@ preddf %>%
 	theme_classic() #classic
 
 ggsave("Figures/rabbit_abund.pdf", width=7, height=10)
-ggsave("Figures/rabbit_abund.png", width=7, height=10, dpi=600)
+ggsave("Figures/rabbit_abund.png", width=7, height=10, dpi=300)
