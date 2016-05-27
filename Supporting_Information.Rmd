@@ -1,6 +1,5 @@
 ---
-title: Supporting Informaiton
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+title: Supporting Information
 output: 
   word_document: 
     fig_caption: yes
@@ -19,13 +18,13 @@ trans_summary<-obs_data2 %>%
   group_by(sitename) %>%
   summarise(firstsamp=round(min(year)), lastsamp=round(max(year)), total_surv=length(foxes.counted), years_samped=n_distinct(year), maxlength=max(trans.length)/1000, meanlength=round(mean(trans.length)/1000, 2))
 
-names(trans_summary)<-c("Transect", "Established", "Last survey", "Number of Surveys", "Years with survey", "Full length (km)", "Mean length (km)")
+names(trans_summary)<-c("Transect", "Established", "Last survey", "Number of Surveys", "Years with surveys", "Full length (km)", "Mean length (km)")
 
 library(knitr)
 kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.",
 	align=c("c", "l", "c", "c", "c","c", "c", "c") )
 ```
-<br>
+
 
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
 ```r
