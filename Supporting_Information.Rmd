@@ -35,10 +35,10 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 
 ##JAGS Code for the Bayesian State Space Model
 ```r
-`r paste(readLines('R/gompertz_heirarch_rain.txt'), collapse = '\n')`
+`r paste(readLines('R/gompertz_heirarch_rain.txt'), collapse = '\n', warn=FALSE)`
 ```
 
-![Figure S1. Posterior densities of the regression parameters.](Figures/beta_posterior_density.png) 
+![Figure S1. Posterior densities of the regression parameters $(\beta)$.](Figures/beta_posterior_density.png) 
 
 ![Figure S2. Posterior densities of the error terms $(\sigma)$.](Figures/sigma_posterior_density.png) 
 
@@ -46,4 +46,12 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 
 ![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits](Figures/raneff_violin_rabbits.png)
 
-![Figure S5. Half-yearly rainfall at the study sites over the course of the study](Figures/rain_graph.png)
+![Figure S5. Traceplots for the regression parameters $(\beta)$.](Figures/beta_traceplots.png)
+
+![Figure S6. Traceplots for the error terms $(\sigma)$.](Figures/sigma_traceplots.png)
+
+![Figure S7. Gelman convergence diagnostics for regression parameters $(\beta)$.](Figures/beta_gelman_diag.png)
+
+![Figure S8. Traceplots for the regression parameters $(\sigma)$.](Figures/sigma_gelman_diag.png)
+
+![Figure S7. Half-yearly rainfall at the study sites over the course of the study](Figures/rain_graph.png)
