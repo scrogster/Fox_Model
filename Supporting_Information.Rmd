@@ -46,6 +46,8 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 
 ![Figure S7. Gelman convergence diagnostics for regression parameters $(\beta)$.](Figures/beta_gelman_diag.png)
 
-![Figure S8. Traceplots for the regression parameters $(\sigma)$.](Figures/sigma_gelman_diag.png)
+![Figure S8. Gelman convergence diagnostics for error terms $(\sigma)$.](Figures/sigma_gelman_diag.png)
 
-![Figure S9. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
+![Figure S9. Traceplots for the regression parameters $(\sigma)$.](Figures/sigma_gelman_diag.png)
+
+![Figure S10. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
