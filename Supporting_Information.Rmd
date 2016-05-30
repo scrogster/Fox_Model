@@ -27,8 +27,8 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 
 
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
-```r
-`r paste(readLines('R/gompertz_heirarch_rain.txt'), collapse = '\n', warn=FALSE)`
+```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE}
+cat(readLines('R/gompertz_heirarch_rain.txt'), sep = '\n', warn=FALSE)
 ```
 
 ![Figure S1. Posterior densities of the regression parameters $(\beta)$.](Figures/beta_posterior_density.png) 
@@ -47,6 +47,4 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 
 ![Figure S8. Gelman convergence diagnostics for error terms $(\sigma)$.](Figures/sigma_gelman_diag.png)
 
-![Figure S9. Traceplots for the regression parameters $(\sigma)$.](Figures/sigma_gelman_diag.png)
-
-![Figure S10. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
+![Figure S9. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
