@@ -25,7 +25,6 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 	align=c("c", "l", "c", "c", "c","c", "c", "c") )
 ```
 
-
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
 ```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE}
 cat(readLines('R/gompertz_heirarch_rain.txt'), sep = '\n', warn=FALSE)
