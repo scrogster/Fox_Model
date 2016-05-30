@@ -49,12 +49,13 @@ Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
 
 *****************************************************************
 
-Suggested running title: *Density dependence and numerical responses of red fox populations*
+Suggested running title: *Numerical responses of red fox populations*
 
-Word Counts: X Summary; X Main Text; X Acknowledgements; X References; X Tables; X Figure Legends.
+*Word Counts:* 
+Summary: 313; Main Text: 3771; Acknowledgements: 62; References: 1863; Tables: 156 ; Figure Legends: 188.
 Number of Tables: 1.
 Number of Figures: 4.
-Number of References: X.
+Number of References: 66.
 
 *****************************************************************
 #Summary
