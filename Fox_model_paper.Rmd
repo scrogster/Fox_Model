@@ -16,10 +16,6 @@ David M. Forsyth
 
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
-David S.L. Ramsey
-
-Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
-
 Stephen R. McPhee
 
 Agricultural Technical Services Pty Lty, 48 Warooka Road, Yorketown South Australia 5576 Australia.
@@ -32,6 +28,10 @@ Caleb Hurrell
 
 Agricultural Services and Biosecurity Operations Division, Department of Economic Development, Jobs, Training and Resources, Cnr Fenwick and Little Malop Streets, Geelong Victoria 3220 Australia.
 
+Ivor G. Stuart
+
+Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
+
 Kasey A. Stamation
 
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
@@ -40,9 +40,9 @@ Michael Lindeman
 
 Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
-Ivor G. Stuart
+David S.L. Ramsey
 
-Kingfisher Research Pty Ltd, 177 Progress Road, Eltham Victoria 3095 Australia.
+Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
 
 [^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au; Phone +61 3 9450 8643; Fax +61 3 9450 8799.
 
