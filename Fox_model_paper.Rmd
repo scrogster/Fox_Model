@@ -86,7 +86,7 @@ Rainfall is an important driver of mammalian herbivore abundances in large parts
 
 Of particular management interest is the effect of controlling rabbits to low densities, either through conventional or biological control, on fox populations [@pech1992limits; @holden2003impact]. If controlling rabbits to low densities substantially reduces fox abundances, then there may be a reduced need for targetted fox control. Conversely, if sustained control of rabbits to low abundance does not limit fox populations (perhaps because alternative prey are exploited when rabbits are scarce), then there may be a need to undertake simultaneous, integrated control of both rabbit and fox populations, to protect biodiversity and agricultural production. 
 
-Here, we use long term monitoring data to examine the dynamics of fox and rabbit populations at 21 locations in south-eastern Australia. We use this data to evaluate the relative influence of density dependence, climate and prey abundance on rates of increase of red fox populations.
+Here, we use long term monitoring data to examine the dynamics of fox and rabbit populations at 21 locations in south-eastern Australia. We use these data to evaluate the relative influence of density dependence, climate and prey abundance on rates of increase of red fox populations.
 
 #Materials and methods
 
