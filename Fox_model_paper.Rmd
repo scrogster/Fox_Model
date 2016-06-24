@@ -1,5 +1,5 @@
 ---
-title: 'Long-term, spatially extensive data reveals weak numerical response of invasive red fox *(Vulpes vulpes)* to abundance of European rabbits: implications for population management'
+title: 'Long-term, spatially extensive data reveals weak numerical response of invasive red fox *(Vulpes vulpes)* to abundance of European rabbits *(Oryctolagus cuniculus)*: implications for population management'
 output: 
   word_document: 
     fig_caption: yes
@@ -7,8 +7,6 @@ output:
 csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
-
-
 
 Michael P. Scroggie [^1]
 
