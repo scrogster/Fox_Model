@@ -1,5 +1,5 @@
 
-all: prepped_data.Rdata model_results.Rdata figures paper
+all: prepped_data.Rdata model_results.Rdata model_results_testing.Rdata figures paper
 
 #metarule to make the figures
 figures: Figures/beta_posterior_density.pdf Figures/sigma_posterior_density.pdf Figures/raneff_violin_rabbits.pdf Figures/raneff_violin_foxes.pdf Figures/predicted_fox_r.pdf Figures/fox_abund.pdf Figures/rabbit_abund.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf
@@ -15,8 +15,11 @@ prepped_data.Rdata: Data/kasey.xls Data/SOI.txt Data/TabulatedRainHalfYearly.csv
 ###############################################################################	
 #Run the state-space model and save the results                               #
 ###############################################################################
-model_results.Rdata:   R/run_model.R prepped_data.Rdata  R/gompertz_heirarch_rain.txt 
-	Rscript $<
+model_results.Rdata: R/run_model.R prepped_data.Rdata  R/gompertz_heirarch_rain.txt 
+	Rscript $^ $@
+	
+model_results_testing.Rdata: R/run_model.R prepped_data.Rdata  R/gompertz_heirarch_rain_testing.txt 
+	Rscript $^ $@
 
 ###############################################################################	
 #generate the figures as pdfs, pngs done implicitly                           #
