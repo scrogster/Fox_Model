@@ -3,7 +3,11 @@ require(ggplot2)
 require(ggmcmc)
 require(grid)
 
-load("model_results.Rdata")
+args=commandArgs(trailingOnly=TRUE)
+
+model_data=args[1]
+
+load(file.path(model_data))
 
 beta_result<-ggs(samp, family="^beta|^r.mean")
 

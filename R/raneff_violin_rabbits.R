@@ -4,7 +4,11 @@ require(ggplot2)
 require(ggmcmc)
 require(dplyr)
 
-load("model_results.Rdata")
+args=commandArgs(trailingOnly=TRUE)
+
+model_data=args[1]
+
+load(file.path(model_data))
 
 sitelabs<-as.character(unique(obs_data$site))
 

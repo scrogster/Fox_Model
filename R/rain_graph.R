@@ -2,7 +2,11 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 
-load("model_results.Rdata")
+args=commandArgs(trailingOnly=TRUE)
+
+model_data=args[1]
+
+load(file.path(model_data))
 
 rain_dat2<-rain_dat
 

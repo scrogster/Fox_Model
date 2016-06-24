@@ -1,6 +1,10 @@
 require(ggplot2)
 
-load("model_results.Rdata")
+args=commandArgs(trailingOnly=TRUE)
+
+model_data=args[1]
+
+load(file.path(model_data))
 
 mean_rain<-(mean(stack(rain_dat)[,1])-250)/100
 low_rain<-(quantile(stack(rain_dat)[,1], 0.1)-250)/100

@@ -2,7 +2,11 @@ library(ggplot2)
 library(ggmcmc)
 library(rjags)
 
-load("model_results.Rdata")
+args=commandArgs(trailingOnly=TRUE)
+
+model_data=args[1]
+
+load(file.path(model_data))
 
 mcmc_result<-ggs(samp)
 
