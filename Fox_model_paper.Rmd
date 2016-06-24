@@ -94,7 +94,7 @@ Here, we use long term monitoring data to examine the dynamics of fox and rabbit
 
 Twenty-one monitoring transects distributed throughout the state of Victoria were included in this study (Fig. 1). All transects were located on private livestock and cropping properties. Seventeen of these transects were established in 1998 to evaluate the effects of the establishment of RHDV on rabbit populations [@mcphee2010long]. An additional three transects were added to the study in 2001, 2007 and 2008. The transects were permanently marked, and varied in length from 7.0-21.7 km (Table S1). Since the minimum distance between transects (5.4 km) exceeds the home range sizes of both rabbits and foxes in south-eastern Australia [@williams1995managing; @saunders1995managing; @carter2012ecology], the transects were treated as demographically independent. The 21 transects encompassed a climatic and productivity gradient from cool, moist, highly productive sites in south to hot, dry, low-productivity sites in the north (Table S1). 
 
-The rabbit management history of transects varied. Following the establishment of RHDV in Victoria in 1996, the Victorian government subsidised rabbit managed at 14 properties with transects from 1996 - 2002 [@mcphee2010long].  Management involved using heavy machinery to remove surface harbour and destroy warrens [for further details see @mcphee2010long]. Three properties were deliberately not subjected to this management [@mcphee2010long], although management was conducted at one of these properties (Ingliston) in 2010 [@forsyth_density-dependent_2015]. The removal of surface harbour and warren ripping substantially reduced rabbit abundance over and above the effects of RHDV [@mcphee2010long; @ramsey2014recolonisation].
+The rabbit management history of transects varied. Following the establishment of RHDV in Victoria in 1996, the Victorian government subsidised rabbit management at 14 properties with transects from 1996 - 2002 [@mcphee2010long].  Management involved using heavy machinery to remove surface harbour and destroy warrens [for further details see @mcphee2010long]. Three properties were deliberately not subjected to this management [@mcphee2010long], although management was conducted at one of these properties (Ingliston) in 2010 [@forsyth_density-dependent_2015]. The removal of surface harbour and warren ripping substantially reduced rabbit abundance over and above the effects of RHDV [@mcphee2010long; @ramsey2014recolonisation].
 
 ##Spotlight counts
 
@@ -106,18 +106,18 @@ We modelled the time-series of fox and rabbit counts from the 21 transects joint
 A Poisson observation model was assumed for the counts of both foxes and rabbits, where the number of individuals observed during each survey was dependent on underlying abundance, with a Poisson error structure for the observations. Transect lengths were included in the expectation of the Poisson model, to allow for both within- and between-site variation in the lengths of the spotlight transects:
 
 $$
-C_{it} \sim Poisson(\mu_{t}l_{it})
+C_{ijt} \sim Poisson(\mu_{jt}l_{ijt})
 $$
 
-Where $C_{it}$ is the number of individuals observed during the $i^{th}$ replicate spotlight count at time $t$. $l_{it}$ were the corresponding lengths of transect surveyed during each census. 
+Where $C_{it}$ is the number of individuals observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$. $l_{ijt}$ were the corresponding lengths of transect surveyed during each census. 
 
-The transect-level abundances $(\mu_{t})$ of foxes at each site were modelled as a stochastic, density-dependent process:
+The transect-level abundances $(\mu_{jt})$ of foxes at each site were modelled as a stochastic, density-dependent process:
 
 $$
-\mu_{t}=\mu_{t-1} e^{r_{t}}
+\mu_{jt}=\mu_{jt-1} e^{r_{jt}}
 $$
 
-Where $\mu_{it}$ is the expected mean spotlight count at time $t$, and $r_{t}$ is the  rate-of-increase for the population during the interval $[t-1,t]$. We decomposed $r_{t}$ into components attributable to transect and survey-level covariates using a linear model to account for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model, @cruz2013modelling], rainfall during the previous six months, season (summer vs winter), a random transect-effect, and residual errors. Six-monghtly Rainfall data (mm) were centred by subracting 250mm prior to analysis, to improve the convergence of the model.
+Where $\mu_{jt}$ is the expected mean spotlight count of the $j^th$ transect at time $t$, and $r_{jt}$ is the  rate-of-increase for the $j^{th}$ population during the interval $[t-1,t]$. We decomposed $r_{jt}$ into components attributable to transect and survey-level covariates using a linear model to account for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model, @cruz2013modelling], rainfall during the previous six months, season (summer vs winter), a random transect-effect, and residual errors. Six-monghtly Rainfall data (mm) were centred by subracting 250mm prior to analysis, to improve the convergence of the model.
 
 $$
 r_{t}=\bar{r} + \beta_{1}\log{R_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{t-1}+\beta_{4}\mbox{winter}_{t}+ \zeta_{i}+\epsilon_{t}
