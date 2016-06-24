@@ -123,13 +123,13 @@ $$
 r_{t}=\bar{r} + \beta_{1}\log{R_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{t-1}+\beta_{4}\mbox{winter}_{t}+ \zeta_{i}+\epsilon_{t}
 $$
 
-Where $R_{t}$ is the estimate abundance of rabbits at time $t$, and $\beta_{1}-\beta_{4}$ are regression parameters describing the numerical response of the fox population to rabbit abundance, the strength of density dependence in the rate-of-increase of the fox population, the relationship between rate of increase and the lagged six-monthly rainfall, and whether or not the count was made in the second half of the calendar year. $\zeta_{i}$ are random site-level effects on the rate of increase of the fox population and $\epsilon_{t}$ are normally-distributed errors.
+Where $\bar{r}$ is the mean rate of increase, $R_{t}$ is the estimate abundance of rabbits at time $t$, and $\beta_{1}-\beta_{4}$ are regression parameters describing the numerical response of the fox population to rabbit abundance, the strength of density dependence in the rate-of-increase of the fox population, the relationship between rate of increase and the lagged six-monthly rainfall, and whether or not the count was made in the second half of the calendar year. $\zeta_{i}$ are random site-level effects on the rate of increase of the fox population and $\epsilon_{t}$ are normally-distributed errors.
 
-The abundance of rabbits at the sites was modelled jointly with that of foxes, using a state-space model similar in form to that used for foxes, but without a term for numerical response of the rabbit populations to prey availability: 
+The abundance of rabbits at the sites was modelled jointly with that of foxes, using a state-space model similar to that used for foxes, but without a term for numerical response of the rabbit populations to prey availability: 
 
 $$
 \begin{align}
-C_{i,t} &\sim Poisson(R_{t}L_{i,t}) \\
+C_{ijt} &\sim Poisson(R_{jt}L_{ijt}) \\
 R_{t} &=R_{t-1} e^{r_{t}} \\
 r_{t} &=\bar{r}  + \beta_{5}\log{\mu_{t-1}}+\beta_{6}\mbox{rain}_{t-1}+\beta_{7}\mbox{winter}_{t}+ \zeta_{i}+\epsilon_{t}
 \end{align}
@@ -163,8 +163,6 @@ Three variables had significant effects on the rate of increase of rabbits: rabb
 
 There was no evidence that rabbit abundance had a significant positive effect on the rate of increase of foxes, with the 95 % CI for this parameter including zero (Table 1 and Fig S1). However, there was a strongly negative effect of fox abundance in the preceding six months on the rate of increase of foxes, with the 95 % CI for this parameter being much less than zero. Rainfall in the six months preceding a survey had a positive effect on the rate of increase of foxes (Table 1 and Fig S1). After accounting for the effects of other variables, fox populations grew faster from spring to autumn than from autumn to spring (Table 1 and Fig S1). 
 
-For foxes, there was very little evidence for a positive numerical response to the abundance of rabbits ($\beta_{1}>0$). (Table 1 and Fig S1). Across the observed range of rabbit abundance, increased rabbit abundance were predicted to have only a very weakly positive effect on the rate of increase of fox populations relative to other influences. The analysis showed a strongly negative density dependant effect of fox abundance on the population rate of increase i.e. $(\beta_{2}<0)$ (Table 1 and Fig S1).
-
 Combining the above inferences, we were able to predict the expected rate of increase of fox populations under a range of fox and rabbit abundances, varying rainfall, and in summer and winter (Fig 2). These predictions clearly illustrate the dominating effects of fox density, rainfall and season on the prevailing rates of increase of fox populations, with only a very weak effect of rabbit abundance apparent in the predictions. 
 	
 We also estimated the conditions under which fox populations would be at equilibrium (i.e. r = 0; Fig 2). Under presumed `optimal' conditions (i.e. high rainfall, in autumn) fox populations would be at carrying capacity at $\sim 0.75$ foxes per spotlight km (Fig 2). In contrast, under low rainfall conditions in spring, carrying capacity was predicted to be \textless 0.1 foxes per spotlight km (Fig 2). 
@@ -172,6 +170,7 @@ We also estimated the conditions under which fox populations would be at equilib
 *A priori,* we hypothesised that the effect of rabbit abundance on the rate of increase of foxes would either be positive $(\beta_{1}>0)$, as greater rabbit abundance would result in improved prey availability for foxes, or close to zero, if availability of accessible alternative prey sources meant that food did not become limiting when rabbit populations declined. We also expected that high fox abundances would result in reduced rates of increase for foxes $(\beta_{2}<0)$, due to increasingly strong density-dependent effects on survival and recruitment as abundance increased.
 
 ##Sources of error in the population models
+
 The state-space model included both site-level and random sources of variation in the rates of increase for both species. Posterior distributions of these parameters are illustrated in Fig S2. Site-level variation in rates of increase was of greater magnitude than random error (Fig S2, Table 1). Transect-level variation in rates of increase presumably reflects site-to-site variation in habitat quality and conditions, unexplained by the other parameters of the model.
 
 
@@ -187,7 +186,13 @@ The transect-based spotlight counts that we analysed are uncorrected indices of 
 
 ##Rainfall and rabbit/fox population dynamics
 
-Rainfall is thought to be a driver of the abundances of mammalian herbivores and predators in semi-arid and arid systems worldwide [@dennis2000joint; @letnic2004responses; @letnic2011resources; @shaw2012population]. Our 21 monitoring transects included a wide range of mean annual rainfalls (Fig 1), spanning a gradient from semi-arid to temperate climates, and showed strong but opposing effects of rainfall in the preceding six months for rabbits and foxes. Contrary to expectations [@Pech_alternativeprey], increasing rainfall in the preceding six months had a negative effect. Our analysis cannot elucidate the reason for this effect on rainfall on rabbit abundances, but it could be due to increased mortality of rabbits by drowning in their warrens [@bowen1998population; @robson1993natural; @thompson1994european]. 
+Rainfall is thought to be a driver of the abundances of mammalian herbivores and predators in semi-arid and arid systems worldwide [@dennis2000joint; @letnic2004responses; @letnic2011resources; @shaw2012population]. Our 21 monitoring transects included a wide range of mean annual rainfalls (Fig 1), spanning a gradient from semi-arid to temperate climates, and showed strong but opposing effects of rainfall in the preceding six months for rabbits and foxes. Contrary to expectations [@Pech_alternativeprey], increasing rainfall in the preceding six months had a negative effect on rabbit abundance, after other sources of variation were accounted for. Our analysis cannot elucidate the reason for this effect on rainfall on rabbit abundances, but it could be due to increased mortality of rabbits by drowning in their warrens [@bowen1998population; @robson1993natural; @thompson1994european].
+
+NEED TO ADD IN HERE A BIT MORE ABOUT PARADOXICAL RABBIT RESULT
+DR suggests;
+1. Six-month lag period may be less appropriate for rabbits, which respond more rapidly to rainfall than foxes (rerun with zero lag on this effect?)
+2. Most sites have active rabbit management, so rabbit populations are kept in check by active management and can't respond to the opportunity for increased survival or recruitment that high rainfall would otherwise present.
+3. Timing of RHD outbreaks may also be relevant - these typically occur during autumn, so may counteract initial spring-time increases in rabbit abundance in response to high rainfall conditions.
 
 In contrast, rainfall in the preceding six months had a positive effect on fox abundance. Foxes are omnivores, eating a wide range of mammal, reptile, bird, insect and plant material [for south-eastern Australia see @davis_foxdiet], and readily switch between food sources as availability changes [@delibes2008feeding; @holden2003impact; @Kjellander_preyswit; @Leckie_preyswitch]. It is likely that periods of high rainfall led to increased availability of many of their key foods, with the possible exception of rabbits, and that this in turn led to increased survival and recruitment [see below, @saunders1995managing].
 
