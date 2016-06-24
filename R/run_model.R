@@ -5,10 +5,17 @@ NITER=40000
 NBURN=40000
 THIN=10
 
-load("prepped_data.Rdata")
+args=commandArgs(trailingOnly=TRUE)
+
+
+prepped_data=args[1]
+modelfile=args[2]
+outfile=args[3]
+
+load(file.path(prepped_data))
 
 start.time<-Sys.time()
-hier.mod<-jags.model('R/gompertz_heirarch_rain.txt', 
+hier.mod<-jags.model(file.path(modelfile), 
 				 data=hier_dat, n.chains = 3, n.adapt = NADAPT) 
 update(hier.mod, NBURN) #burnin
 samp<-coda.samples(hier.mod,
@@ -72,4 +79,4 @@ predsamp<-coda.samples(hier.mod,
 end.time<-Sys.time()
 print(end.time-start.time)
 
-save.image("model_results.Rdata")
+save.image(file.path(outfile))
