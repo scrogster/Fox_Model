@@ -5,12 +5,14 @@ require(grid)
 
 args=commandArgs(trailingOnly=TRUE)
 
-model_data=args[1]
 
+model_data=args[1]
+out_pdf=file.path(args[2])
+out_png=gsub("pdf", "png", out_pdf)
+	
 load(file.path(model_data))
 
 beta_result<-ggs(samp, family="^beta|^r.mean")
-
 
 ggplot(beta_result, aes(x=value, group=Parameter))+
 	geom_density(fill="red", alpha=0.3)+
@@ -21,14 +23,14 @@ ggplot(beta_result, aes(x=value, group=Parameter))+
 	theme_classic()
 
 #http://stackoverflow.com/questions/11979017/changing-facet-label-to-math-formula-in-ggplot2
-for(ii in 1:7){
-	grid.gedit(gPath(paste0("strip_t-", ii), "strip.text"), 
-			 grep=TRUE, label=bquote(beta[.(ii)]))}
-grid.gedit(gPath(paste0("strip_t-", 8), "strip.text"), 
-		 grep=TRUE, label=bquote(bar(r)[fox]))
-grid.gedit(gPath(paste0("strip_t-", 9), "strip.text"), 
-		 grep=TRUE, label=bquote(bar(r)[rabbit]))
+# for(ii in 1:7){
+# 	grid.gedit(gPath(paste0("strip_t-", ii), "strip.text"), 
+# 			 grep=TRUE, label=bquote(beta[.(ii)]))}
+# grid.gedit(gPath(paste0("strip_t-", 8), "strip.text"), 
+# 		 grep=TRUE, label=bquote(bar(r)[fox]))
+# grid.gedit(gPath(paste0("strip_t-", 9), "strip.text"), 
+# 		 grep=TRUE, label=bquote(bar(r)[rabbit]))
 
-ggsave("Figures/beta_posterior_density.pdf")
-ggsave("Figures/beta_posterior_density.png")
+ggsave(out_pdf)
+ggsave(out_png)
 

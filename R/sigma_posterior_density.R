@@ -6,6 +6,8 @@ library(grid)
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
+out_pdf=file.path(args[2])
+out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
@@ -27,14 +29,14 @@ ggplot(beta_result, aes(x=value, group=Parameter))+
 	theme_classic()+
 	theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 
-grid.gedit(gPath(paste0("strip_t-", 1), "strip.text"), 
-		 grep=TRUE, label=bquote(sigma[proc](fox)))
-grid.gedit(gPath(paste0("strip_t-", 2), "strip.text"), 
-		 grep=TRUE, label=bquote(sigma[proc](rabbit)))
-grid.gedit(gPath(paste0("strip_t-", 3), "strip.text"), 
-		 grep=TRUE, label=bquote(sigma[transect](fox)))
-grid.gedit(gPath(paste0("strip_t-", 4), "strip.text"), 
-		 grep=TRUE, label=bquote(sigma[transect](rabbit)))
+#grid.gedit(gPath(paste0("strip_t-", 1), "strip.text"), 
+#		 grep=TRUE, label=bquote(sigma[proc](fox)))
+#grid.gedit(gPath(paste0("strip_t-", 2), "strip.text"), 
+#		 grep=TRUE, label=bquote(sigma[proc](rabbit)))
+#grid.gedit(gPath(paste0("strip_t-", 3), "strip.text"), 
+#		 grep=TRUE, label=bquote(sigma[transect](fox)))
+#grid.gedit(gPath(paste0("strip_t-", 4), "strip.text"), 
+#		 grep=TRUE, label=bquote(sigma[transect](rabbit)))
 
-ggsave("Figures/sigma_posterior_density.pdf")
-ggsave("Figures/sigma_posterior_density.png")
+ggsave(out_pdf)
+ggsave(out_png)

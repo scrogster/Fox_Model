@@ -5,6 +5,8 @@ library(tidyr)
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
+out_pdf=file.path(args[2])
+out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
@@ -12,9 +14,6 @@ rain_dat2<-rain_dat
 
 rain_dat2<-data.frame("SiteName"=row.names(rain_dat2), rain_dat2)
 row.names(rain_dat2)<-1:21
-
-
-
 
 rain_dat2<-tbl_df(rain_dat2)
 
@@ -41,5 +40,5 @@ ggplot(rain_tidy, aes(x=Time, y=Rainfall))+
 	facet_wrap(~SiteName, ncol=3, nrow=7)+
 	xlim(1995, 2015)+
 	theme_classic()
-ggsave("Figures/rain_graph.pdf")
-ggsave("Figures/rain_graph.png")
+ggsave(out_pdf)
+ggsave(out_png)

@@ -7,6 +7,8 @@ require(dplyr)
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
+out_pdf=file.path(args[2])
+out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
@@ -26,5 +28,5 @@ ggplot(raneff_result_rab, aes(factor(Parameter), value))+
 	coord_flip()+
 	theme_classic()
 
-ggsave("Figures/raneff_violin_rabbits.pdf")
-ggsave("Figures/raneff_violin_rabbits.png")
+ggsave(out_pdf)
+ggsave(out_png)

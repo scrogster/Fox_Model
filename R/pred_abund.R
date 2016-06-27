@@ -7,6 +7,8 @@ require(rjags)
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
+out_pdf=file.path(args[2])
+out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
@@ -69,8 +71,8 @@ preddf %>%
 	facet_wrap(~Sitename,  ncol=3, nrow=7, scales="free_y") +
 	theme_classic() #classic 
 
-ggsave("Figures/fox_abund.pdf", width=7, height=10)
-ggsave("Figures/fox_abund.png", width=7, height=10, dpi=300)
+ggsave(out_pdf, width=7, height=10)
+ggsave(out_png, width=7, height=10, dpi=300)
 
 ## ----rabbit_pred_graph, cache=FALSE, echo=FALSE, message=FALSE, fig.height=9.5, fig.width=7.5, fig.cap='Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid line is the posterior median, and shaded polygons are the 95\\% credible intervals of the mean expected abundances.', fig.pos="p!"----
 #plotting estimated trajectories of all rabbit populations.
@@ -87,5 +89,8 @@ preddf %>%
 	facet_wrap(~Sitename, ncol=3, nrow=7, scales="free_y")+
 	theme_classic() #classic
 
-ggsave("Figures/rabbit_abund.pdf", width=7, height=10)
-ggsave("Figures/rabbit_abund.png", width=7, height=10, dpi=300)
+rabbit_pdf<-gsub("fox", "rabbit", out_pdf)
+rabbit_png<-gsub("fox", "rabbit", out_png)
+
+ggsave(rabbit_pdf, width=7, height=10)
+ggsave(rabbit_png, width=7, height=10, dpi=300)

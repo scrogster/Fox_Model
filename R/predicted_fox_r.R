@@ -3,6 +3,8 @@ require(ggplot2)
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
+out_pdf=file.path(args[2])
+out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
@@ -73,5 +75,5 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	theme(legend.title.align=0.5, legend.title=element_text(face="italic"))
 	
 
-ggsave("Figures/predicted_fox_r.pdf")
-ggsave("Figures/predicted_fox_r.png", dpi=300)
+ggsave(out_pdf)
+ggsave(out_png, dpi=300)
