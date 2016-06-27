@@ -25,7 +25,7 @@ for(t in (start[k]+1):end[k]){
   
   ##---process sub-model for rabbits
   r.rabbits.expected[t, k]<-  log(mu.rabbits[t-1, k])* beta[5] 
-                    +rain[k, t+rain.offset-1]*beta[6] #rain effect of r.
+                    +rain[k, t+rain.offset+1]*beta[6] #rain effect of r.
                      +winter[t]*beta[7] #effect of winter on rabbit r.
                     +site.r.eff.rabbits[k]
 
