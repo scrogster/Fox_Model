@@ -74,7 +74,7 @@ predsamp<-coda.samples(hier.mod,
 				   c(predparamstring), 
 				   n.iter=NITER, thin=THIN)
 #extract dic
-dic.heirarch<-dic.samples(hier.mod, 4000)
+dic.heirarch<-dic.samples(hier.mod, NITER/10)
 print(dic.heirarch)
 
 end.time<-Sys.time()
