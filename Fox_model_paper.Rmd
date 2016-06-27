@@ -143,7 +143,7 @@ The model was fitted to the data using the Bayesian Markov Chain Monte Carlo (MC
 ##Data overview
 ```{r message=FALSE, results='hide', echo=FALSE}
 #load results so we can use inline r to insert resulting numbers
-load("model_results.Rdata")
+load("model_results_12_6.Rdata")
 
 ```
 
@@ -221,7 +221,7 @@ Table 1 - summary statistics for posteriors of model parameters. Mean - posterio
 require(dplyr)
 require(rjags)
 require(knitr)
-load("model_results.Rdata")
+load("model_results_12_6.Rdata")
 param.names<-c("$\\beta_{1}$", "$\\beta_{2}$", "$\\beta_{3}$", "$\\beta_{4}$", "$\\beta_{5}$","$\\beta_{6}$", "$\\beta_{7}$",
                "$\\bar{r}_{\\mbox{fox}}$", "$\\bar{r}_{\\mbox{rabbit}}$",
                  "$\\sigma_{resid} \\mbox{(fox)}$", "$\\sigma_{resid} \\mbox{(rabbit)}$",
