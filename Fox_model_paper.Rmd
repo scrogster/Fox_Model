@@ -52,7 +52,7 @@ Suggested running title: *Numerical responses of red fox populations*
 
 *Word Counts:* 
 Summary: 313; Main Text: 3771; Acknowledgements: 62; References: 1863; Tables: 156 ; Figure Legends: 188.
-Number of Tables: 1.
+Number of Tables: 2.
 Number of Figures: 4.
 Number of References: 66.
 
@@ -157,11 +157,11 @@ Examination of trace plots for the regression parameters and error terms indicat
 
 ##Determinants of the rate of increase of rabbits
 
-Three variables had significant effects on the rate of increase of rabbits: rabbit abundance in the preceding six months, rainfall and season (Table 1, Fig S1). Rabbit abundance in the preceding six months had a negative effect on the rate of increase (i.e. negative density-dependence, Table 1, Fig S1). Interestingly, there was a negative effect of rainfall during the preceding six months on the rate of increase of rabbits (Table 1, Fig S1). After accounting for the effects of both rabbit abundance and rainfall in the preceding six months, the rates of increase of rabbits were significantly higher during autumn to spring than from spring to autumn (Table 1, Fig S1). 
+Three variables had significant effects on the rate of increase of rabbits: rabbit abundance in the preceding six months, rainfall and season (Table 2, Fig S1). Rabbit abundance in the preceding six months had a negative effect on the rate of increase (i.e. negative density-dependence, Table 2, Fig S1). Interestingly, there was a negative effect of rainfall during the preceding six months on the rate of increase of rabbits (Table 2, Fig S1). After accounting for the effects of both rabbit abundance and rainfall in the preceding six months, the rates of increase of rabbits were significantly higher during autumn to spring than from spring to autumn (Table 2, Fig S1). 
 
 ##Determinants of the rate of increase of foxes
 
-There was no evidence that rabbit abundance had a significant positive effect on the rate of increase of foxes, with the 95 % CI for this parameter including zero (Table 1 and Fig S1). However, there was a strongly negative effect of fox abundance in the preceding six months on the rate of increase of foxes, with the 95 % CI for this parameter being much less than zero. Rainfall in the six months preceding a survey had a positive effect on the rate of increase of foxes (Table 1 and Fig S1). After accounting for the effects of other variables, fox populations grew faster from spring to autumn than from autumn to spring (Table 1 and Fig S1). 
+There was no evidence that rabbit abundance had a significant positive effect on the rate of increase of foxes, with the 95 % CI for this parameter including zero (Table 2 and Fig S1). However, there was a strongly negative effect of fox abundance in the preceding six months on the rate of increase of foxes, with the 95 % CI for this parameter being much less than zero. Rainfall in the six months preceding a survey had a positive effect on the rate of increase of foxes (Table 2 and Fig S1). After accounting for the effects of other variables, fox populations grew faster from spring to autumn than from autumn to spring (Table 2 and Fig S1). 
 
 Combining the above inferences, we were able to predict the expected rate of increase of fox populations under a range of fox and rabbit abundances, varying rainfall, and in summer and winter (Fig 2). These predictions clearly illustrate the dominating effects of fox density, rainfall and season on the prevailing rates of increase of fox populations, with only a very weak effect of rabbit abundance apparent in the predictions. 
 	
@@ -171,7 +171,7 @@ We also estimated the conditions under which fox populations would be at equilib
 
 ##Sources of error in the population models
 
-The state-space model included both site-level and random sources of variation in the rates of increase for both species. Posterior distributions of these parameters are illustrated in Fig S2. Site-level variation in rates of increase was of greater magnitude than random error (Fig S2, Table 1). Transect-level variation in rates of increase presumably reflects site-to-site variation in habitat quality and conditions, unexplained by the other parameters of the model.
+The state-space model included both site-level and random sources of variation in the rates of increase for both species. Posterior distributions of these parameters are illustrated in Fig S2. Site-level variation in rates of increase was of greater magnitude than random error (Fig S2, Table 2). Transect-level variation in rates of increase presumably reflects site-to-site variation in habitat quality and conditions, unexplained by the other parameters of the model.
 
 
 #Discussion
@@ -215,8 +215,20 @@ We thank the many landholders who provided access to the monitoring transects lo
 #Data Accessability
 Raw data and *JAGS* and *R* code for fitting the state-space model will be deposited in the Dryad Digital Depository doi:xxxxxxx.
 
-#Table
-Table 1 - summary statistics for posteriors of model parameters. Mean - posterior mean, SD - posterior SD, Median - posterior median, q2.5/q97.5 - lower and upper 95% credible intervals.
+#Tables
+Table 1 - Deviance information criteria (DIC), and model selection weights for models with various lags on rainfall effects on rates of increase *(r)* for foxes and rabbits. Lags are specified in months.
+```{r echo=FALSE, message=FALSE, results="asis"}
+load("DIC_results.Rdata")
+require(knitr)
+
+tabout<-modseltab[,-1]
+names(tabout)<-c("Lag on foxes", "Lag on rabbits", "$\\Delta DIC$", "model weight")
+
+kable(tabout, caption=NULL, row.names = FALSE,
+	align=c("c", "c", "r", "r"), digits=3)
+```
+
+Table 2 - summary statistics for posteriors of model parameters. Mean - posterior mean, SD - posterior SD, Median - posterior median, q2.5/q97.5 - lower and upper 95% credible intervals.
 ```{r echo=FALSE, message=FALSE, results="asis"}
 require(dplyr)
 require(rjags)
