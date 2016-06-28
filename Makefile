@@ -1,5 +1,5 @@
 
-all: prepped_data.Rdata models figures paper
+all: prepped_data.Rdata models DIC_results.Rdata figures paper
 
 
 #metarule to fit the models
@@ -55,7 +55,10 @@ model_results_6_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_6.txt
 #zero-lag on rabbits, zero lag on foxes
 model_results_0_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_0.txt 
 	Rscript $^ $@    
-	
+
+DIC_results.Rdata: R/get_dics.R models
+	Rscript $< $@
+
 PREF_RESULT = model_results_12_6.Rdata
 ###############################################################################	
 #generate the figures as pdfs, pngs done implicitly                           #
