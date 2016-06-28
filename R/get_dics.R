@@ -1,4 +1,8 @@
 
+args<-commandArgs(trailingOnly=TRUE)
+
+outfile<-file.path(args[1])
+
 result_list<-list(
 	"model_results_0_0.Rdata",
 	"model_results_0_6.Rdata",
@@ -18,4 +22,20 @@ get_dic<-function(resultfile){
     return(out)
 }
 
-lapply(result_list, get_dic)
+diclist<-lapply(result_list, get_dic)
+
+dics<-sapply(diclist, function(x) {sum(x$deviance+x$penalty)})
+which.min(dics)
+
+deltaDIC <- dics-dics[which.min(dics)]
+weights <- exp(-0.5 *deltaDIC)
+
+mod_names <- unlist(result_list)
+fox_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[3]})
+rabbit_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[4]})
+
+modseltab <- data.frame(mod_names, fox_lag, rabbit_lag, deltaDIC, model.weights = weights/sum(weights)  )
+
+modseltab <- modseltab[order(modseltab$model.weights, decreasing = TRUE),]
+
+save.image(outfile)
