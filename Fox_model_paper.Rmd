@@ -227,7 +227,7 @@ kable(tabout, caption=NULL, row.names = FALSE,
 	align=c("c", "c", "r", "r"), digits=3)
 ```
 
-Table 2 - summary statistics for posteriors of model parameters. Mean - posterior mean, SD - posterior SD, Median - posterior median, q2.5/q97.5 - lower and upper 95% credible intervals.
+Table 2 - Summary statistics for posteriors of model parameters. Mean - posterior mean, SD - posterior SD, Median - posterior median, q2.5/q97.5 - lower and upper 95% credible intervals.
 ```{r echo=FALSE, message=FALSE, results="asis"}
 require(dplyr)
 require(rjags)
