@@ -51,10 +51,10 @@ Arthur Rylah Institute for Environmental Research, Department of Environment, La
 Suggested running title: *Numerical responses of red fox populations*
 
 *Word Counts:* 
-Summary: 313; Main Text: 3771; Acknowledgements: 62; References: 1863; Tables: 156 ; Figure Legends: 188.
+Summary: 319; Main Text: 3976; Acknowledgements: 59; References: 1975; Tables: 244 ; Figure Legends: 211.
 Number of Tables: 2.
 Number of Figures: 4.
-Number of References: 66.
+Number of References: 69.
 
 *****************************************************************
 #Summary
