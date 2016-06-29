@@ -20,6 +20,10 @@ trans_summary<-obs_data2 %>%
 
 names(trans_summary)<-c("Transect", "Established", "Last survey", "Number of Surveys", "Years with surveys", "Full length (km)", "Mean length (km)")
 
+#rename "Yarram/Woodside" to just "Yarram"
+trans_summary$Transect <-as.character(trans_summary$Transect)
+trans_summary$Transect[trans_summary$Transect=="Yarram/Woodside"] <- "Yarram"
+
 library(knitr)
 kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.",
 	align=c("c", "l", "c", "c", "c","c", "c", "c") )
