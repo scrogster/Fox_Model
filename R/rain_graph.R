@@ -39,7 +39,7 @@ ggplot(rain_tidy, aes(x=Time, y=Rainfall))+
 	geom_line(col="blue")+
 	facet_wrap(~SiteName, ncol=3, nrow=7)+
 	xlim(1995, 2015)+
-	ylab=("Rainfall (mm)")+
+	ylab("Rainfall (mm)")+
 	theme_classic()
 ggsave(out_pdf)
 ggsave(out_png)
