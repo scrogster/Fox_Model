@@ -18,12 +18,12 @@ beta_result<-ggs(samp, family="^beta|^r.mean")
 #code to put proper math notation in facet labels of plot
 pname<-as_labeller(c(
 	'beta[1]'="beta[1]",
-	'beta[2]'="beta[1]",
-	'beta[3]'="beta[1]",
-	'beta[4]'="beta[1]",
-	'beta[5]'="beta[1]",
-	'beta[6]'="beta[1]",
-	'beta[7]'="beta[1]",
+	'beta[2]'="beta[2]",
+	'beta[3]'="beta[3]",
+	'beta[4]'="beta[4]",
+	'beta[5]'="beta[5]",
+	'beta[6]'="beta[6]",
+	'beta[7]'="beta[7]",
 	'r.mean'="bar(r)[fox]",
 	'r.mean.rabbits'="bar(r)[rabbit]")
 	, label_parsed
