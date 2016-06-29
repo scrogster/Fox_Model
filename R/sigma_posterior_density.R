@@ -13,30 +13,22 @@ load(file.path(model_data))
 
 beta_result<-ggs(samp, family="^sigma")
 
-# signames <- c(
-# 	'sigma[1]'= "sigma[proc] (fox)",         #"\\sigma[proc] (fox)",
-# 	'sigma[2]'="sigma[proc] (rabbit)",
-# 	'sigma[3]'="sigma[transect] (fox)",
-# 	'sigma[4]'="sigma[transect] (rabbit)"
-# )
-
+#code to put proper math notation in facet labels of plot
+pname<-as_labeller(c(
+	'sigma[1]'="sigma[process]^fox",
+	'sigma[2]'="sigma[process]^rabbit",
+	'sigma[3]'="sigma[transect]^fox",
+	'sigma[4]'="sigma[transect]^rabbit")
+	, label_parsed
+)
 
 ggplot(beta_result, aes(x=value, group=Parameter))+
-	geom_density(fill="red", alpha=0.3)+
-	facet_wrap(~Parameter)+
+	geom_density(fill="green", alpha=0.3)+
+	facet_wrap(~Parameter,  labeller=pname)+
 	xlab("")+
 	ylab("")+
 	theme_classic()+
 	theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
-
-#grid.gedit(gPath(paste0("strip_t-", 1), "strip.text"), 
-#		 grep=TRUE, label=bquote(sigma[proc](fox)))
-#grid.gedit(gPath(paste0("strip_t-", 2), "strip.text"), 
-#		 grep=TRUE, label=bquote(sigma[proc](rabbit)))
-#grid.gedit(gPath(paste0("strip_t-", 3), "strip.text"), 
-#		 grep=TRUE, label=bquote(sigma[transect](fox)))
-#grid.gedit(gPath(paste0("strip_t-", 4), "strip.text"), 
-#		 grep=TRUE, label=bquote(sigma[transect](rabbit)))
 
 ggsave(out_pdf)
 ggsave(out_png)
