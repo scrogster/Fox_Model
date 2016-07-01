@@ -100,10 +100,10 @@ We modelled the time-series of fox and rabbit counts from the 21 transects joint
 A Poisson observation model was assumed for the counts of both foxes and rabbits, where the number of individuals observed during each survey was dependent on underlying abundance, with a Poisson error structure for the observations. Transect lengths were included in the expectation of the Poisson model, to allow for both within- and between-site variation in the lengths of the spotlight transects:
 
 $$
-F_{ijt} \sim Poisson(\mu_{jt}l_{ijt})
+F_{ijt} \sim Poisson(\mu_{jt}L_{ijt})
 $$
 
-Where $F_{ijt}$ is the number of foxes observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$. The corresponding lengths of transect surveyed during each census was $l_{ijt}$. 
+Where $F_{ijt}$ is the number of foxes observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$. The corresponding lengths of transect surveyed during each census was $L_{ijt}$. 
 
 The underlying transect-level abundances $(\mu_{jt})$ of foxes at each site over the course of the study were modelled as a stochastic, density-dependent process:
 
@@ -114,7 +114,7 @@ $$
 Where $\mu_{jt}$ is the expected mean spotlight count of the $j^th$ transect at time $t$, and $r_{jt}^{fox}$ is the  rate-of-increase for the $j^{th}$ population during the interval $[t-1,t]$. We decomposed $r_{jt}^{fox}$ into components attributable to transect and survey-level covariates using a linear model. The model accounted for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model, @cruz2013modelling], previous rainfall, season (summer vs winter), random transect-effects, and process errors. Rainfall data (mm, aggregated to six-monthly totals) were centred by subtracting 250mm prior to analysis to improve the convergence of the model. For the effects of rainfall in the model, we considered lags of 0, 6 and 12 months, and compared the parsimony of the alternative models using the Deviance Information Criterion [DIC, @spiegelhalter2002DIC].
 
 $$
-r_{jt}^{fox}=\bar{r}_{fox} + \beta_{1}\log{\rho_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{t-1}+\beta_{4}\mbox{winter}_{t}+ \zeta_{j}^{fox}+\epsilon_{t}^{fox}
+r_{jt}^{fox}=\bar{r}_{fox} + \beta_{1}\log{\rho_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{jt-1}+\beta_{4}\mbox{winter}_{t}+ \zeta_{j}^{fox}+\epsilon_{t}^{fox}
 $$
 
 Where $\bar{r}_{fox}$ is the mean rate of increase, $\rho_{t}$ is the estimated abundance of rabbits at time $t$, and $\beta_{1}-\beta_{4}$ are regression parameters describing the numerical response of the fox population to rabbit abundance, the strength of density dependence in the rate-of-increase of the fox population, the relationship between rate of increase and the lagged rainfall, and whether or not the count was made in the second half of the calendar year. $\zeta_{i}^{fox}$ are random site-level effects with standard deviation $\sigma_{site}^{fox}$ on the rate of increase of the fox population and $\epsilon_{t}^{fox}$ are normally-distributed process errors with standard deviation $\sigma_{process}^{fox}$.
@@ -130,11 +130,11 @@ $$
 
 $$
 \begin{align}
-r_{jt}^{rabbit} &=\bar{r}_{rabbit}  + \beta_{5}\log{\rho_{t-1}} + \beta_{6}\mbox{rain}_{t-1} +\beta_{7}\mbox{winter}_{t} +\zeta_{j}^{rabbit} +\epsilon_{t}^{rabbit}
+r_{jt}^{rabbit} &=\bar{r}_{rabbit}  + \beta_{5}\log{\rho_{t-1}} + \beta_{6}\mbox{rain}_{jt-1} +\beta_{7}\mbox{winter}_{t} +\zeta_{j}^{rabbit} +\epsilon_{t}^{rabbit}
 \end{align}
 $$
 
-Where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances of rabbits, and the other model terms are equivalent to the comparable termins in the fox model.
+Where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances of rabbits, and the other model terms are equivalent to the comparable terms in the model fox abundance.
 
 \subsection*{Model fitting, priors and goodness-of-fit}
 The model was fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummer2003jags]. The *JAGS* code for the model is given in Appendix S1. Vague, uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001^{-\frac{1}{2}})$ priors for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of traceplots. A burn-in of 40000 iterations followed by sampling from three independant Markov chains with different starting values for 40000 further iterations. After thinning, a total of 4000 samples from each of the chains were retained for inference.
@@ -173,7 +173,7 @@ We also estimated the conditions under which fox populations would be at equilib
 
 ##Sources of error in the population models
 
-The state-space model included both transect-level and process errors in the rates of increase for both species. Posterior distributions of these parameters are illustrated in Fig S2. transect-level variation in rates of increase was of greater magnitude than process error (Fig S2, Table 2). Transect-level variation in rates of increase presumably reflect site-to-site variation in habitat quality and conditions, unexplained by the other parameters of the model.
+The state-space model included both transect-level and process errors in the rates of increase for both species. Posterior distributions of these parameters are illustrated in Fig S2. Transect-level variation in rates of increase was of greater magnitude than process error (Fig S2, Table 2). Transect-level variation in rates of increase presumably reflect site-to-site variation in habitat quality and conditions, unexplained by the other parameters of the model.
 
 #Discussion
 
@@ -189,7 +189,7 @@ The transect-based spotlight counts that we analysed are uncorrected indices of 
 
 Rainfall is thought to be a driver of the abundances of mammalian herbivores and predators in semi-arid and arid systems worldwide [@dennis2000joint; @letnic2004responses; @letnic2011resources; @shaw2012population]. Our 21 monitoring transects included a wide range of mean annual rainfalls (Fig 1), spanning a gradient from semi-arid to temperate climates, and showed strong but opposing effects of rainfall in the preceding six months for rabbits and foxes. Contrary to expectations [@Pech_alternativeprey], high rainfall in the preceding six months had a negative effect on rabbit abundance, after other sources of variation in the model were accounted for. Our analysis provides little direct basis for determining the mechanism behind this appararently paradoxical result, but several hypotheses seem plausible. Firstly, during the course of the study, rabbits at all sites were subject to ongoing mortality due to RHDV. Outbreaks of disease may have limited the potential for rabbit populations to grow under high rainfall conditions, especially as periods of heightened mortality due to RHDV coincide with rabbits' peak breeding season [@mutze2008geographic; @wells2015timing]. Secondly, all of our transects were subject to regular, active management of rabbit numbers throughout the period of this study. Population supression by these management activities may have limited the ability of the rabbit populations to increase during periods of high rainfall. Finally, periods of especially high rainfall have also been associated with increased mortality of rabbits attributable to drowning (especially of young) in their warrens [@bowen1998population; @robson1993natural; @thompson1994european], though this latter mechanism may only be of significance in higher rainfall, temperate environments.
 
-In contrast, rainfall in the preceding twelve had a positive effect on fox abundance. Foxes are omnivores, eating a wide range of mammal, reptile, bird, insect and plant material [for south-eastern Australia, see @davis_foxdiet], and readily switch between food sources as availability changes [@delibes2008feeding; @holden2003impact; @Kjellander_preyswit; @Leckie_preyswitch]. It is likely that periods of high rainfall led to increased availability of many of these foods (with the possible exception of rabbits), and that this in turn led to increased survival and recruitment [see below, @saunders1995managing].
+In contrast, rainfall in the preceding twelve months had a positive effect on fox abundance. Foxes are omnivores, eating a wide range of mammal, reptile, bird, insect and plant material [for south-eastern Australia, see @davis_foxdiet], and readily switch between food sources as availability changes [@delibes2008feeding; @holden2003impact; @Kjellander_preyswit; @Leckie_preyswitch]. It is likely that periods of high rainfall led to increased availability of many of these foods (with the possible exception of rabbits), and that this in turn led to increased survival and recruitment [see below, @saunders1995managing].
 
 ##Density-dependence in fox and rabbit dynamics
 
@@ -205,10 +205,10 @@ Our study tested the hypothesis that fox populations exhibit a numerical respons
 
 #Acknowledgements
 
-We thank the many landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who collected spotlight transect data. We thank the Victorian Department of Economic Development, Jobs, Training and Resources, and it's predecessors for funding this work. Helpful comments on the manuscript were provided by YYY.
+We thank the many landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who collected spotlight transect data. We thank the Victorian Department of Economic Development, Jobs, Training and Resources, and it's predecessors for funding this work. Helpful comments on the manuscript were provided by Canran Liu and Deirdre Lucas.
 
 #Data Accessability
-All data and *JAGS* and *R* code for fitting the state-space model will be deposited in the Zeonodo digital repository doi:xxxxxxx.
+All data, and *JAGS* and *R* code for the state-space model are contained in a git repository at [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, a snapshot of the code and data will be deposited in the Zeonodo digital archive, with doi:xxxxxxx.
 
 #Tables
 Table 1 - Deviance information criteria $(\Delta DIC)$, and model selection weights for candidate models with various lags on rainfall effects on rates of increase *(r)* for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
@@ -255,9 +255,9 @@ kable(tabout, caption=NULL,
 
 ![Figure 2. Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low, medium and high rainfall. The dashed lines denote the combinations of rabbit and fox abundance for which *r* = 0.](Figures/predicted_fox_r.png)
 
-![Figure 3. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances. Note that the y-axis scales differ between sites to accomodate differing densities.](Figures/fox_abund.png)
+![Figure 3. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that the y-axis scales differ between sites to accomodate differing densities.](Figures/fox_abund.png)
 
-![Figure 4. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credibly intervals of expected abundances. Note that the y-axis scales differ between sites to accomodate differing densities.](Figures/rabbit_abund.png)
+![Figure 4. Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that the y-axis scales differ between sites to accomodate differing densities.](Figures/rabbit_abund.png)
 
 #Supporting Information
 Additional Supporting Information may be found in the online version of this article:
