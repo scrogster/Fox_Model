@@ -217,7 +217,7 @@ load("DIC_results.Rdata")
 require(knitr)
 
 tabout<-modseltab[,-1]
-names(tabout)<-c("Lag on foxes", "Lag on rabbits", "$\\Delta DIC$", "model weight")
+names(tabout)<-c("Lag on foxes", "Lag on rabbits","Deviance", "$\\Delta DIC$", "model weight")
 
 kable(tabout, caption=NULL, row.names = FALSE,
 	align=c("c", "c", "r", "r"), digits=3)
