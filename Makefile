@@ -3,7 +3,7 @@ all: prepped_data.Rdata models figures paper
 
 
 #metarule to fit the models
-models: model_results_6_6.Rdata model_results_0_6.Rdata model_results_6_0.Rdata model_results_0_0.Rdata model_results_12_12.Rdata model_results_12_6.Rdata model_results_6_12.Rdata model_results_0_12.Rdata model_results_12_0.Rdata 
+models: model_results_6_6.Rdata model_results_0_6.Rdata model_results_6_0.Rdata model_results_0_0.Rdata model_results_12_12.Rdata model_results_12_6.Rdata model_results_6_12.Rdata model_results_0_12.Rdata model_results_12_0.Rdata DIC_results.Rdata
 
 #metarule to make the figures
 figures: Figures/raneff_violin_foxes.pdf Figures/beta_posterior_density.pdf Figures/sigma_posterior_density.pdf Figures/raneff_violin_rabbits.pdf  Figures/predicted_fox_r.pdf Figures/fox_abund.pdf Figures/rabbit_abund.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf 
@@ -56,7 +56,7 @@ model_results_6_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_6.txt
 model_results_0_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_0.txt 
 	Rscript $^ $@    
 
-DIC_results.Rdata: R/get_dics.R models
+DIC_results.Rdata: R/get_dics.R 
 	Rscript $< $@
 
 PREF_RESULT = model_results_12_6.Rdata
