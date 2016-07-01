@@ -25,7 +25,7 @@ get_dic<-function(resultfile){
 diclist<-lapply(result_list, get_dic)
 
 dics<-sapply(diclist, function(x) {sum(x$deviance+x$penalty)})
-which.min(dics)
+devs<-sapply(diclist, function(x) {sum(x$deviance)})
 
 deltaDIC <- dics-dics[which.min(dics)]
 weights <- exp(-0.5 *deltaDIC)
@@ -34,7 +34,7 @@ mod_names <- unlist(result_list)
 fox_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[3]})
 rabbit_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[4]})
 
-modseltab <- data.frame(mod_names, fox_lag, rabbit_lag, deltaDIC, model.weights = weights/sum(weights)  )
+modseltab <- data.frame(mod_names, fox_lag, rabbit_lag, deviance, deltaDIC, model.weights = weights/sum(weights)  )
 
 modseltab <- modseltab[order(modseltab$model.weights, decreasing = TRUE),]
 
