@@ -34,7 +34,7 @@ mod_names <- unlist(result_list)
 fox_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[3]})
 rabbit_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[4]})
 
-modseltab <- data.frame(mod_names, fox_lag, rabbit_lag, deviance, deltaDIC, model.weights = weights/sum(weights)  )
+modseltab <- data.frame(mod_names, fox_lag, rabbit_lag, devs, deltaDIC, model.weights = weights/sum(weights)  )
 
 modseltab <- modseltab[order(modseltab$model.weights, decreasing = TRUE),]
 
