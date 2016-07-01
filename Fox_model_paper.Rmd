@@ -208,7 +208,7 @@ Our study tested the hypothesis that fox populations exhibit a numerical respons
 We thank the many landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who collected spotlight transect data. We thank the Victorian Department of Economic Development, Jobs, Training and Resources, and it's predecessors for funding this work. Helpful comments on the manuscript were provided by YYY.
 
 #Data Accessability
-Raw data and *JAGS* and *R* code for fitting the state-space model will be deposited in the Dryad Digital Depository doi:xxxxxxx.
+All data and *JAGS* and *R* code for fitting the state-space model will be deposited in the Zeonodo digital repository doi:xxxxxxx.
 
 #Tables
 Table 1 - Deviance information criteria $(\Delta DIC)$, and model selection weights for candidate models with various lags on rainfall effects on rates of increase *(r)* for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
