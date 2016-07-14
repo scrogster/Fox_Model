@@ -16,7 +16,7 @@ GROUP BY tblSpotlightTransects.[Monitor Site], tblSpotlightBackgroundData.[Spotl
 HAVING ((Not (tblSpotlightTransects.[Monitor Site])='Avalon' And 
          Not (tblSpotlightTransects.[Monitor Site])='Sunbury' And 
          Not (tblSpotlightTransects.[Monitor Site])='Kerang') AND 
-         ((tblSpotlightBackgroundData.[Spotlight Date])< #2014-01-01#))
+         ((tblSpotlightBackgroundData.[Spotlight Date])< #2014-07-01#))
 ORDER BY tblSpotlightTransects.[Monitor Site], tblSpotlightBackgroundData.[Spotlight Date];
 "
 
