@@ -6,8 +6,11 @@ library(reshape2)
 library(plyr)
 
 ## ----read_data, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE, tidy=TRUE----
-spotlight<-read.xls("Data/kasey.xls", 2)
-#names(spotlight)
+#spotlight<-read.xls("Data/kasey.xls", 2)
+
+spotlight<-read.csv("Data/spotlight_data.csv")
+
+
 #convert date data to date format using lubridate facilities
 spotlight$Spotlight.Date<-ymd(as.character(spotlight$Spotlight.Date))
 
@@ -76,9 +79,9 @@ obs_data<-data.frame(
 	#this variable is the calender year, plus the monthly fraction.
 	"ytime"=year(spotlight$sess.dates)+(month(spotlight$sess.dates)/12),
 	"breeding"=as.numeric(month(spotlight$sess.dates)>6),
-	"foxes.counted"=spotlight$SumOfNumber.of.Foxes,
-	"rabbits.counted"=spotlight$SumOfNumber.of.Rabbits,
-	"trans.length"=spotlight$SumOfSpotlight.Length..m.,
+	"foxes.counted"=spotlight$Foxes,
+	"rabbits.counted"=spotlight$Rabbits,
+	"trans.length"=spotlight$TransectLength,
 	"rep_count"=spotlight$Replicate_Count
 )
 
