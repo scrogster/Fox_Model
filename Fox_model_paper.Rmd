@@ -144,7 +144,7 @@ The model was fitted to the data using the Bayesian Markov Chain Monte Carlo (MC
 ##Data overview
 ```{r message=FALSE, results='hide', echo=FALSE}
 #load results so we can use inline r to insert resulting numbers
-load("model_results_12_6.Rdata")
+load("model_results_6_6.Rdata")
 
 ```
 
