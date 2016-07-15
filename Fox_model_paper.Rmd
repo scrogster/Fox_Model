@@ -210,11 +210,11 @@ Our study tested the hypothesis that fox populations exhibit a numerical respons
 
 We thank the landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who conducted the spotlight counts. The Victorian Department of Economic Development, Jobs, Training and Resources, and it's predecessors funded this work. Helpful comments on the manuscript were provided by Canran Liu, Andrew Bennett and Deirdre Lucas.
 
-#Data Accessability
+#Data Accessibility
 All data, and *JAGS* and *R* code for the state-space model are contained in a git repository at [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, a snapshot of the code and data will be deposited in the Zenodo digital archive with DOI xxx.
 
 #Tables
-**Table 1.** Deviance information criteria $(\Delta DIC)$, and model selection weights for candidate models with various lags on rainfall effects on rates of increase *(r)* for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
+**Table 1.** Deviance information criteria $(\Delta DIC)$, and model selection weights for candidate models with various lags on rainfall effects on rates of increase for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
 ```{r echo=FALSE, message=FALSE, results="asis"}
 load("DIC_results.Rdata")
 require(knitr)
@@ -226,7 +226,7 @@ kable(tabout, caption=NULL, row.names = FALSE,
 	align=c("c", "c", "r", "r"), digits=3)
 ```
 
-**Table 2.** Summary statistics for posterior distributions of model parameters.
+**Table 2.** Summary statistics for posterior distributions of parameters of the most parsimonious model for rabbit and fox abundance.
 ```{r echo=FALSE, message=FALSE, results="asis"}
 require(dplyr)
 require(rjags)
