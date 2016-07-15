@@ -31,7 +31,7 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
 ```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE}
-cat(readLines('R/GHR_12_6.txt'), sep = '\n', warn=FALSE)
+cat(readLines('R/GHR_6_6.txt'), sep = '\n', warn=FALSE)
 ```
 
 ![Figure S1. Posterior densities of the regression parameters $(\beta)$.](Figures/beta_posterior_density.png) 
