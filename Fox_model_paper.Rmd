@@ -4,6 +4,7 @@ output:
   word_document: 
     fig_caption: yes
     reference_docx: Template.docx
+    pandoc_args: ["--smart"]
 csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
@@ -90,12 +91,14 @@ Twenty-one monitoring transects, distributed throughout the state of Victoria we
 
 The rabbit management history of transects varied. Following the establishment of RHDV in Victoria in 1996, the Victorian government subsidised rabbit management at 14 properties with transects from 1996 - 2002 [@mcphee2010long].  Management involved using heavy machinery to remove surface harbour and destroy warrens [for further details see @mcphee2010long]. Three properties were deliberately not subjected to this management [@mcphee2010long], although management was conducted at one of these properties (Ingliston) in 2010 [@forsyth_density-dependent_2015]. The removal of surface harbour and warren ripping substantially reduced rabbit abundance over and above the effects of RHDV [@mcphee2010long; @ramsey2014recolonisation].
 
+Foxes were not managed on the 21 properties, except for occasional recreational shooting. Such shooting has little impact on fox populations [@saunders2010impacts; @saunders1995managing].
+
 ##Spotlight counts
 
-Spotlight counts were conducted between two and four times annually, with the majority of counts made during autumn and spring. Two replicate counts were usually made on each survey occasion, typically over two consecutive nights. Counts commenced shortly after sunset, and involved one observer standing in the tray of a slow-moving (10 - 20 kmh^-1^, depending upon terrain) utility vehicle, searching 80 - 100 m either side of the transect line using a hand-held 100 W spotlight [@williams1995managing]. The numbers of rabbits and foxes seen along the transects were recorded. 
+Spotlight counts were conducted between two and four times annually, with the majority of counts made during autumn and spring. Two replicate counts were usually made on each survey occasion, typically over two consecutive nights. Counts commenced shortly after sunset, and involved one observer standing in the tray of a slow-moving (10--20 kmh^-1^, depending upon terrain) utility vehicle, searching 100 m either side of the transect line using a hand-held 100 W spotlight [@williams1995managing]. The numbers of rabbits and foxes seen along the transects were recorded. 
 
 ##Statistical model and hypotheses
-We modelled the time-series of fox and rabbit counts from the 21 transects jointly, using an hierarchical, Bayesian state-space modelling approach [@buckland2004state]. To account for uneven timing and survey effort amongst sites, the spotlight counts of rabbits and foxes were temporally discretized into half-yearly intervals, depending on whether they were made in the first (January-June) or second (July-December) half of each calendar year.
+We modelled the time-series of fox and rabbit counts from the 21 transects jointly, using an hierarchical, Bayesian state-space modelling approach [@buckland2004state]. To account for uneven timing and survey effort amongst sites, the spotlight counts of rabbits and foxes were temporally discretized into half-yearly intervals, depending on whether they were made in the first (January--June) or second (July--December) half of the calendar year.
 
 A Poisson observation model was assumed for the counts of both foxes and rabbits, where the number of individuals observed during each survey was dependent on underlying abundance, with a Poisson error structure for the observations. Transect lengths were included in the expectation of the Poisson model, to allow for both within- and between-site variation in the lengths of the spotlight transects:
 
@@ -103,7 +106,7 @@ $$
 F_{ijt} \sim Poisson(\mu_{jt}L_{ijt})
 $$
 
-Where $F_{ijt}$ is the number of foxes observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$. The corresponding lengths of transect surveyed during each census was $L_{ijt}$. 
+where $F_{ijt}$ is the number of foxes observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$. The corresponding lengths of transect surveyed during each census was $L_{ijt}$. 
 
 The underlying transect-level abundances $(\mu_{jt})$ of foxes at each site over the course of the study were modelled as a stochastic, density-dependent process:
 
@@ -111,13 +114,13 @@ $$
 \mu_{jt}=\mu_{jt-1} e^{r_{jt}^{fox}}
 $$
 
-Where $\mu_{jt}$ is the expected mean spotlight count of the $j^th$ transect at time $t$, and $r_{jt}^{fox}$ is the  rate-of-increase for the $j^{th}$ population during the interval $[t-1,t]$. We decomposed $r_{jt}^{fox}$ into components attributable to transect and survey-level covariates using a linear model. The model accounted for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model, @cruz2013modelling], previous rainfall, season (summer vs winter), random transect-effects, and process errors. Rainfall data (mm, aggregated to six-monthly totals) were centred by subtracting 250mm prior to analysis to improve the convergence of the model. For the effects of rainfall in the model, we considered lags of 0, 6 and 12 months, and compared the parsimony of the alternative models using the Deviance Information Criterion [DIC, @spiegelhalter2002DIC].
+where $\mu_{jt}$ is the expected mean spotlight count of the $j^th$ transect at time $t$, and $r_{jt}^{fox}$ is the  rate-of-increase for the $j^{th}$ population during the interval $[t-1,t]$. We decomposed $r_{jt}^{fox}$ into components attributable to transect and survey-level covariates using a linear model. The model accounted for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model; @cruz2013modelling], previous rainfall, season (summer vs winter), random transect-effects, and process errors. For the effects of rainfall in the model, we considered lags of 0, 6 and 12 months, and compared the parsimony of the alternative models using the Deviance Information Criterion [DIC, @spiegelhalter2002DIC].
 
 $$
 r_{jt}^{fox}=\bar{r}_{fox} + \beta_{1}\log{\rho_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{jt-1}+\beta_{4}\mbox{winter}_{t}+ \zeta_{j}^{fox}+\epsilon_{t}^{fox}
 $$
 
-Where $\bar{r}_{fox}$ is the mean rate of increase, $\rho_{t}$ is the estimated abundance of rabbits at time $t$, and $\beta_{1}-\beta_{4}$ are regression parameters describing the numerical response of the fox population to rabbit abundance, the strength of density dependence in the rate-of-increase of the fox population, the relationship between rate of increase and the lagged rainfall, and whether or not the count was made in the second half of the calendar year. $\zeta_{i}^{fox}$ are random site-level effects with standard deviation $\sigma_{site}^{fox}$ on the rate of increase of the fox population and $\epsilon_{t}^{fox}$ are normally-distributed process errors with standard deviation $\sigma_{process}^{fox}$.
+where $\bar{r}_{fox}$ is the mean rate of increase, $\rho_{t}$ is the estimated abundance of rabbits at time $t$, and $\beta_{1}-\beta_{4}$ are regression parameters describing the numerical response of the fox population to rabbit abundance, the strength of density dependence in the rate-of-increase of the fox population, the relationship between rate of increase and the lagged rainfall, and whether or not the count was made in the second half of the calendar year. $\zeta_{i}^{fox}$ are random site-level effects with standard deviation $\sigma_{site}^{fox}$ on the rate of increase of the fox population and $\epsilon_{t}^{fox}$ are normally-distributed process errors with standard deviation $\sigma_{process}^{fox}$.
 
 The counts of rabbits ($R_{ijt}$) at the sites was modelled jointly with those of foxes, using a state-space model similar to that used for foxes, but without a term for numerical response of the rabbit populations to prey availability: 
 
@@ -136,8 +139,9 @@ $$
 
 Where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances of rabbits, and the other model terms are equivalent to the comparable terms in the model fox abundance.
 
-\subsection*{Model fitting, priors and goodness-of-fit}
-The model was fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummer2003jags]. The *JAGS* code for the model is given in Appendix S1. Vague, uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001^{-\frac{1}{2}})$ priors for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of traceplots. A burn-in of 40000 iterations followed by sampling from three independant Markov chains with different starting values for 40000 further iterations. After thinning, a total of 4000 samples from each of the chains were retained for inference.
+### Model fitting, priors and goodness-of-fit
+
+The model was fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummer2003jags]. The *JAGS* code for the model is given in Appendix S1. Vague, uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001^{-\frac{1}{2}})$ priors for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of traceplots. To improve the convergence of the models, rainfall data (mm, aggregated to six-monthly totals) were centred by subtracting 250mm (the approximate mean six-monthyl rainfall across all sites) prior to analysis. A burn-in of 40000 iterations followed by sampling from three independant Markov chains with different starting values for 40000 further iterations. After thinning, a total of 4000 samples from each of the chains were retained for inference.
 
 #Results
 
@@ -148,7 +152,7 @@ load("model_results_6_6.Rdata")
 
 ```
 
-There were a total of `r nrow(obs_data)` spotlight counts from 21 transects spanning the period autumn 1998 to autumn 2013 (Table S1). Numbers of foxes observed during spotlight counts varied from `r round(min(obs_data$foxes.counted/(obs_data$trans.length/1000)), 2)` to `r round(max(obs_data$foxes.counted/(obs_data$trans.length/1000)), 2)` per spotlight km. and rabbits from `r round(min(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 2)` to `r round(max(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 2)` per spotlight km, respectively. 
+There were a total of `r nrow(obs_data)` spotlight counts from 21 transects spanning the period autumn 1998 to autumn 2014 (Table S1). Numbers of foxes observed during spotlight counts varied from `r round(min(obs_data$foxes.counted/(obs_data$trans.length/1000)), 1)` to `r round(max(obs_data$foxes.counted/(obs_data$trans.length/1000)), 1)` per spotlight km. and rabbits from `r round(min(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 1)` to `r round(max(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 1)` per spotlight km, respectively. 
 
 There was a steep gradient in annual rainfall between the transects, but also wide seasonal and annual variability within transects (Figs 1 and S9). 
 
