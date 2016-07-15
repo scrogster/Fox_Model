@@ -45,7 +45,7 @@ Arthur Rylah Institute for Environmental Research, Department of Environment, La
 
 *****************************************************************
 
-Suggested running title: *Numerical responses of red fox populations*
+Suggested running title: *Numerical response of red fox populations*
 
 *Word Counts:* 
 Summary: 319; Main Text: 3976; Acknowledgements: 59; References: 1975; Tables: 244 ; Figure Legends: 211.
@@ -139,8 +139,8 @@ $$
 
 Where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances of rabbits, and the other model terms are equivalent to the comparable terms in the model fox abundance.
 
-### Model fitting, priors and goodness-of-fit
 
+##Model fitting, priors and goodness-of-fit
 The model was fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummer2003jags]. The *JAGS* code for the model is given in Appendix S1. Vague, uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001^{-\frac{1}{2}})$ priors for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of traceplots. To improve the convergence of the models, rainfall data (mm, aggregated to six-monthly totals) were centred by subtracting 250mm (the approximate mean six-monthyl rainfall across all sites) prior to analysis. A burn-in of 40000 iterations followed by sampling from three independant Markov chains with different starting values for 40000 further iterations. After thinning, a total of 4000 samples from each of the chains were retained for inference.
 
 #Results
