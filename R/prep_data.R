@@ -28,7 +28,7 @@ soi$year<-year(soi$Date)
 SOI_summary<-ddply(soi, ~year+sechalf, function(x){mean(x$SOI, na.rm=TRUE)})
 
 ## ----import_rain_summary, echo=FALSE, warning=FALSE, message=FALSE, cache=TRUE, tidy=TRUE----
-rain_summary<-read.csv("Data/TabulatedRainHalfYearly.csv")
+rain_summary<-read.csv("Data/TabulatedRainHalfYearly_updated.csv")
 #str(rain_summary)
 
 #tidy up (delete unwanted sites, duplicate Ingliston to substitute for pentland hills)
@@ -125,7 +125,8 @@ hier_dat<-list(
 	#first rabbit counts are 1998 (first half). start lagged aggregated SOI from beginning of 1997
 	#t-1 = half year lag, t-2 =full year lag.
 	# modSOI=subset(SOI_summary, year>=1997)$V1,
-	winter=subset(SOI_summary, year>=1997)$sechalf,
+	#winter=subset(SOI_summary, year>=1997)$sechalf,
+	winter=rep(c(0, 1), 25),
 	rain=(rain_dat-250)/100, #rain data now roughly centred by subtracting 250, (roughly the mean), 
 	#then divided by 100 to make scales comparable with other covars.
 	rain.offset=4   #value of 4= six-month lag, 3=1 year lag, #can smooth later.
