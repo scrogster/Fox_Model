@@ -16,9 +16,14 @@ GROUP BY tblSpotlightTransects.[Monitor Site], tblSpotlightBackgroundData.[Spotl
 HAVING ((Not (tblSpotlightTransects.[Monitor Site])='Avalon' And 
          Not (tblSpotlightTransects.[Monitor Site])='Sunbury' And 
          Not (tblSpotlightTransects.[Monitor Site])='Kerang') AND 
-         ((tblSpotlightBackgroundData.[Spotlight Date])< #2014-07-01#))
+         ((tblSpotlightBackgroundData.[Spotlight Date])< #2016-06-30#)) 
 ORDER BY tblSpotlightTransects.[Monitor Site], tblSpotlightBackgroundData.[Spotlight Date];
 "
+
+#Code to cull out some months if desired. For now leaving all in. Tradeoff between keeping just strictly autumn/spring data, and volume of data.
+#AND 
+#(month(tblSpotlightBackgroundData.[Spotlight Date])>2 AND month(tblSpotlightBackgroundData.[Spotlight Date])<6 )OR
+#(month(tblSpotlightBackgroundData.[Spotlight Date])>8 AND month(tblSpotlightBackgroundData.[Spotlight Date])<12 )
 
 channel<-odbcConnectAccess(file.path(wd, db))
 
