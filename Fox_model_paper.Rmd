@@ -160,7 +160,7 @@ Models with lag-periods of zero, six and twelve months for the effects of rainfa
 
 ##Model checking
 
-Examination of trace plots for the regression parameters and error terms indicated that the Markov chains were well mixed (Figs SX and SX). The Rubin-Gelman statistic was $\le 1.1$ for all parameters (Figs S7 and S8). On this basis, satisfactory convergence of the Markov chains was judged to have been achieved. 
+Examination of trace plots for the regression parameters and error terms indicated that the Markov chains were well mixed (Figs SX and SX). The Rubin-Gelman statistic was close to unity for all parameters (Figs S7 and S8). On this basis, satisfactory convergence of the Markov chains was judged to have been achieved. 
 
 ##Determinants of the rate of increase of rabbits
 
