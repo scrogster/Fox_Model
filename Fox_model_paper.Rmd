@@ -152,7 +152,7 @@ load("model_results_6_6.Rdata")
 
 ```
 
-There were a total of `r nrow(obs_data)` spotlight counts from 21 transects between mid-1998 and mid-2014 (Table S1). There was a steep gradient in mean annual rainfall between the transects, but also wide seasonal and annual variability within transects (Figs 1 and S9).  Numbers of foxes observed during spotlight counts varied from `r round(min(obs_data$foxes.counted/(obs_data$trans.length/1000)), 1)` to `r round(max(obs_data$foxes.counted/(obs_data$trans.length/1000)), 1)` per spotlight km. and rabbits from `r round(min(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 1)` to `r round(max(obs_data$rabbits.counted/(obs_data$trans.length/1000)), 1)` per spotlight km, respectively. 
+There were a total of `r nrow(spotlight)` spotlight counts from 21 transects between mid-1998 and mid-2014 (Table S1). There was a steep gradient in mean annual rainfall between the transects, but also wide seasonal and annual variability within transects (Figs 1 and S9).  Numbers of foxes observed during spotlight counts varied from `r round(min(spotlight$Foxes/(spotlight$TransectLength/1000)), 1)` to `r round(max(spotlight$Foxes/(spotlight$TransectLength/1000)), 1)` per spotlight km. and rabbits from `r round(min(spotlight$Rabbits/(spotlight$TransectLength/1000)), 1)` to `r round(max(spotlight$Rabbits/(spotlight$TransectLength/1000)), 1)` per spotlight km, respectively. 
 
 ##Model selection
 
@@ -231,7 +231,7 @@ kable(tabout, caption=NULL, row.names = FALSE,
 require(dplyr)
 require(rjags)
 require(knitr)
-load("model_results_12_6.Rdata")
+load("model_results_6_6.Rdata")
 param.names<-c("$\\beta_{1}$", "$\\beta_{2}$", "$\\beta_{3}$", "$\\beta_{4}$", "$\\beta_{5}$","$\\beta_{6}$", "$\\beta_{7}$",
                "$\\bar{r}_{\\mbox{fox}}$", "$\\bar{r}_{\\mbox{rabbit}}$",
                  "$\\sigma_{process}^\\mbox{fox}$", "$\\sigma_{process}^\\mbox{rabbit}$",

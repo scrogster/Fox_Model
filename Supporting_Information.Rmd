@@ -9,14 +9,20 @@ bibliography: rabbit_refs.bib
 ---
 
 ```{r echo=FALSE, message=FALSE, results="asis"}
-load("model_results_12_6.Rdata")
+load("model_results_6_6.Rdata")
 require(dplyr)
 require(xtable)
+require(lubridate)
 
-obs_data2<-tbl_df(data.frame("sitename"=spotlight$Monitor.Site, obs_data))
-trans_summary<-obs_data2 %>%
-  group_by(sitename) %>%
-  summarise(firstsamp=round(min(year)), lastsamp=round(max(year)), total_surv=length(foxes.counted), years_samped=n_distinct(year), maxlength=max(trans.length)/1000, meanlength=round(mean(trans.length)/1000, 2))
+trans_summary<-spotlight %>%
+  mutate(Year=year(Date)) %>%
+  group_by(Site) %>%
+  summarise(firstsamp=round(min(Year)), 
+  		  lastsamp=round(max(Year)), 
+  		  total_surv=length(Foxes), 
+  		  years_samped=n_distinct(Year), 
+  		  maxlength=max(TransectLength)/1000, 
+  		  meanlength=round(mean(TransectLength)/1000, 2))
 
 names(trans_summary)<-c("Transect", "Established", "Last survey", "Number of Surveys", "Years with surveys", "Full length (km)", "Mean length (km)")
 
