@@ -24,8 +24,8 @@ samp<-coda.samples(hier.mod,
 			    n.iter=NITER, thin=THIN)
 
 #assembling a big string of abundance predictions
-st<-print(tapply(disctime_shifted, mod_data$site.code, min))
-fin<-print(tapply(disctime_shifted, mod_data$site.code, max))
+st<-start_times$start_times
+fin<-end_times$end_times
 predparamstring<-c(paste0("mu.rabbits[",st[1]:fin[1],",1]"),
 			    paste0("mu.rabbits[",st[2]:fin[2],",2]"),
 			    paste0("mu.rabbits[",st[3]:fin[3],",3]"),
