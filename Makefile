@@ -20,23 +20,23 @@ prepped_data.Rdata: Data/spotlight_data.csv Data/SOI.txt Data/TabulatedRainHalfY
 ###############################################################################	
 #Run the state-space model and save the results                               #
 ###############################################################################
-#12-month lag on foxes, 0-month lag on rabbits (averaging six month and 12 monthly rainfall)
+#12-month lag on foxes, 0-month lag on rabbits 
 model_results_12_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_12_0.txt 
 	Rscript $^ $@    
 
-#zero lag on foxes, 12-month lag on rabbits (averaging six month and 12 monthly rainfall)
+#zero lag on foxes, 12-month lag on rabbits 
 model_results_0_12.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_12.txt 
 	Rscript $^ $@    
 
-#six-month lag on foxes, 12-month lag on rabbits (averaging six month and 12 monthly rainfall)
+#six-month lag on foxes, 12-month lag on rabbits 
 model_results_6_12.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_6_12.txt 
 	Rscript $^ $@    
 
-#twelve-month lag on foxes, six-month lag on rabbits (averaging six month and 12 monthly rainfall)
+#twelve-month lag on foxes, six-month lag on rabbits 
 model_results_12_6.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_12_6.txt 
 	Rscript $^ $@    
 
-#twelve-month lag on foxes, twelve-month lag on rabbits (averaging six month and 12 monthly rainfall)
+#twelve-month lag on foxes, twelve-month lag on rabbits 
 model_results_12_12.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_12_12.txt 
 	Rscript $^ $@    
 
@@ -59,7 +59,7 @@ model_results_0_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_0.txt
 DIC_results.Rdata: R/get_dics.R 
 	Rscript $< $@
 
-PREF_RESULT = model_results_12_6.Rdata
+PREF_RESULT = model_results_6_6.Rdata
 ###############################################################################	
 #generate the figures as pdfs, pngs done implicitly                           #
 ###############################################################################
