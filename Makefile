@@ -56,10 +56,10 @@ model_results_6_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_6.txt
 model_results_0_0.Rdata: R/run_model.R prepped_data.Rdata  R/GHR_0_0.txt 
 	Rscript $^ $@    
 
-DIC_results.Rdata: R/get_dics.R 
+DIC_results.Rdata: R/get_dics.R model_results_12_0.Rdata
 	Rscript $< $@
 
-PREF_RESULT = model_results_6_6.Rdata
+PREF_RESULT = model_results_12_0.Rdata
 ###############################################################################	
 #generate the figures as pdfs, pngs done implicitly                           #
 ###############################################################################
