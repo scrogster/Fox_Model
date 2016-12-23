@@ -8,9 +8,9 @@ out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-mean_rain<-(mean(stack(rain_dat)[,1])-250)/100
-low_rain<-(quantile(stack(rain_dat)[,1], 0.1)-250)/100
-high_rain<-(quantile(stack(rain_dat)[,1], 0.9)-250)/100
+mean_rain<-(mean(stack(data.frame(rain_mat))[,1], na.rm=TRUE)-250)/100
+low_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.1, na.rm=TRUE)-250)/100
+high_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.9, na.rm=TRUE)-250)/100
 
 #posterior means
 post.means<-colMeans(as.matrix(samp))

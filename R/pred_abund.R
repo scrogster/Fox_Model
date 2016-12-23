@@ -33,19 +33,19 @@ preddf<-data.frame(pred_summary, vars)
 preddf$time.orig<-1998 +(preddf$Time-1)/2
 #tabulation of site codes and names, adding site names to the dataframe for plot labelling
 labelling_tab<-data.frame(
-	"Site"=unique(obs_data$site))
-row.names(labelling_tab)<-as.numeric(unique(obs_data$site))
+	"Site"=unique(spotlight$Site))
+row.names(labelling_tab)<-as.numeric(factor(unique(spotlight$Site)))
 preddf$Sitename<-labelling_tab$Site[preddf$Site]
 
 ## ----tidy_obs_data, cache=FALSE, echo=FALSE, message=FALSE---------------
 tidy_obs<-data.frame(
-	"fox.count"=obs_data$foxes.counted,
-	"rabbit.count"=obs_data$rabbits.counted,
-	"trans.length"=obs_data$trans.length,
-	"Site"=as.numeric(obs_data$site),
-	"Sitename"=obs_data$site,
-	"Time"=disctime_shifted,
-	"time.orig"=1998 +(disctime_shifted-1)/2
+	"fox.count"=spotlight$Foxes,
+	"rabbit.count"=spotlight$Rabbits,
+	"trans.length"=spotlight$TransectLength,
+	"Site"=as.numeric(factor(spotlight$Site)),
+	"Sitename"=factor(spotlight$Site),
+	"Time"=spotlight$ytime_disc,
+	"time.orig"=spotlight$ytime
 ) 
 
 #recode "Yarram/Woodside" to just "Yarram" in preddf and tidy_obs
@@ -66,7 +66,7 @@ preddf %>%
 	geom_ribbon(aes(ymin=lwr,ymax=upp, colour=NULL),alpha=0.65, fill="darkorange3")+
 	ylab(expression(paste("Foxes k",m^{-1})))+
 	xlab("Time")+
-	xlim(1995, 2015)+
+	xlim(1995, 2016)+
 	geom_point(data=tidy_obs, aes(x=time.orig, y=fox.count/(trans.length/1000)), cex=1) +
 	facet_wrap(~Sitename,  ncol=3, nrow=7, scales="free_y") +
 	theme_classic() #classic 
@@ -84,7 +84,7 @@ preddf %>%
 	geom_ribbon(aes(ymin=lwr,ymax=upp, colour=NULL),alpha=0.65, fill="slategray3")+
 	ylab(expression(paste("Rabbits k",m^{-1})))+
 	xlab("Time")+
-	xlim(1995, 2015)+
+	xlim(1995, 2016)+
 	geom_point(data=tidy_obs, aes(x=time.orig, y=rabbit.count/(trans.length/1000)), cex=1) +
 	facet_wrap(~Sitename, ncol=3, nrow=7, scales="free_y")+
 	theme_classic() #classic

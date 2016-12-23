@@ -10,35 +10,33 @@ out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-rain_dat2<-rain_dat
+rain_dat2<-rain_summary
 
-rain_dat2<-data.frame("SiteName"=row.names(rain_dat2), rain_dat2)
-row.names(rain_dat2)<-1:21
+#rain_dat2<-data.frame("SiteName"=row.names(rain_dat2), rain_dat2)
+#row.names(rain_dat2)<-1:21
 
 rain_dat2<-tbl_df(rain_dat2)
 
 #Manual editing and overwrite of a few site names
-NewSiteNames<-as.character(rain_dat2$SiteName)
+NewSiteNames<-as.character(rain_dat2$Site)
 NewSiteNames[NewSiteNames=="BlackRange"]<-"Black Range"
 NewSiteNames[NewSiteNames=="SpringHill"]<-"Spring Hill"
 NewSiteNames[NewSiteNames=="SwiftsCreek"]<-"Swifts Creek"
 NewSiteNames[NewSiteNames=="TelopeaDowns"]<-"Telopea Downs"
 
-rain_dat2$SiteName<-NewSiteNames
+rain_dat2$Site<-NewSiteNames
 
 #re-arrange and tidy the data
 rain_tidy<-rain_dat2 %>% 
-	gather("TimeCode", "Rainfall", starts_with("X")) %>%
-	separate("TimeCode", into=c("Rubbish", "Year", "Semester"), sep=c(1, 5)) %>%
-	select(-Rubbish) %>%
-	mutate(Year=as.numeric(Year)) %>%
-	mutate(Semester=as.numeric(substr(Semester, 3, 3))) %>%
-	mutate(Time= Year + Semester*0.5)
+	gather("TimeCode", "Rainfall", 2:43) %>%
+	separate("TimeCode", into=c("Year", "Semester"), sep="--") %>%
+	mutate(Time= as.numeric(Year) + as.numeric(Semester)*0.5)
 
+#plot time series of half-yearly rainfall for each site.
 ggplot(rain_tidy, aes(x=Time, y=Rainfall))+
 	geom_line(col="blue")+
-	facet_wrap(~SiteName, ncol=3, nrow=7)+
-	xlim(1995, 2015)+
+	facet_wrap(~Site, ncol=3, nrow=7)+
+	xlim(1995, 2016)+
 	ylab("Rainfall (mm)")+
 	theme_classic()
 ggsave(out_pdf)

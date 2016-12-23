@@ -13,7 +13,7 @@ out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-sitelabs<-as.character(unique(obs_data$site))
+sitelabs<-as.character(unique(spotlight$Site))
 
 sitelabs[sitelabs=="Yarram/Woodside"]<-"Yarram"
 
