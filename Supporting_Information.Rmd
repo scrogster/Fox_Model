@@ -9,7 +9,7 @@ bibliography: rabbit_refs.bib
 ---
 
 ```{r echo=FALSE, message=FALSE, results="asis"}
-load("model_results_6_6.Rdata")
+load("model_results_12_0.Rdata")
 require(dplyr)
 require(xtable)
 require(lubridate)
@@ -37,7 +37,7 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
 ```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE}
-cat(readLines('R/GHR_6_6.txt'), sep = '\n', warn=FALSE)
+cat(readLines('R/GHR_12_0.txt'), sep = '\n', warn=FALSE)
 ```
 
 ![Figure S1. Posterior densities of the regression parameters $(\beta)$.](Figures/beta_posterior_density.png) 

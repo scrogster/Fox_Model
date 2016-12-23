@@ -148,7 +148,7 @@ The models were fitted to the data using the Bayesian Markov Chain Monte Carlo (
 ##Data overview
 ```{r message=FALSE, results='hide', echo=FALSE}
 #load results so we can use inline r to insert resulting numbers
-load("model_results_6_6.Rdata")
+load("model_results_12_0.Rdata")
 
 ```
 
@@ -215,7 +215,7 @@ All data, and *JAGS* and *R* code for the state-space model are contained in a g
 
 #Tables
 **Table 1.** Deviance information criteria $(\Delta DIC)$, and model selection weights for candidate models with various lags on rainfall effects on rates of increase for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
-```{r echo=FALSE, message=FALSE, results="asis"}
+```{r echo=FALSE, message=FALSE, results="asis", cache=FALSE}
 load("DIC_results.Rdata")
 require(knitr)
 
@@ -231,7 +231,7 @@ kable(tabout, caption=NULL, row.names = FALSE,
 require(dplyr)
 require(rjags)
 require(knitr)
-load("model_results_6_6.Rdata")
+load("model_results_12_0.Rdata")
 param.names<-c("$\\beta_{1}$", "$\\beta_{2}$", "$\\beta_{3}$", "$\\beta_{4}$", "$\\beta_{5}$","$\\beta_{6}$", "$\\beta_{7}$",
                "$\\bar{r}_{\\mbox{fox}}$", "$\\bar{r}_{\\mbox{rabbit}}$",
                  "$\\sigma_{process}^\\mbox{fox}$", "$\\sigma_{process}^\\mbox{rabbit}$",
