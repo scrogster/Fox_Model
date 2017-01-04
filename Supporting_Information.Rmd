@@ -42,6 +42,7 @@ cat(readLines('R/GHR_12_0.txt'), sep = '\n', warn=FALSE)
 
 ![Figure S1. Posterior densities of the regression parameters $(\beta)$.](Figures/beta_posterior_density.png) 
 
+
 ![Figure S2. Posterior densities of the error terms $(\sigma)$.](Figures/sigma_posterior_density.png) 
 
 ![Figure S3. Posterior densities for the site-level random effects terms for rates of increase of foxes.](Figures/raneff_violin_foxes.png)
