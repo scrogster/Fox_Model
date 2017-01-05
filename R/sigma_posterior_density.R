@@ -27,8 +27,11 @@ ggplot(beta_result, aes(x=value, group=Parameter))+
 	facet_wrap(~Parameter,  labeller=pname)+
 	xlab("")+
 	ylab("")+
-	theme_classic()+
-	theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+	xlim(0, NA)+
+	theme_bw()+
+	theme(strip.background = element_blank(), 
+		 strip.text.x=element_text(hjust=0.5),
+		 panel.border = element_rect(colour = "black"))
 
 ggsave(out_pdf)
 ggsave(out_png)
