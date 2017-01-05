@@ -9,8 +9,8 @@ out_png=gsub("pdf", "png", out_pdf)
 load(file.path(model_data))
 
 mean_rain<-(mean(stack(data.frame(rain_mat))[,1], na.rm=TRUE)-250)/100
-low_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.1, na.rm=TRUE)-250)/100
-high_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.9, na.rm=TRUE)-250)/100
+low_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.25, na.rm=TRUE)-250)/100
+high_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.75, na.rm=TRUE)-250)/100
 
 #posterior means
 post.means<-colMeans(as.matrix(samp))
@@ -34,8 +34,8 @@ predFOX_r<-function(R, F, rr, ww){
 #print(predFOX_r(R=50, F=5, rr=mean_rain, ww=0) )
 
 
-rab_levels<-seq(0.01, 30, by=0.1)
-fox_levels<-seq(0.01, 1, by=0.01)
+rab_levels<-seq(0.01, 20, by=0.1)
+fox_levels<-seq(0.01, 0.3, by=0.01)
 rain_levels<-c(low_rain, mean_rain, high_rain)
 winter_levels=c(0, 1)
 
@@ -62,17 +62,24 @@ b <- c(-1.5,-1,-0.5, 0, 0.5, 1, 1.5)
 ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	facet_grid(Rainfall ~ Season, labeller="label_both") +
 	geom_raster(interpolate = TRUE) +
+#	scale_colour_continuous(limits=c(-1.7, 1.7), low="red", high="green")+
 	stat_contour(breaks=c(0), lty=2)+  #contour where r=0
 	scale_fill_gradientn(limits = c(-1.7,1.7),
 					 colours=c("firebrick","red", "orange", "yellow2",
 					 		"white", 
 					 		"green", "limegreen", "chartreuse4", "darkgreen"),
-					 breaks=b,labels=format(b))+
+					 breaks=b,labels=format(b) )+
+	guides(fill = guide_colorbar(draw.ulim = FALSE,draw.llim = FALSE, tick=FALSE))+
 	labs(x = expression(paste("Foxes km",phantom(0)^{-1})), 
 		y = expression(paste("Rabbits km",phantom(0)^{-1}))) +
-	theme_classic() +
-	theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=0)) +
-	theme(legend.title.align=0.5, legend.title=element_text(face="italic"))
+	theme_bw()+
+	theme(strip.background = element_blank(), 
+		 strip.text.x=element_text(hjust=0.1),
+		 panel.border = element_rect(colour = "black"),
+           axis.text.x=element_text(angle=90, vjust=0.5, hjust=0)) +
+	theme(legend.title.align=0.25, legend.title=element_text(face="italic"))
+
+
 	
 
 ggsave(out_pdf)
