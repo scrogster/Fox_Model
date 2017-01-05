@@ -94,5 +94,5 @@ Figures/beta_traceplots.pdf: R/diagnostic_plots.R $(PREF_RESULT)
 ###############################################################################	
 #generate the paper as a word document                                        #
 ###############################################################################
-Fox_model_paper.docx: R/render_script.R models figures
+Fox_model_paper.docx: R/render_script.R models figures rabbit_refs.bib
 	Rscript $<
