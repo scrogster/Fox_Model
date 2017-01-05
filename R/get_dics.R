@@ -4,6 +4,7 @@ args<-commandArgs(trailingOnly=TRUE)
 outfile<-file.path(args[1])
 
 result_list<-list(
+	"model_results_norain.Rdata",
 	"model_results_0_0.Rdata",
 	"model_results_0_6.Rdata",
 	"model_results_6_0.Rdata",
@@ -34,7 +35,16 @@ mod_names <- unlist(result_list)
 fox_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[3]})
 rabbit_lag <- sapply(strsplit(as.character(mod_names), "[_.]"), function(x){x[4]})
 
+
 modseltab <- data.frame(mod_names, fox_lag, rabbit_lag, devs, deltaDIC, model.weights = weights/sum(weights)  )
+
+modseltab$fox_lag[which(modseltab$fox_lag=="norain")]<-NA
+modseltab$rabbit_lag[which(modseltab$rabbit_lag=="Rdata")]<-NA
+
+modseltab$fox_lag<-as.character(modseltab$fox_lag)
+modseltab$rabbit_lag<-as.character(modseltab$rabbit_lag)
+modseltab$fox_lag[which(is.na(modseltab$fox_lag))]<-"no effect"
+modseltab$rabbit_lag[which(is.na(modseltab$rabbit_lag))]<-"no effect"
 
 modseltab <- modseltab[order(modseltab$model.weights, decreasing = TRUE),]
 
