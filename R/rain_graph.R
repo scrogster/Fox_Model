@@ -1,5 +1,6 @@
 library(dplyr)
 library(ggplot2)
+library(ggthemes)
 library(tidyr)
 
 args=commandArgs(trailingOnly=TRUE)
@@ -36,8 +37,12 @@ rain_tidy<-rain_dat2 %>%
 ggplot(rain_tidy, aes(x=Time, y=Rainfall))+
 	geom_line(col="blue")+
 	facet_wrap(~Site, ncol=3, nrow=7)+
-	xlim(1995, 2016)+
+	xlim(1995, 2016.5)+
 	ylab("Rainfall (mm)")+
-	theme_classic()
-ggsave(out_pdf)
-ggsave(out_png)
+	theme_bw()+
+	theme(strip.background = element_blank(), 
+		 strip.text.x=element_text(hjust=0.1),
+		 panel.border = element_rect(colour = "black"))
+
+ggsave(out_pdf, width=6, height=9)
+ggsave(out_png, width=6, height=9)
