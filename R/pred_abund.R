@@ -16,8 +16,12 @@ preds<-ggs(predsamp)
 aa<-group_by(preds, Parameter)
 pred_summary<-summarise(aa, post.mean = mean(value), 
 				    post.med = median(value),
-				    lwr =quantile(value, 0.025), 
-				    upp=quantile(value, 0.975))
+				    q5 =quantile(value, 0.05),
+				    q10 =quantile(value, 0.1),
+				    q25 =quantile(value, 0.25),
+				    q75=quantile(value, 0.75),
+				    q90 =quantile(value, 0.9),
+				    q95=quantile(value, 0.95))
 splitter<-function(x){
 	bb<-unlist(strsplit(as.character(x), '[\\[,\\]'))
 	cc<-unlist(strsplit(bb[3], '\\]'))
@@ -48,6 +52,9 @@ tidy_obs<-data.frame(
 	"time.orig"=spotlight$ytime
 ) 
 
+tidy_obs<-tidy_obs %>%
+	mutate(fox.count=ifelse(fox.count==0, 0.1, fox.count),rabbit.count=ifelse(rabbit.count==0, 0.1, rabbit.count))
+
 #recode "Yarram/Woodside" to just "Yarram" in preddf and tidy_obs
 tempsites<-as.character(preddf$Sitename)
 tempsites[tempsites=="Yarram/Woodside"]<-"Yarram"
@@ -63,13 +70,22 @@ preddf %>%
 	filter(Param=="mu.fox") %>%
 	ggplot(aes(x=time.orig, y=post.med))+
 	geom_line(colour="black")+
-	geom_ribbon(aes(ymin=lwr,ymax=upp, colour=NULL),alpha=0.65, fill="darkorange3")+
+	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="darkorange3")+
+	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="darkorange3")+
+	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="darkorange3")+
 	ylab(expression(paste("Foxes k",m^{-1})))+
 	xlab("Time")+
-	xlim(1995, 2016)+
-	geom_point(data=tidy_obs, aes(x=time.orig, y=fox.count/(trans.length/1000)), cex=1) +
-	facet_wrap(~Sitename,  ncol=3, nrow=7, scales="free_y") +
-	theme_classic() #classic 
+	scale_y_log10(breaks=c(0.01, 0.1, 1, 10))+
+	scale_x_continuous(breaks=seq(1995, 2016, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2016) )+
+	geom_point(data=tidy_obs, aes(x=time.orig, y=fox.count/(trans.length/1000)), cex=0.5) +
+	facet_wrap(~Sitename,  ncol=3, nrow=7) +
+	theme_bw()+
+	theme(strip.background = element_blank(), 
+		 strip.text.x=element_text(hjust=0.05),
+		 panel.border = element_rect(colour = "black"),
+		 panel.grid.major=element_line(colour="grey50", size=0.15),
+		 panel.grid.minor=element_line(colour="grey80", size=0.05))
+
 
 ggsave(out_pdf, width=7, height=10)
 ggsave(out_png, width=7, height=10, dpi=300)
@@ -81,13 +97,21 @@ preddf %>%
 	filter(Param=="mu.rabbits") %>%
 	ggplot(aes(x=time.orig, y=post.med))+
 	geom_line(colour="black")+
-	geom_ribbon(aes(ymin=lwr,ymax=upp, colour=NULL),alpha=0.65, fill="slategray3")+
+	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="slategray3")+
+	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="slategray3")+
+	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="slategray3")+
 	ylab(expression(paste("Rabbits k",m^{-1})))+
 	xlab("Time")+
-	xlim(1995, 2016)+
-	geom_point(data=tidy_obs, aes(x=time.orig, y=rabbit.count/(trans.length/1000)), cex=1) +
-	facet_wrap(~Sitename, ncol=3, nrow=7, scales="free_y")+
-	theme_classic() #classic
+	scale_y_log10(breaks=c(0.1, 1, 10, 100))+
+	scale_x_continuous(breaks=seq(1995, 2016, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2016) )+
+	geom_point(data=tidy_obs, aes(x=time.orig, y=rabbit.count/(trans.length/1000)), cex=0.5) +
+	facet_wrap(~Sitename, ncol=3, nrow=7)+
+	theme_bw()+
+	theme(strip.background = element_blank(), 
+		 strip.text.x=element_text(hjust=0.05),
+		 panel.border = element_rect(colour = "black"),
+		 panel.grid.major=element_line(colour="grey50", size=0.15),
+		 panel.grid.minor=element_line(colour="grey80", size=0.05))
 
 rabbit_pdf<-gsub("fox", "rabbit", out_pdf)
 rabbit_png<-gsub("fox", "rabbit", out_png)
