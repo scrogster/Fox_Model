@@ -27,7 +27,10 @@ ggplot(raneff_result_fox, aes(factor(Parameter), value))+
 	scale_x_discrete(limits=levels(raneff_result_fox$Parameter), labels=sitelabs)+
 	xlab("")+
 	coord_flip()+
-	theme_classic()
+	theme_bw()+
+	theme(strip.background = element_blank(), 
+		 strip.text.x=element_text(hjust=0.5),
+		 panel.border = element_rect(colour = "black"))
 
 ggsave(out_pdf)
 ggsave(out_png)
