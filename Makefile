@@ -9,7 +9,7 @@ models: model_results_6_6.Rdata model_results_0_6.Rdata model_results_6_0.Rdata 
 figures: Figures/raneff_violin_foxes.pdf Figures/beta_posterior_density.pdf Figures/sigma_posterior_density.pdf Figures/raneff_violin_rabbits.pdf  Figures/predicted_fox_r.pdf Figures/fox_abund.pdf Figures/rabbit_abund.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf 
 
 #metarule to make the paper
-paper: Fox_model_paper.docx 
+paper: Fox_model_paper.docx Fox_model_paper.pdf
 
 ###############################################################################	
 #clean and tidy the data, and save to an Rdata file                           #
@@ -94,5 +94,7 @@ Figures/beta_traceplots.pdf: R/diagnostic_plots.R $(PREF_RESULT)
 ###############################################################################	
 #generate the paper as a word document                                        #
 ###############################################################################
-Fox_model_paper.docx: R/render_script.R models figures rabbit_refs.bib
-	Rscript $<
+Fox_model_paper.docx: R/render_script.R Fox_model_paper.Rmd rabbit_refs.bib models figures 
+	Rscript R/render_script.R word_document
+Fox_model_paper.pdf: R/render_script.R Fox_model_paper.Rmd rabbit_refs.bib models figures 
+	Rscript R/render_script.R pdf_document

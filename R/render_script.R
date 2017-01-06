@@ -1,7 +1,12 @@
-require(rmarkdown)
+library(rmarkdown)
 
-args=commandArgs(trailingOnly=TRUE)
+args = commandArgs(trailingOnly=TRUE)
 
-rmarkdown::render("Fox_model_paper.Rmd")
+#desired format for ouput paper
+out_format=args[1]
 
-rmarkdown::render("Supporting_Information.Rmd")
+if(out_format=="word_document"){render("Fox_model_paper.Rmd", "word_document")}
+if(out_format=="word_document"){render("Supporting_Information.Rmd", "word_document")}
+
+if(out_format=="pdf_document") {render("Fox_model_paper.Rmd", "pdf_document")}
+if(out_format=="pdf_document") {render("Supporting_Information.Rmd", "pdf_document")}

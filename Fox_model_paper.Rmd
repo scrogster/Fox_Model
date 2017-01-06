@@ -125,16 +125,16 @@ where $\bar{r}_{fox}$ is the mean rate of increase, $\rho_{t}$ is the estimated 
 The counts of rabbits ($R_{ijt}$) were modelled jointly with those of foxes, using a state-space approach similar to that used for foxes, but without a term for numerical response of the rabbit populations to prey availability: 
 
 $$
-\begin{align}
+\begin{aligned}
 R_{ijt} &\sim Poisson(\rho_{jt}L_{ijt}) \\
 \rho_{t} &=\rho_{t-1} e^{r_{t}^{rabbit}} 
-\end{align}
+\end{aligned}
 $$
 
 $$
-\begin{align}
+\begin{aligned}
 r_{jt}^{rabbit} &=\bar{r}_{rabbit}  + \beta_{5}\log{\rho_{t-1}} + \beta_{6}\mbox{rain}_{jt-1} +\beta_{7}\mbox{winter}_{t} +\zeta_{j}^{rabbit} +\epsilon_{t}^{rabbit}
-\end{align}
+\end{aligned}
 $$
 
 Where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances of rabbits, and the other model terms are equivalent to the comparable terms in the model of fox abundance.
@@ -224,10 +224,19 @@ require(dplyr)
 require(rjags)
 require(knitr)
 load("model_results_12_0.Rdata")
-param.names<-c("$\\beta_{1}$", "$\\beta_{2}$", "$\\beta_{3}$", "$\\beta_{4}$", "$\\beta_{5}$","$\\beta_{6}$", "$\\beta_{7}$",
-               "$\\bar{r}_{\\mbox{fox}}$", "$\\bar{r}_{\\mbox{rabbit}}$",
-                 "$\\sigma_{process}^\\mbox{fox}$", "$\\sigma_{process}^\\mbox{rabbit}$",
-                  "$\\sigma_{transect}^\\mbox{fox}$", "$\\sigma_{transect}^\\mbox{rabbit}$")
+param.names<-c("$\\beta_{1}$", 
+			"$\\beta_{2}$", 
+			"$\\beta_{3}$", 
+			"$\\beta_{4}$", 
+			"$\\beta_{5}$",
+			"$\\beta_{6}$",
+			"$\\beta_{7}$",
+               "$\\bar{r}_{fox}$", 
+			"$\\bar{r}_{rabbit}$",
+               "$\\sigma_{process}^{fox}$", 
+			"$\\sigma_{process}^{rabbit}$",
+               "$\\sigma_{transect}^{fox}$", 
+			"$\\sigma_{transect}^{rabbit}$")
 
 tab1<-data.frame( summary(samp)$statistics[1:13,])
 #row.names(tab1)<-param.names
