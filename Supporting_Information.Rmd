@@ -1,11 +1,23 @@
 ---
-title: Supporting Information
-output: 
-  word_document: 
+title: "Supporting Information"
+header-includes:
+   - \usepackage[nolists,tablesfirst, nomarkers]{endfloat}
+   - \usepackage{lscape}
+   - \usepackage{rotating}
+output:
+  pdf_document: default
+  fig_width: 7
+  fig_caption: yes
+  classoption: landscape
+  word_document:
     fig_caption: yes
     reference_docx: Template_Supporting.docx
-csl: journal-of-applied-ecology.csl
+    pandoc_args: ["--smart"]
+fontfamily: mathpazo
+fontsize: 10pt
+geometry: margin=1.0in
 bibliography: rabbit_refs.bib
+csl: journal-of-applied-ecology.csl
 ---
 
 ```{r echo=FALSE, message=FALSE, results="asis"}
@@ -13,6 +25,7 @@ load("model_results_12_0.Rdata")
 require(dplyr)
 require(xtable)
 require(lubridate)
+library(knitr)
 
 trans_summary<-spotlight %>%
   mutate(Year=year(Date)) %>%
@@ -30,23 +43,36 @@ names(trans_summary)<-c("Transect", "Established", "Last survey", "Number of Sur
 trans_summary$Transect <-as.character(trans_summary$Transect)
 trans_summary$Transect[trans_summary$Transect=="Yarram/Woodside"] <- "Yarram"
 
-library(knitr)
 kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.",
 	align=c("c", "l", "c", "c", "c","c", "c", "c") )
+# tab<-xtable(trans_summary, 
+# 		  caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.")
+# align(tab)<-c("c", "c", "c", "c", "c","c", "c", "c") 
+# print(tab, comment=FALSE, 
+# 	      floating=TRUE, 
+# 	      floating.environment="sidewaystable",
+# 	      include.rownames=FALSE
+# 	     )
 ```
+
+
 
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
 ```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE}
 cat(readLines('R/GHR_12_0.txt'), sep = '\n', warn=FALSE)
 ```
 
-![Figure S1. Posterior densities of the regression parameters $(\beta)$.](Figures/beta_posterior_density.png) 
+![Figure S1. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
 
 
-![Figure S2. Posterior densities of the error terms $(\sigma)$.](Figures/sigma_posterior_density.png) 
+![Figure S2. Posterior densities of the regression parameters $(\beta)$.](Figures/beta_posterior_density.png) 
 
-![Figure S3. Posterior densities for the site-level random effects terms for rates of increase of foxes.](Figures/raneff_violin_foxes.png)
 
-![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin_rabbits.png)
+![Figure S3. Posterior densities of the error terms $(\sigma)$.](Figures/sigma_posterior_density.png) 
 
-![Figure S5. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
+![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of foxes.](Figures/raneff_violin_foxes.png)
+
+
+![Figure S5. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin_rabbits.png)
+
+

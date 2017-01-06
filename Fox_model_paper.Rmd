@@ -1,10 +1,18 @@
 ---
 title: 'Long-term, spatially extensive monitoring reveals a weak numerical response of invasive foxes to abundance of rabbits: implications for population management'
-output: 
-  word_document: 
-    fig_caption: yes
+header-includes:
+   - \usepackage[nolists,tablesfirst, nomarkers]{endfloat}
+   - \usepackage{setspace}\doublespacing
+date: '`r format(Sys.time(), "%e %B %Y")`'
+output:
+  pdf_document: default
+  fig_width: 5.5
+  fig_caption: yes
+  word_document:
     reference_docx: Template.docx
-    pandoc_args: ["--smart"]
+fontfamily: mathpazo
+fontsize: 11pt
+geometry: margin=1.0in
 csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
@@ -15,7 +23,7 @@ Arthur Rylah Institute for Environmental Research, Department of Environment, La
 
 David M. Forsyth
 
-Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.
+Vertebrate Pest Research Unit, NSW Department of Primary Industries, Orange, New South Wales 2800, Australia.
 
 Stephen R. McPhee
 
@@ -206,7 +214,7 @@ We thank the landholders who provided access to the monitoring transects located
 #Data Accessibility
 All data, and *JAGS* and *R* code for the state-space model are contained in a git repository at [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, a snapshot of the code and data will be deposited in the Zenodo digital archive with DOI xxx.
 
-#Tables
+
 **Table 1.** Deviance information criteria ($\Delta$DIC), and model selection weights for candidate models with various lags on rainfall effects on rates of increase for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
 ```{r echo=FALSE, message=FALSE, results="asis", cache=FALSE}
 load("DIC_results.Rdata")
@@ -217,6 +225,7 @@ names(tabout)<-c("Lag on foxes", "Lag on rabbits","Deviance", "$\\Delta DIC$", "
 kable(tabout, caption=NULL, row.names = FALSE,
 	align=c("c", "c", "r", "r"), digits=3)
 ```
+
 
 **Table 2.** Summary statistics for posterior distributions of parameters of the most parsimonious state-space model for rabbit and fox abundance.
 ```{r echo=FALSE, message=FALSE, results="asis"}
@@ -254,14 +263,14 @@ kable(tabout, caption=NULL,
 	align=c("l", "r", "r", "r", "r", "r"), digits=3 )
 ```
 
-#Figures
-![**Figure 1.** Location of the 21 monitoring sites within the State of Victoria, showing variation in mean annual rainfall. Inset: Location of the State of Victoria (shaded black) in suth-eastern Australia.](Figures/Site-map.png)
 
-![**Figure 2.** Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low, medium and high rainfall. The dashed lines denote the combinations of rabbit and fox abundance for which *r* = 0.](Figures/predicted_fox_r.png)
+![Location of the 21 monitoring sites within the State of Victoria, showing variation in mean annual rainfall. Inset: Location of the State of Victoria (shaded black) in suth-eastern Australia.](Figures/Site-map.png)
 
-![**Figure 3.** Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that the y-axis scales differ between sites to accomodate differing densities.](Figures/fox_abund.png)
+![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low, medium and high rainfall. The dashed lines denote the combinations of rabbit and fox abundance for which *r* = 0.](Figures/predicted_fox_r.png)
 
-![**Figure 4.** Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that the y-axis scales differ between sites to accomodate differing densities.](Figures/rabbit_abund.png)
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that y-axes are $log_{10}$ transformed.](Figures/fox_abund.png)
+
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that y-axes are $log_{10}$ transformed.](Figures/rabbit_abund.png)
 
 #Supporting Information
 Additional Supporting Information to be included in the online version of the article:
@@ -270,15 +279,17 @@ Additional Supporting Information to be included in the online version of the ar
 
 **Appendix S1.** JAGS code for the Bayesian state-space model.
 
-**Figure S1.** Posterior densities of the regression parameters $(\beta)$.
+**Figure S1.** Half-yearly rainfall at the study sites over the course of the study.
 
-**Figure S2.** Posterior densities of the error terms $(\sigma)$.
+**Figure S2.** Posterior densities of the regression parameters $(\beta)$.
 
-**Figure S3.** Posterior densities for the site-level random effects terms for rates of increase of foxes.
+**Figure S3.** Posterior densities of the error terms $(\sigma)$.
 
-**Figure S4.** Posterior densities for the site-level random effects terms for rates of increase of rabbits.
+**Figure S4.** Posterior densities for the site-level random effects terms for rates of increase of foxes.
 
-**Figure S5.** Half-yearly rainfall at the study sites over the course of the study.
+**Figure S5.** Posterior densities for the site-level random effects terms for rates of increase of rabbits.
+
+
 
 #References
 
