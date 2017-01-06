@@ -2,13 +2,13 @@
 title: "Supporting Information"
 header-includes:
    - \usepackage[nolists,tablesfirst, nomarkers]{endfloat}
-   - \usepackage{lscape}
-   - \usepackage{rotating}
+   - \usepackage{caption}
+   - \captionsetup[figure]{labelformat=empty}
+   - \captionsetup[table]{labelformat=empty}
 output:
   pdf_document: default
   fig_width: 7
   fig_caption: yes
-  classoption: landscape
   word_document:
     fig_caption: yes
     reference_docx: Template_Supporting.docx
@@ -37,7 +37,7 @@ trans_summary<-spotlight %>%
   		  maxlength=max(TransectLength)/1000, 
   		  meanlength=round(mean(TransectLength)/1000, 2))
 
-names(trans_summary)<-c("Transect", "Established", "Last survey", "Number of Surveys", "Years with surveys", "Full length (km)", "Mean length (km)")
+names(trans_summary)<-c("Transect", "Established", "Last Surv.", "Total Survs.", "Years with Survs.", "Length (km)", "Mean length (km)")
 
 #rename "Yarram/Woodside" to just "Yarram"
 trans_summary$Transect <-as.character(trans_summary$Transect)
@@ -56,10 +56,10 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 ```
 
 
-
+\newpage
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
 ```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE}
-cat(readLines('R/GHR_12_0.txt'), sep = '\n', warn=FALSE)
+cat(readLines('R/GHR_0_6.txt'), sep = '\n', warn=FALSE)
 ```
 
 ![Figure S1. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
