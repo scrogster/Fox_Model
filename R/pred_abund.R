@@ -73,7 +73,7 @@ preddf %>%
 	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="darkorange3")+
 	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="darkorange3")+
 	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="darkorange3")+
-	ylab(expression(paste("Foxes k",m^{-1})))+
+	ylab(expression(paste(log[10],"(Foxes k",m^{-1},")")))+
 	xlab("Time")+
 	scale_y_log10(breaks=c(0.01, 0.1, 1, 10))+
 	scale_x_continuous(breaks=seq(1995, 2016, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2016) )+
@@ -87,8 +87,8 @@ preddf %>%
 		 panel.grid.minor=element_line(colour="grey80", size=0.05))
 
 
-ggsave(out_pdf, width=7, height=10)
-ggsave(out_png, width=7, height=10, dpi=300)
+ggsave(out_pdf, width=7, height=9)
+ggsave(out_png, width=7, height=9, dpi=300)
 
 ## ----rabbit_pred_graph, cache=FALSE, echo=FALSE, message=FALSE, fig.height=9.5, fig.width=7.5, fig.cap='Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid line is the posterior median, and shaded polygons are the 95\\% credible intervals of the mean expected abundances.', fig.pos="p!"----
 #plotting estimated trajectories of all rabbit populations.
@@ -100,7 +100,7 @@ preddf %>%
 	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="slategray3")+
 	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="slategray3")+
 	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="slategray3")+
-	ylab(expression(paste("Rabbits k",m^{-1})))+
+	ylab(expression(paste(log[10],"(Rabbits k",m^{-1},")")))+
 	xlab("Time")+
 	scale_y_log10(breaks=c(0.1, 1, 10, 100))+
 	scale_x_continuous(breaks=seq(1995, 2016, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2016) )+
@@ -116,5 +116,5 @@ preddf %>%
 rabbit_pdf<-gsub("fox", "rabbit", out_pdf)
 rabbit_png<-gsub("fox", "rabbit", out_png)
 
-ggsave(rabbit_pdf, width=7, height=10)
-ggsave(rabbit_png, width=7, height=10, dpi=300)
+ggsave(rabbit_pdf, width=7, height=9)
+ggsave(rabbit_png, width=7, height=9, dpi=300)
