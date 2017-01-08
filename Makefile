@@ -63,7 +63,7 @@ model_results_norain.Rdata: R/run_model.R prepped_data.Rdata R/GHR_norain.txt
 DIC_results.Rdata: R/get_dics.R model_results_12_0.Rdata
 	Rscript $< $@
 
-PREF_RESULT = model_results_0_6.Rdata
+PREF_RESULT = model_results_6_12.Rdata
 ###############################################################################	
 #generate the figures as pdfs, pngs done implicitly                           #
 ###############################################################################
