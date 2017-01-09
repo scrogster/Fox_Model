@@ -31,5 +31,5 @@ ggplot(raneff_result_rab, aes(factor(Parameter), value))+
 		 strip.text.x=element_text(hjust=0.5),
 		 panel.border = element_rect(colour = "black"))
 
-ggsave(out_pdf)
-ggsave(out_png)
+ggsave(out_pdf, width=4, height=8)
+ggsave(out_png, width=4, height=8)

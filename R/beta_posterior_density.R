@@ -37,7 +37,7 @@ ggplot(beta_result, aes(x=value, group=Parameter))+
 	geom_vline(xintercept=0, col="black", linetype = "longdash")+
 	theme_bw()+
 	theme(strip.background = element_blank(), 
-		 strip.text.x=element_text(hjust=0.5),
+		 strip.text.x=element_text(hjust=0.2),
 		 panel.border = element_rect(colour = "black"))
 
 ggsave(out_pdf)
