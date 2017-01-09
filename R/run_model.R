@@ -2,7 +2,7 @@ require("rjags")
 load.module("glm")
 NADAPT=250
 NITER=40000
-NBURN=40000
+NBURN=30000
 THIN=10
 
 args=commandArgs(trailingOnly=TRUE)
@@ -74,7 +74,7 @@ predsamp<-coda.samples(hier.mod,
 				   c(predparamstring), 
 				   n.iter=NITER, thin=THIN)
 #extract dic
-dic.heirarch<-dic.samples(hier.mod, NITER/10)
+dic.heirarch<-dic.samples(hier.mod, NITER/2)
 print(dic.heirarch)
 
 end.time<-Sys.time()
