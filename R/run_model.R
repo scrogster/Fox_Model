@@ -7,6 +7,7 @@ THIN=10
 
 args=commandArgs(trailingOnly=TRUE)
 
+set.seed(45454545)
 
 prepped_data=args[1]
 modelfile=args[2]
@@ -15,6 +16,12 @@ outfile=args[3]
 load(file.path(prepped_data))
 
 start.time<-Sys.time()
+#make random seeds reproducible
+inits = list()
+inits[[1]]=list(".RNG.name"="base::Wichmann-Hill", ".RNG.seed"=12345)
+inits[[2]]=list(".RNG.name"="base::Marsaglia-Multicarry", ".RNG.seed"=54321)
+inits[[3]]=list(".RNG.name"="base::Mersenne-Twister", ".RNG.seed"=66666)
+
 hier.mod<-jags.model(file.path(modelfile), 
 				 data=hier_dat, n.chains = 3, n.adapt = NADAPT) 
 update(hier.mod, NBURN) #burnin
@@ -78,6 +85,7 @@ dic.heirarch<-dic.samples(hier.mod, NITER/2)
 print(dic.heirarch)
 
 end.time<-Sys.time()
-print(end.time-start.time)
+duration_run<-end.time-start.time
+print(duration_run)
 
 save.image(file.path(outfile))
