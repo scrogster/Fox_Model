@@ -43,13 +43,6 @@ David S.L. Ramsey -
 
 [^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au; Phone +61 3 9450 8643; Fax +61 3 9450 8799.
 
-
-*Word Counts:* 
-Summary: 319; Main Text: 3976; Acknowledgements: 59; References: 1975; Tables: 244 ; Figure Legends: 211.
-Number of Tables: 2.
-Number of Figures: 4.
-Number of References: 69.
-
 \newpage
 
 #Summary
@@ -65,6 +58,14 @@ Number of References: 69.
 **Keywords:** biological invasions, density dependence, invasive species,  *Oryctolagus cuniculus*, predator-prey dynamics, rabbit haemmorhagic disease; rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
 
 **Suggested running title:** *Numerical response of red fox populations*
+
+*Word Counts:* 
+Summary: 319; Main Text: 3976; Acknowledgements: 59; References: 1975; Tables: 244 ; Figure Legends: 211.
+Number of Tables: 2.
+Number of Figures: 4.
+Number of References: 69.
+
+\newpage
 
 \newpage
 #Introduction
@@ -204,7 +205,7 @@ Our study tested the hypothesis that fox populations exhibit a numerical respons
 We thank the landholders who provided access to the monitoring transects located on their properties, and all of the staff (too numerous to list here) who conducted the spotlight counts. The Victorian Department of Economic Development, Jobs, Training and Resources, and it's predecessors funded this work. Helpful comments on drafts of the manuscript were provided by Canran Liu, Andrew Bennett and Deirdre Lucas.
 
 #Data Accessibility
-All data, and *JAGS* and *R* code necessary to implement the state-space model and reproduce the numerical results presented in this paper are contained in a git repository at [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, a snapshot of the code and data will be deposited in the Zenodo digital archive.
+All data, and *JAGS* and *R* code necessary to implement the state-space model and reproduce the numerical results presented in this paper are available at [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, a snapshot of the code and data will be deposited in the Zenodo digital archive.
 
 \newpage
 Table 1. Deviance information criteria ($\Delta$DIC), and model selection weights for candidate models with various lags on rainfall effects on rates of increase for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
