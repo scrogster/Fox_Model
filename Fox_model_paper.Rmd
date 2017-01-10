@@ -1,5 +1,5 @@
 ---
-title: 'Long-term, spatially extensive monitoring reveals a weak numerical response of invasive foxes to abundance of rabbits: implications for population management'
+title: 'Weak numerical response of invasive Red foxes to abundance of rabbits: implications for population management'
 header-includes:
    - \usepackage[nolists,tablesfirst, nomarkers]{endfloat}
    - \usepackage{setspace}\doublespacing
@@ -55,6 +55,8 @@ David S.L. Ramsey -
 
 4. *Synthesis and applications.* Our analysis provides the first quantitative evidence of density dependence in Australian fox populations, but showed little evidence that abundance of foxes is driven by the availability of rabbits. We conclude that fox and rabbit abundances are determined by the interaction between rainfall, season and prevailing density, and that there is little numerical interaction between the species. As controlling rabbits to very low abundances is not expected to substantially reduce fox abundances in south-eastern Australia, targetted control of fox populations will be necessary if reductions in fox abundance are desired by managers.
 
+\newpage
+
 **Keywords:** biological invasions, density dependence, invasive species,  *Oryctolagus cuniculus*, predator-prey dynamics, rabbit haemmorhagic disease; rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
 
 **Suggested running title:** *Numerical response of red fox populations*
@@ -67,7 +69,7 @@ Number of References: 69.
 
 \newpage
 
-\newpage
+
 #Introduction
 
 Managing ecosystems that include both predators and prey is difficult because of the complex trophic and competitive interactions that are possible in such systems [@ruscoe2011unexpected; @bode2015eradicating]. For example, there was much debate about the preferred order in which to eradicate invasive feral cats *(Felis catus)* and European rabbits *(Oryctolagus cuniculus)* from Macquarie Island [@bergstrom2009indirect; @dowding2009cats]. Although eradication of invasive mammalian predators and prey is now technically feasible for smaller islands [@bode2015eradicating], sustained control to low densities is currently the only feasible management option for larger islands and continents [@ruscoe2011unexpected; @glen2013eradicating]. The need to rely on sustained control in such management contexts adds to the complexity of the decision-making process, as managers with limited resources may have to continually evaluate the costs and benefits of controlling predators, prey or both in order to achieve desired management outcomes.
@@ -99,7 +101,7 @@ Foxes were not systematically managed on any of the 21 properties, except for oc
 Spotlight counts were conducted between two and four times annually, with the majority of counts made during the Austral autumn (March-May) and spring (September-November). Two replicate counts were usually made on each survey occasion, typically over two consecutive nights. Counts commenced shortly after sunset, and involved one observer standing in the tray of a slow-moving (10--20 km h^-1^, depending upon terrain) utility vehicle, searching 100 m either side of the transect line with a hand-held 100 W spotlight [@williams1995managing]. The numbers of rabbits and foxes observed along the transects were recorded. 
 
 ##Statistical model and hypotheses
-We modelled the time-series of fox and rabbit counts from the 21 transects using an hierarchical, Bayesian state-space modelling approach [@buckland2004state]. To account for uneven timing and survey effort amongst sites, the spotlight counts of rabbits and foxes were temporally discretized into half-yearly intervals, depending on whether they were made in the first (January--June) or second (July--December) half of each calendar year. Hence, changes in populations were attributed by the model to either the June--July or summer December--January periods: hereafter these seasonal periods of change are reffered to as 'winter' or 'summer'.
+We modelled the time-series of fox and rabbit counts from the 21 transects using an hierarchical, Bayesian state-space modelling approach [@buckland2004state]. To account for uneven timing and survey effort amongst sites, the spotlight counts of rabbits and foxes were temporally discretized into half-yearly intervals, depending on whether they were made in the first (January--June) or second (July--December) half of each calendar year. Hence, changes in populations were attributed by the model to either the June--July or summer December--January periods: hereafter these seasonal periods of change are referred to as 'winter' or 'summer'.
 
 A Poisson observation model was assumed for the counts of both foxes and rabbits, where the number of individuals observed during each survey was dependent on underlying abundance, with a Poisson error structure for the observations. Transect lengths were included in the expectation of the Poisson model, to allow for both within- and between-site variation in the lengths of the spotlight transects. For foxes, the observation model was:
 
