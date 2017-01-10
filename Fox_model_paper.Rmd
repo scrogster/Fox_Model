@@ -62,10 +62,10 @@ David S.L. Ramsey -
 **Suggested running title:** *Numerical response of red fox populations*
 
 *Word Counts:* 
-Summary: 319; Main Text: 3976; Acknowledgements: 59; References: 1975; Tables: 244 ; Figure Legends: 211.
+Summary: 301; Main Text: 4273; Acknowledgements: 64; References: 1966; Tables: 255 ; Figure Legends: 179.
 Number of Tables: 2.
 Number of Figures: 4.
-Number of References: 69.
+Number of References: 67.
 
 \newpage
 
@@ -95,6 +95,8 @@ Twenty-one monitoring transects distributed throughout the state of Victoria wer
 The rabbit management history of transects varied. Following the establishment of RHDV in Victoria in 1996, the Victorian government subsidised rabbit management at 14 of the properties from 1996 - 2002 [@mcphee2010long].  Management involved using heavy machinery to remove surface harbour and destroy warrens [for further details see @mcphee2010long]. Three properties were deliberately not subjected to this management [@mcphee2010long], although rabbit management was later conducted at one of these properties (Ingliston) from 2010 [@forsyth_density-dependent_2015]. The removal of surface harbour and ripping of warrens resulted in sustained reductions in rabbit abundance over and above the effects of RHDV [@mcphee2010long; @ramsey2014recolonisation].
 
 Foxes were not systematically managed on any of the 21 properties, except for occasional recreational shooting. Such shooting has little impact on fox populations [@saunders2010impacts; @saunders1995managing].
+
+Monthly rainfall records were compiled for all transects for the duration of the study using data from nearby official weather stations, obtained from the Australian Bureau of Meteorology. Where a monthy total for the nearest available weather station was unavailable, data from the next closet station was substituted to obtain a complete monthly rainfall record. The monthly rainfall data were summarised into half-yearly (January--June, July--December) totals for each transect.
 
 ##Spotlight counts
 
@@ -143,18 +145,18 @@ $$
 
 Where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances of rabbits, and the other model terms are equivalent to the comparable terms in the model of fox abundance.  For the effects of rainfall in the model, we considered lags of 0, 6 and 12 months, and compared the parsimony of the alternative models using the Deviance Information Criterion [DIC, @spiegelhalter2002DIC]. We also considered a model which did not include any effects of rainfall on the rate of increase of either species.
 
+```{r message=FALSE, results='hide', echo=FALSE, cache=FALSE}
+#load results so we can use inline r to insert resulting numbers
+load("model_results_6_12.Rdata")
+
+```
 
 ##Model fitting, priors and goodness-of-fit
-Models were fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummer2003jags]. The *JAGS* code for the model is given in Appendix S1. Vague, uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001)$ priors for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of parameter traceplots. To improve the convergence of the models, rainfall data (mm, aggregated to six-monthly totals) were centred by subtracting 250 mm (the approximate mean six-monthly rainfall across all sites) prior to analysis. A burn-in of 40,000 iterations was undertaken, followed by sampling from three independent Markov chains with different starting values for 40,000 further iterations. After thinning, a total of 4000 samples from each of the three chains were retained for inference.
+Models were fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummer2003jags]. The *JAGS* code for the model is given in Appendix S1. Vague, uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001)$ priors for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of parameter traceplots. To improve the convergence of the models, rainfall data (mm, aggregated to six-monthly totals) were centred by subtracting 250 mm (the approximate mean six-monthly rainfall across all sites) prior to analysis. A burn-in of 30,000 iterations was undertaken, followed by sampling from three independent Markov chains with different starting values for 40,000 further iterations. After thinning, a total of 4,000 samples from each of the three chains were retained for inference.
 
 #Results
 
 ##Data overview
-```{r message=FALSE, results='hide', echo=FALSE}
-#load results so we can use inline r to insert resulting numbers
-load("model_results_12_0.Rdata")
-
-```
 
 A total of `r nrow(spotlight)` spotlight counts were conducted across the 21 transects between mid-1998 and mid-2015 (Table S1). There was a steep gradient in mean annual rainfall between the transects, but also wide seasonal and annual variability within transects (Figs 1 and S1).  Numbers of foxes observed during spotlight counts varied from `r round(min(spotlight$Foxes/(spotlight$TransectLength/1000)), 1)` to `r round(max(spotlight$Foxes/(spotlight$TransectLength/1000)), 1)` per spotlight km and rabbits from `r round(min(spotlight$Rabbits/(spotlight$TransectLength/1000)), 1)` to `r round(max(spotlight$Rabbits/(spotlight$TransectLength/1000)), 1)` per spotlight km respectively. 
 
