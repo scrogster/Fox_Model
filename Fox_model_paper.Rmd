@@ -1,5 +1,5 @@
 ---
-title: 'Weak numerical response of invasive Red foxes to abundance of rabbits: implications for population management'
+title: 'Weak numerical response of invasive Red foxes to abundance of European rabbits: implications for population management'
 header-includes:
    - \usepackage[nolists,tablesfirst, nomarkers]{endfloat}
    - \usepackage{setspace}\doublespacing
