@@ -18,7 +18,7 @@ paper: Fox_model_paper.docx Fox_model_paper.pdf
 ###############################################################################	
 #clean and tidy the data, and save to an Rdata file                           #
 ###############################################################################	
-prepped_data.Rdata: Data/spotlight_data.csv Data/SOI.txt Data/TabulatedRainHalfYearly_updated.csv R/prep_data.R
+prepped_data.Rdata: Data/spotlight_data.csv Data/TabulatedRainHalfYearly_updated.csv R/prep_data.R
 	Rscript R/prep_data.R
 
 ###############################################################################	
