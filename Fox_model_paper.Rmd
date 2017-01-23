@@ -112,7 +112,7 @@ A Poisson observation model was assumed for the counts of both foxes and rabbits
 
 $$
 F_{ijt} \sim Poisson(\mu_{jt}L_{ijt})
-$$ {#eq:(1)}
+$$
 
 where $F_{ijt}$ is the number of foxes observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$. The corresponding lengths of transect surveyed during each survey was $L_{ijt}$. 
 
