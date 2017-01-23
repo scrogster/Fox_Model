@@ -5,6 +5,8 @@ header-includes:
    - \usepackage{caption}
    - \captionsetup[figure]{labelformat=empty}
    - \captionsetup[table]{labelformat=empty}
+   - \usepackage{lineno}
+   - \linenumbers
 output:
   pdf_document: default
   fig_width: 7
@@ -70,6 +72,8 @@ cat(readLines('R/GHR_6_12.txt'), sep = '\n', warn=FALSE)
 
 ![Figure S3. Posterior densities of the error terms of the state-space model $(\sigma)$.](Figures/sigma_posterior_density.png) 
 
+
 ![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin_rabbits.png)
+
 ![Figure S5. Posterior densities for the site-level random effects terms for rates of increase of foxes.](Figures/raneff_violin_foxes.png)
 
