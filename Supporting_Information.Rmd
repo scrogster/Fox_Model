@@ -44,7 +44,7 @@ trans_summary$Transect <-as.character(trans_summary$Transect)
 trans_summary$Transect[trans_summary$Transect=="Yarram/Woodside"] <- "Yarram"
 
 kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits. Mean length is the mean transect length actually surveyed across all surveys at each transect.",
-	align=c("c", "l", "c", "c", "c","c", "c", "c") )
+	align=c("c", "c", "c", "c", "c","c", "c", "c") )
 # tab<-xtable(trans_summary, 
 # 		  caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.")
 # align(tab)<-c("c", "c", "c", "c", "c","c", "c", "c") 
@@ -62,7 +62,7 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 cat(readLines('R/GHR_6_12.txt'), sep = '\n', warn=FALSE)
 ```
 
-![Figure S1. Half-yearly rainfall at the study sites over the course of the study.](Figures/rain_graph.png)
+![Figure S1. Half-yearly rainfall at the 21 sites during the study.](Figures/rain_graph.png)
 
 
 ![Figure S2. Posterior densities of the regression parameters of the state-space model $(\beta)$.](Figures/beta_posterior_density.png) 
@@ -70,9 +70,6 @@ cat(readLines('R/GHR_6_12.txt'), sep = '\n', warn=FALSE)
 
 ![Figure S3. Posterior densities of the error terms of the state-space model $(\sigma)$.](Figures/sigma_posterior_density.png) 
 
-![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of foxes.](Figures/raneff_violin_foxes.png)
-
-
-![Figure S5. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin_rabbits.png)
-
+![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin_rabbits.png)
+![Figure S5. Posterior densities for the site-level random effects terms for rates of increase of foxes.](Figures/raneff_violin_foxes.png)
 
