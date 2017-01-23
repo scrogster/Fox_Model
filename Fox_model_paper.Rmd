@@ -65,7 +65,7 @@ David S.L. Ramsey -
 **Suggested running title:** *Numerical response of red fox populations*
 
 *Word Counts:* 
-Summary: 301; Main Text: 4273; Acknowledgements: 64; References: 1966; Tables: 255 ; Figure Legends: 179.
+Summary: 300; Main Text: 4158; Acknowledgements: 66; References: 1950; Tables: 256 ; Figure Legends: 171.
 Number of Tables: 2.
 Number of Figures: 4.
 Number of References: 67.
