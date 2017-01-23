@@ -20,8 +20,8 @@ bibliography: rabbit_refs.bib
 Michael P. Scroggie [^1] -
 *Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.*
 
-David M. Forsyth -
-*Vertebrate Pest Research Unit, NSW Department of Primary Industries, Orange New South Wales 2800, Australia.*
+David M. Forsyth [^2] -
+*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.*
 
 Steven R. McPhee -
 *Agricultural Technical Services Pty Ltd, 48 Warooka Road, Yorketown South Australia 5576 Australia.*
@@ -41,7 +41,8 @@ Michael Lindeman -
 David S.L. Ramsey -
 *Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, PO Box 137, Heidelberg Victoria 3084 Australia.*
 
-[^1]: Corresponding author. Email: michael.scroggie@delwp.vic.gov.au; Phone +61 3 9450 8643; Fax +61 3 9450 8799.
+[^1]: Corresponding author: Email: michael.scroggie@delwp.vic.gov.au; Phone +61 3 9450 8643; Fax +61 3 9450 8799.
+[^2]: Current address: Vertebrate Pest Research Unit, NSW Department of Primary Industries, Orange New South Wales 2800, Australia.
 
 \newpage
 
