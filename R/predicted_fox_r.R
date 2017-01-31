@@ -8,9 +8,13 @@ out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-mean_rain<-(mean(stack(data.frame(rain_mat))[,1], na.rm=TRUE)-250)/100
-low_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.25, na.rm=TRUE)-250)/100
-high_rain<-(quantile(stack(data.frame(rain_mat))[,1], 0.75, na.rm=TRUE)-250)/100
+mean_rain<-mean(stack(data.frame(rain_mat))[,1], na.rm=TRUE)
+low_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.25, na.rm=TRUE)
+high_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.75, na.rm=TRUE)
+
+mean_rain_real<-(mean_rain*100)+250
+low_rain_real<-(low_rain*100)+250
+high_rain_real<-(high_rain*100)+250
 
 #posterior means
 post.means<-colMeans(as.matrix(samp))
@@ -35,7 +39,7 @@ predFOX_r<-function(R, F, rr, ww){
 
 
 rab_levels<-seq(0.01, 20, by=0.1)
-fox_levels<-seq(0.01, 0.3, by=0.01)
+fox_levels<-seq(0.01, 1.0, by=0.01)
 rain_levels<-c(low_rain, mean_rain, high_rain)
 winter_levels=c(0, 1)
 
