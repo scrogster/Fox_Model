@@ -40,7 +40,7 @@ func<-function(x){
 }
 ##Import and tidy the spotlight data.
 spotlight<-read_csv("Data/spotlight_data.csv") %>%
-	rename(Site=`Monitor Site`, Date=`Spotlight Date`) %>%
+	rename(Site=`Monitor.Site`, Date=`Spotlight.Date`) %>%
 	filter(Site != "Pyramid Hill") %>%
 	arrange(Site, Date)  %>%
 	mutate(first=(Replicate_Count==1)) %>%
@@ -77,6 +77,7 @@ hier_dat<-list(
 	sites=max(as.numeric(factor(spotlight$Site))),
 	Nobs=nrow(spotlight),
 	winter=spotlight$winter,
+	postrip=spotlight$PostRipped,
 	rain= rain_mat, 
 	rain.offset=4   #value of 4= six-month lag, 3=1 year lag, #can smooth later.
 )
