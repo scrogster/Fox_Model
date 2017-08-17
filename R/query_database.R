@@ -1,9 +1,10 @@
 library(RODBC)
-
+library(dplyr)
 
 wd<-'J:/Biodiversity Research/Terrestrial Research/Rabbit project/Split Database'
 
-db<-'Statewide Rabbit Monitoring Program_20150805_be.mdb'
+db_old<-'Statewide Rabbit Monitoring Program_20150805_be.mdb'
+db<-'Statewide Rabbit Monitoring Program_20170802_be.mdb' #new copy of DB code added 17/8/2017
 
 query<-"SELECT tblSpotlightTransects.[Monitor Site], 
                tblSpotlightBackgroundData.[Spotlight Date], 
@@ -26,10 +27,20 @@ ORDER BY tblSpotlightTransects.[Monitor Site], tblSpotlightBackgroundData.[Spotl
 #(month(tblSpotlightBackgroundData.[Spotlight Date])>8 AND month(tblSpotlightBackgroundData.[Spotlight Date])<12 )
 
 channel<-odbcConnectAccess(file.path(wd, db))
-
-
 spotlight_dat<-sqlQuery(channel, paste(query))
+
+query2<-"SELECT tblMonitorSites.[Monitor site] AS `Monitor Site`, tblMonitorSites.[Ripped Date] FROM tblMonitorSites;"
+ripdate_dat<-sqlQuery(channel, paste(query2))
 
 close(channel)
 
-write.csv(spotlight_dat , "Data/spotlight_data.csv", row.names=FALSE)
+#join the rip dates into the data
+sdat<-spotlight_dat %>%
+	  left_join(ripdate_dat, by="Monitor Site") %>%
+	  mutate(PostRipped = `Spotlight Date`>=`Ripped Date`) %>%
+       mutate(PostRipped =ifelse(is.na(PostRipped), FALSE, PostRipped)) %>%
+	  select(-`Ripped Date`) %>%
+	  data.frame()
+
+
+write.csv(sdat , "Data/spotlight_data.csv", row.names=FALSE)
