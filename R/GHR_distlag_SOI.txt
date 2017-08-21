@@ -1,0 +1,86 @@
+
+model{
+
+for(k in 1:sites){
+  #process model
+   #starting abund (priors)
+   site.r.eff[k]~dnorm(r.mean , tau.site) #random site effects on r.max
+   site.r.eff.rabbits[k]~dnorm(r.mean.rabbits, tau.site.rabbits) #random site effects on r.max
+   
+   #non-heirarchically centred versions of the random effects for plotting
+   site.r.eff.centered[k]<-site.r.eff[k]-r.mean
+   site.r.eff.rabbits.centered[k]<-site.r.eff.rabbits[k]-r.mean.rabbits
+   mu.fox[4, k]~dunif(0, 10)
+   mu.rabbits[1, k]~dunif(0, 100)
+for(t in 5:40){
+  ##-- process sub-model for foxes
+  r.fox.expected[t, k]<- log(mu.rabbits[t-food.lag, k])* beta[1] #numerical response to rabbit abundance
+                    +log(mu.fox[t-1, k])*beta[2] #dense depend.
+                    +soi_array[t,fox.lag] *beta[3]
+                    +winter[t]*beta[4]  #effect of winter on r
+                    +site.r.eff[k]
+  r.fox[t, k]~dnorm(r.fox.expected[t, k], tau.proc)
+  mu.fox[t, k]<-mu.fox[t-1, k]*exp(r.fox[t, k])  
+} #t
+
+for(tt in 2:40){
+  ##---process sub-model for rabbits
+  r.rabbits.expected[tt, k]<-  log(mu.rabbits[tt-1, k])* beta[5] 
+                    +soi_array[tt,rabbit.lag]*beta[6] #rain effect of r.
+                     +winter[tt]*beta[7] #effect of winter on rabbit r.
+                     +postrip[tt]*beta[8]
+                    +site.r.eff.rabbits[k]
+
+  r.rabbits[tt, k]~dnorm(r.rabbits.expected[tt, k], tau.proc.rabbits)
+  mu.rabbits[tt, k]<-mu.rabbits[tt-1, k]*exp(r.rabbits[tt, k]) 
+   } #tt
+   
+} #k
+###################################
+#observation models
+###################################
+for(i in 1:Nobs){
+expected.count[i]<-mu.fox[obs_time[i], site.code[i]] * (trans.length[i]/1000)
+fox.count[i]~dpois(expected.count[i]) #poisson obs model
+
+expected.rabbits[i]<-mu.rabbits[obs_time[i], site.code[i]] * (trans.length[i]/1000)
+rabbit.count[i]~dpois(expected.rabbits[i])
+}#i
+
+###################################
+#lagging indicator variables
+###################################
+
+fox.lag~dcat(rep(1, 30))
+rabbit.lag~dcat(rep(1, 30))
+food.lag~dcat(rep(1, 4))
+
+###################################
+#other priors
+###################################
+
+r.mean~dnorm(0, 0.001)
+r.mean.rabbits~dnorm(0, 0.001)
+
+for(u in 1:8){
+beta[u]~dnorm(0, 0.001)
+}
+
+sigma.proc~dunif(0, 5)
+tau.proc<-pow(sigma.proc, -2)
+
+sigma.proc.rabbits~dunif(0, 5)
+tau.proc.rabbits<-pow(sigma.proc.rabbits, -2)
+
+sigma.site~dunif(0, 5)
+tau.site<-pow(sigma.site, -2)
+
+sigma.site.rabbits~dunif(0, 5)
+tau.site.rabbits<-pow(sigma.site.rabbits, -2)
+
+sigma[1]<-sigma.proc
+sigma[2]<-sigma.proc.rabbits
+sigma[3]<-sigma.site
+sigma[4]<-sigma.site.rabbits
+
+}
