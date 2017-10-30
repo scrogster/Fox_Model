@@ -1,5 +1,3 @@
-## ----mcmc_results_site_fox, eval=TRUE, echo=FALSE, cache=TRUE, fig.cap='Posterior densities of transect-level random effects ($\\zeta_{i}$) on rates-of-increase for foxes at the 21 transects.', dependson="hier_model",  fig.pos="p!"----
-#ggs_caterpillar(mcmc_result, family = "site.r.eff")+ theme_classic()
 require(ggplot2)
 require(ggmcmc)
 require(dplyr)
@@ -9,8 +7,8 @@ args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
 out_pdf=file.path(args[2])
-model_data="Fitted_rain_model.Rdata"
-out_pdf = "Figures/raneff_violin_foxes.pdf"
+#model_data="Fitted_rain_model.Rdata"
+#out_pdf = "Figures/raneff_violin_foxes.pdf"
 out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
