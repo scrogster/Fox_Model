@@ -148,7 +148,7 @@ where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances 
 
 ```{r message=FALSE, results='hide', echo=FALSE, cache=FALSE}
 #load results so we can use inline r to insert resulting numbers
-load("model_results_6_12.Rdata")
+load("Fitted_rain_model.Rdata")
 
 ```
 
@@ -218,25 +218,13 @@ We thank the landholders who provided access to the monitoring transects located
 All data, and *JAGS* and *R* code necessary to implement the state-space model and reproduce the numerical results presented in this paper are available at [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, a snapshot of the code and data will be deposited in the Zenodo digital archive.
 
 \newpage
-Table 1. Deviance information criteria ($\Delta$DIC) and model selection weights for candidate models with various lags on rainfall effects on rates of increase for foxes and rabbits. Lags are specified in months. Models are presented in descending order of support.
-```{r echo=FALSE, message=FALSE, results="asis", cache=FALSE}
-load("DIC_results.Rdata")
-require(knitr)
-
-tabout<-modseltab[,-1]
-names(tabout)<-c("Lag on foxes", "Lag on rabbits","Deviance", "$\\Delta DIC$", "model weight")
-kable(tabout, caption=NULL, row.names = FALSE,
-	align=c("c", "c", "r", "r"), digits=3)
-```
-
-\newpage
 
 Table 2. Summary statistics for posterior distributions of parameters of the most parsimonious state-space model for rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence.
 ```{r echo=FALSE, message=FALSE, results="asis"}
 require(dplyr)
 require(rjags)
 require(knitr)
-load("model_results_0_6.Rdata")
+load("Fitted_rain_model.Rdata")
 param.names<-c("$\\beta_{1}$", 
 			"$\\beta_{2}$", 
 			"$\\beta_{3}$", 
@@ -244,6 +232,7 @@ param.names<-c("$\\beta_{1}$",
 			"$\\beta_{5}$",
 			"$\\beta_{6}$",
 			"$\\beta_{7}$",
+			"$\\beta_{8}$",
                "$\\bar{r}_{fox}$", 
 			"$\\bar{r}_{rabbit}$",
                "$\\sigma_{process}^{fox}$", 
@@ -251,15 +240,24 @@ param.names<-c("$\\beta_{1}$",
                "$\\sigma_{transect}^{fox}$", 
 			"$\\sigma_{transect}^{rabbit}$")
 
-tab1<-data.frame( summary(samp)$statistics[1:13,])
-#row.names(tab1)<-param.names
-tab2<-data.frame( summary(samp)$quantiles[1:13,])
+df<-cbind(samp$sims.list$beta, samp$sims.list$r.mean, samp$sims.list$r.mean.rabbits, samp$sims.list$sigma)
 
-Meaning<-c("Fox - NR", "Fox - DD", "Fox - Rain", "Fox - Winter", "Rabbit - DD", "Rabbit- Rain", "Rabbit - Winter",
+stats<-data.frame("Mean"=colMeans(df), 
+			   "SD"=apply(df, 2, sd),
+			   "Median"=apply(df, 2, median),
+			   "q2.5"=apply(df, 2, quantile, 0.025),
+			   "q97.5"=apply(df, 2, quantile, 0.975))
+
+#tab1<-data.frame( summary(samp)$statistics[1:14,])
+
+#tab2<-data.frame( summary(samp)$quantiles[1:14,])
+
+Meaning<-c("Fox - NR", "Fox - DD", "Fox - Rain", "Fox - Winter", 
+		 "Rabbit - DD", "Rabbit- Rain", "Rabbit - Winter", "Rabbit - Ripping",
 		 "Fox - Intercept", "Rabbit - Intercept",
 		 "Fox - residual error", "Rabbit - residual error", "Fox - transect effect", "Rabbit - transect effect")
 
-tabout<-cbind(param.names, Meaning, tab1[,1],  tab1[,2], tab2[,c(3, 1,5)])
+tabout<-cbind(param.names, Meaning, stats)
   names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "q2.5", "q97.5")
   row.names(tabout)<-param.names
 

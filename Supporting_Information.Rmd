@@ -23,7 +23,7 @@ csl: journal-of-applied-ecology.csl
 ---
 
 ```{r echo=FALSE, message=FALSE, results="asis"}
-load("model_results_6_12.Rdata")
+load("Fitted_rain_model.Rdata")
 require(dplyr)
 require(xtable)
 require(lubridate)
@@ -61,7 +61,7 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 \newpage
 ##Appendix S1. JAGS Code for the Bayesian State Space Model
 ```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE}
-cat(readLines('R/GHR_6_12.txt'), sep = '\n', warn=FALSE)
+cat(readLines('R/GHR_distlag_rain.txt'), sep = '\n', warn=FALSE)
 ```
 
 ![Figure S1. Half-yearly rainfall at the 21 sites during the study.](Figures/rain_graph.png)
@@ -73,7 +73,7 @@ cat(readLines('R/GHR_6_12.txt'), sep = '\n', warn=FALSE)
 ![Figure S3. Posterior densities of the error terms of the state-space model $(\sigma)$.](Figures/sigma_posterior_density.png) 
 
 
-![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin_rabbits.png)
+![Figure S4. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin.png)
 
-![Figure S5. Posterior densities for the site-level random effects terms for rates of increase of foxes.](Figures/raneff_violin_foxes.png)
+
 
