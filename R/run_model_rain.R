@@ -1,7 +1,7 @@
 require("jagsUI")
 NADAPT=500
-NITER=10000
-NBURN=5000
+NITER=3000
+NBURN=1000
 THIN=2
 NCHAINS=4
 
@@ -19,9 +19,9 @@ start.time<-Sys.time()
 params=c('beta', 'sigma', 'r.mean', 'r.mean.rabbits', 
   'site.r.eff.centered', 'site.r.eff.rabbits.centered', 'fox.lag', 'rabbit.lag', 'food.lag')
 
-#assembling a big string of abundance predictions
-st<-start_times$start_times
-fin<-end_times$end_times
+#assembling a big string of abundance predictions #we predict a little into the future and also hindcast a bit.
+st<-ifelse(start_times$start_times==5, 5, pmax(start_times$start_times-10, 5))
+fin<-ifelse(end_times$end_times==40, 40, pmin(end_times$end_times+10, 40))
 predparamstring<-c(paste0("mu.rabbits[",st[1]:fin[1],",1]"),
 			    paste0("mu.rabbits[",st[2]:fin[2],",2]"),
 			    paste0("mu.rabbits[",st[3]:fin[3],",3]"),
