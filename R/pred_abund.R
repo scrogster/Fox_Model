@@ -1,18 +1,18 @@
-## ----pred_process2,  cache=FALSE, echo=FALSE, message=FALSE, dependson="heir_model"----
-#pred 
 require(ggmcmc)
 require(dplyr)
-require(rjags)
 
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
 out_pdf=file.path(args[2])
+#model_data="Fitted_rain_model.Rdata"
+#out_pdf = "Figures/fox_abund.pdf"
 out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-preds<-ggs(predsamp)
+preds<-ggs(samp$samples) %>%
+	   filter(grepl("mu", Parameter))
 aa<-group_by(preds, Parameter)
 pred_summary<-summarise(aa, post.mean = mean(value), 
 				    post.med = median(value),
@@ -34,7 +34,7 @@ names(vars)<-c("Param", "Time", "Site")
 vars$Time<-as.numeric(as.character(vars$Time))
 vars$Site<-as.numeric(as.character(vars$Site))
 preddf<-data.frame(pred_summary, vars)
-preddf$time.orig<-1998 +(preddf$Time-1)/2
+preddf$time.orig<-1996 +(preddf$Time-1)/2
 #tabulation of site codes and names, adding site names to the dataframe for plot labelling
 labelling_tab<-data.frame(
 	"Site"=unique(spotlight$Site))
@@ -48,12 +48,12 @@ tidy_obs<-data.frame(
 	"trans.length"=spotlight$TransectLength,
 	"Site"=as.numeric(factor(spotlight$Site)),
 	"Sitename"=factor(spotlight$Site),
-	"Time"=spotlight$ytime_disc,
-	"time.orig"=spotlight$ytime
+	"Time"=spotlight$ytime_disc  ,
+ 	"PostRipped"=spotlight$PostRipped
 ) 
 
 tidy_obs<-tidy_obs %>%
-	mutate(fox.count=ifelse(fox.count==0, 0.1, fox.count),rabbit.count=ifelse(rabbit.count==0, 0.1, rabbit.count))
+	mutate(fox.count=ifelse(fox.count==0, 0.05, fox.count),rabbit.count=ifelse(rabbit.count==0, 0.05, rabbit.count))
 
 #recode "Yarram/Woodside" to just "Yarram" in preddf and tidy_obs
 tempsites<-as.character(preddf$Sitename)
@@ -77,7 +77,7 @@ preddf %>%
 	xlab("Time")+
 	scale_y_log10(breaks=c(0.01, 0.1, 1, 10), lim=c(0.001, 10.1))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
-	geom_point(data=tidy_obs, aes(x=time.orig, y=fox.count/(trans.length/1000)), cex=0.5) +
+	geom_point(data=tidy_obs, aes(x=Time, y=fox.count/(trans.length/1000)), cex=0.5) +
 	facet_wrap(~Sitename,  ncol=3, nrow=7) +
 	theme_bw()+
 	theme(strip.background = element_blank(), 
@@ -92,7 +92,6 @@ ggsave(out_png, width=7, height=9, dpi=300)
 
 ## ----rabbit_pred_graph, cache=FALSE, echo=FALSE, message=FALSE, fig.height=9.5, fig.width=7.5, fig.cap='Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid line is the posterior median, and shaded polygons are the 95\\% credible intervals of the mean expected abundances.', fig.pos="p!"----
 #plotting estimated trajectories of all rabbit populations.
-require(dplyr)
 preddf %>%
 	filter(Param=="mu.rabbits") %>%
 	ggplot(aes(x=time.orig, y=post.med))+
@@ -104,7 +103,7 @@ preddf %>%
 	xlab("Time")+
 	scale_y_log10(breaks=c(0.1, 1, 10, 100), lim=c(0.003, NA))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
-	geom_point(data=tidy_obs, aes(x=time.orig, y=rabbit.count/(trans.length/1000)), cex=0.5) +
+	geom_point(data=tidy_obs, aes(x=Time, y=rabbit.count/(trans.length/1000)), cex=0.5) +
 	facet_wrap(~Sitename, ncol=3, nrow=7)+
 	theme_bw()+
 	theme(strip.background = element_blank(), 
