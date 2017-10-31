@@ -43,7 +43,7 @@ Figures/raneff_violin.pdf: R/raneff_violin.R $(PREF_RESULT)
 Figures/predicted_fox_r.pdf: R/predicted_fox_r.R $(PREF_RESULT) 
 	Rscript $^ $@
 	
-Figures/fox_abund.pdf Figures/rabbit_abund.pdf: R/pred_abund.R $(PREF_RESULT) 
+Figures/fox_abund.pdf Figures/rabbit_abund.pdf: R/pred_abund.R $(PREF_RESULT) Data/ripping_data.csv
 	Rscript $^ $@
 	
 Figures/rain_graph.pdf: R/rain_graph.R $(PREF_RESULT)

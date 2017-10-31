@@ -1,13 +1,22 @@
 require(ggmcmc)
 require(dplyr)
+require(readr)
+require(lubridate)
 
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
-out_pdf=file.path(args[2])
+out_pdf=file.path(args[3])
+rip_data=file.path(args[2])
+
 #model_data="Fitted_rain_model.Rdata"
 #out_pdf = "Figures/fox_abund.pdf"
+#rip_data=file.path("Data/ripping_data.csv")
 out_png=gsub("pdf", "png", out_pdf)
+
+rip_dat<-read_csv(rip_data) %>%
+	rename(Sitename=MonitorSite) %>%
+	mutate(Time=year(RippedDate) + month(RippedDate)/12)
 
 load(file.path(model_data))
 
@@ -78,6 +87,7 @@ preddf %>%
 	scale_y_log10(breaks=c(0.01, 0.1, 1, 10), lim=c(0.001, 10.1))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_point(data=tidy_obs, aes(x=Time, y=fox.count/(trans.length/1000)), cex=0.5) +
+	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.8)+
 	facet_wrap(~Sitename,  ncol=3, nrow=7) +
 	theme_bw()+
 	theme(strip.background = element_blank(), 
@@ -103,7 +113,8 @@ preddf %>%
 	xlab("Time")+
 	scale_y_log10(breaks=c(0.1, 1, 10, 100), lim=c(0.003, NA))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
-	geom_point(data=tidy_obs, aes(x=Time, y=rabbit.count/(trans.length/1000)), cex=0.5) +
+	geom_point(data=tidy_obs, aes(x=Time, y=rabbit.count/(trans.length/1000)), cex=0.8) +
+	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=1.5)+
 	facet_wrap(~Sitename, ncol=3, nrow=7)+
 	theme_bw()+
 	theme(strip.background = element_blank(), 
