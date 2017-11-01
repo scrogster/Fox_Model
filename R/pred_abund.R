@@ -87,7 +87,7 @@ preddf %>%
 	scale_y_log10(breaks=c(0.01, 0.1, 1, 10), lim=c(0.001, 10.1))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_point(data=tidy_obs, aes(x=Time, y=fox.count/(trans.length/1000)), cex=0.5) +
-	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.8)+
+	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.4)+
 	facet_wrap(~Sitename,  ncol=3, nrow=7) +
 	theme_bw()+
 	theme(strip.background = element_blank(), 
@@ -114,7 +114,7 @@ preddf %>%
 	scale_y_log10(breaks=c(0.1, 1, 10, 100), lim=c(0.003, NA))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_point(data=tidy_obs, aes(x=Time, y=rabbit.count/(trans.length/1000)), cex=0.8) +
-	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=1.5)+
+	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.4)+
 	facet_wrap(~Sitename, ncol=3, nrow=7)+
 	theme_bw()+
 	theme(strip.background = element_blank(), 

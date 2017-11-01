@@ -8,25 +8,29 @@ out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-mean_rain<-mean(stack(data.frame(rain_mat))[,1], na.rm=TRUE)
-low_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.25, na.rm=TRUE)
-high_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.75, na.rm=TRUE)
+#mean_rain<-mean(stack(data.frame(rain_mat))[,1], na.rm=TRUE)
+#low_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.25, na.rm=TRUE)
+#high_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.75, na.rm=TRUE)
 
-mean_rain_real<-(mean_rain*100)+250
-low_rain_real<-(low_rain*100)+250
-high_rain_real<-(high_rain*100)+250
+#mean_rain_real<-(mean_rain*100)+250
+#low_rain_real<-(low_rain*100)+250
+#high_rain_real<-(high_rain*100)+250
 
-#posterior means
-post.means<-colMeans(as.matrix(samp))
-#parameter estimates
+mean_rain=30
+low_rain=10
+high_rain=45
+
+#posterior means of the betas
+post.means.beta<-colMeans(samp$sims.list$beta)
+post.means.intercept<-mean(samp$sims.list$r.mean)
 
 #function to predict r for foxes from rabbit, fox abund, rain and season.
 predFOX_r<-function(R, F, rr, ww){
-	r.fox<- (log(R)* post.means["beta[1]"])+ #numerical response
-		(log(F)* post.means["beta[2]"])+ #dense depend.
-		(rr    * post.means["beta[3]"])+ #rain effect of r.
-		(ww*post.means["beta[4]"]) +  #effect of winter on r
-		(post.means["r.mean"])  # grand mean of site.r.eff[k]  
+	r.fox<- (log(R)* post.means.beta[1])+ #numerical response
+		(log(F)* post.means.beta[2])+ #dense depend.
+		(rr    * post.means.beta[3])+ #rain effect of r.
+		(ww*post.means.beta[4]) +  #effect of winter on r
+		(post.means.intercept)  # grand mean of site.r.eff[k]  
 	return(r.fox)
 }
 
