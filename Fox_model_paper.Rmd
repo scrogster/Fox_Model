@@ -105,7 +105,7 @@ Monthly rainfall records were compiled for all transects for the duration of the
 
 Spotlight counts were conducted between two and four times annually, with the majority of counts made during the austral autumn (March-May) and spring (September-November). Two replicate counts were usually made on each survey occasion, typically over two consecutive nights. Counts commenced shortly after sunset, and involved one observer standing in the tray of a slow-moving (10--20 km h^-1^, depending upon terrain) utility vehicle, searching 100 m either side of the transect line with a hand-held 100 W spotlight [@williams1995managing]. The numbers of rabbits and foxes observed along the transects were recorded. 
 
-##Statistical model and hypotheses
+##Statistical model
 We modelled the time-series of fox and rabbit counts from the 21 transects using a hierarchical, Bayesian, state-space modelling approach [@buckland2004state]. To account for uneven timing and survey effort amongst sites, the spotlight counts of rabbits and foxes were temporally discretized into half-yearly intervals, depending on whether they were made in the first (January--June) or second (July--December) half of each calendar year. Hence, changes in populations were attributed by the model to either the June--July or December--January periods: hereafter these seasonal periods of change are referred to as 'winter' or 'summer'.
 
 A Poisson observation model was assumed for the counts of both foxes and rabbits, where the number of individuals observed during each survey was dependent on underlying abundance, with a Poisson error structure for the observations. Transect lengths were included in the expectation of the Poisson model, to allow for both within- and between-site variation in the lengths of the spotlight transects. For foxes, the observation model was:
@@ -122,10 +122,10 @@ $$
 \mu_{jt}=\mu_{jt-1} e^{r_{jt}^{fox}}
 $$
 
-where $\mu_{jt}$ is the expected mean spotlight count of the $j^{th}$ transect at time $t$, and $r_{jt}^{fox}$ is the  rate-of-increase for the $j^{th}$ population during the interval $[t-1,t]$. We decomposed $r_{jt}^{fox}$ into components attributable to transect and survey-level covariates using a linear model. The model accounted for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model; @cruz2013modelling], previous rainfall, season (summer or winter), and random transect effects and process errors.
+where $\mu_{jt}$ is the expected mean spotlight count of the $j^{th}$ transect at time $t$, and $r_{jt}^{fox}$ is the  rate-of-increase for the $j^{th}$ population during the interval $[t-1,t]$. We decomposed $r_{jt}^{fox}$ into components attributable to transect and survey-level covariates using a linear model. The model accounted for a numerical response to prey (rabbit) abundance [@bayliss2002numerical], density-dependence [a Gompertz model; @cruz2013modelling], lagged rainfall, season (summer or winter), and random transect effects and process errors.
 
 $$
-r_{jt}^{fox}=\bar{r}_{fox} + \beta_{1}\log{\rho_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{jt-1}+\beta_{4}\mbox{winter}_{t}+ \zeta_{j}^{fox}+\epsilon_{t}^{fox}
+r_{jt}^{fox}=\bar{r}_{fox} + \beta_{1}\log{\rho_{t-1}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{laggedrain}_{jt}+\beta_{4}\mbox{winter}_{t}+ \zeta_{j}^{fox}+\epsilon_{t}^{fox}
 $$
 
 where $\bar{r}_{fox}$ is the mean rate of increase, $\rho_{t}$ is the estimated abundance of rabbits at time $t$, and $\beta_{1}-\beta_{4}$ are regression parameters describing respectively the numerical response of the fox population to rabbit abundance, the strength of density dependence in the rate-of-increase of the fox population, the relationship between rate of increase and the lagged rainfall, and whether or not the count was made in the second half of the calendar year. $\zeta_{i}^{fox}$ are random site-level effects with standard deviation $\sigma_{site}^{fox}$ on the rate of increase of the fox population and $\epsilon_{t}^{fox}$ are normally-distributed process errors with standard deviation $\sigma_{process}^{fox}$.
@@ -140,11 +140,25 @@ R_{ijt} &\sim Poisson(\rho_{jt}L_{ijt}) \\
 $$
 $$
 \begin{aligned}
-r_{jt}^{rabbit} &=\bar{r}_{rabbit}  + \beta_{5}\log{\rho_{t-1}} + \beta_{6}\mbox{rain}_{jt-1} +\beta_{7}\mbox{winter}_{t} +\zeta_{j}^{rabbit} +\epsilon_{t}^{rabbit}
+r_{jt}^{rabbit} &=\bar{r}_{rabbit}  + \beta_{5}\log{\rho_{t-1}} + \beta_{6}\mbox{laggedrain}_{jt} +\beta_{7}\mbox{winter}_{t}+\beta_{8}\mbox{ripped}_{jt} +\zeta_{j}^{rabbit} +\epsilon_{t}^{rabbit}
 \end{aligned}
 $$
 
-where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the estimated abundances of rabbits, and the other model terms are equivalent to the comparable terms in the model of fox abundance.  For the effects of rainfall in the model, we considered lags of 0, 6 and 12 months, and compared the parsimony of the alternative models using the Deviance Information Criterion [DIC, @spiegelhalter2002DIC]. We also considered a model which did not include any effects of rainfall on the rate of increase of either species.
+where $R_{ijt}$ are the rabbit counts, $\rho_{jt}$ are the lagged estimated abundances of rabbits, and the other model terms are equivalent to the comparable terms in the model of fox abundance.  For both rabbits and foxes, we used a distributed lag approach to estimate the appropriate lagging period for the effects of rainfall on rates of increase, and for the numerical response of foxes to the abundance of rabbits. Lagged rainfall was defined as:
+
+$$
+\mbox{laggedrain}_{jt}=\sum_{m=0}^{m=k}  \frac{rain_{jtm}}{k}
+$$
+
+Where $rain_{jtm}$ are the series of rainfall totals at each site in the months $(m)$ preceding each census, and $k$ is the maximum lag period considered. Increasing values of $k$ imply averaging of antecendent rainfall over an increasingly long period prior to each census. The maximum lag parameters $k$ were estimated separately for rabbits and foxes, as it was considered plausible that the demographic responses of the two species to rainfall would differ. Lagging periods between 1 and 30 months were considered in the model-fitting process.
+
+Lagged rabbit abundance was defined as:
+
+$$
+\mbox{lagged rabbits}_{jt}=\sum_{m=0}^{t=k} \frac{\rho_{jtm}}{k}
+$$
+
+Where $\rho$ are the estimated rabbit abundances at each site at the preceding censuses. Lagging periods between 0 and 4 half-yearly intervals were considered (i.e. up to 2 calendar years).
 
 ```{r message=FALSE, results='hide', echo=FALSE, cache=FALSE}
 #load results so we can use inline r to insert resulting numbers
@@ -153,18 +167,13 @@ load("Fitted_rain_model.Rdata")
 ```
 
 ##Model fitting and priors
-Models were fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummerJAGSmanual]. The *JAGS* code for the model is given in Appendix S1. Weakly informative uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001)$ priors were specified for the regression parameters relating the rates of increase to the covariates ($\beta$).  The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of parameter traceplots. To improve the convergence of the models, rainfall data (mm, aggregated to six-monthly totals) were centred by subtracting 250 mm (the approximate mean six-monthly rainfall across all sites) prior to analysis. A burn-in of 30,000 iterations was undertaken, followed by sampling from three independent Markov chains with different starting values for 40,000 further iterations. After thinning, a total of 4,000 samples from each of the three chains were retained for inference.
+Models were fitted to the data using the Bayesian Markov Chain Monte Carlo (MCMC) software *JAGS* [@plummerJAGSmanual]. The *JAGS* code for the model is given in Appendix S1. Weakly informative uniform priors ($U(0, 5)$) were specified for the process errors and transect-level random effects, and vague $\mbox{Normal}(0, 0.001)$ priors were specified for the regression parameters relating the rates of increase to the covariates ($\beta$). The maximum lagging periods $(k)$ on the demographic response to rainfall for each species were assigned categorical (uniform integer) priors, with equal prior weights given to maximum lag periods between 1 and 30 months. The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic of @brooks1998general, and by visual inspection of parameter traceplots. A burn-in of 30,000 iterations was undertaken, followed by sampling from three independent Markov chains with different starting values for 40,000 further iterations. After thinning, a total of 4,000 samples from each of the three chains were retained for inference.
 
 #Results
 
 ##Data overview
 
 A total of `r nrow(spotlight)` spotlight counts were conducted across the 21 transects between mid-1998 and mid-2015 (Table S1). There was a steep gradient in mean annual rainfall between the transects, but also wide seasonal and annual variability within transects (Figs 1 and S1).  Numbers of foxes observed during spotlight counts varied from `r round(min(spotlight$Foxes/(spotlight$TransectLength/1000)), 1)` to `r round(max(spotlight$Foxes/(spotlight$TransectLength/1000)), 1)` per spotlight km and rabbits from `r round(min(spotlight$Rabbits/(spotlight$TransectLength/1000)), 1)` to `r round(max(spotlight$Rabbits/(spotlight$TransectLength/1000)), 1)` per spotlight km, respectively. 
-
-##Model selection
-
-Models with lag-periods of zero, six and twelve months for the effects of rainfall on rates of increase for both rabbits and foxes, along with a model with no effect of rainfall on either species were compared using DIC (Table 1). For foxes, the best supported model included a lag period of 6 months. For rabbits, the most parsimonious lag period was 12 months.  As the focus of the study was primarily on the effects of rabbit abundance on rates of increase of fox populations, we based further inferences on the most parsimonious model, rather than implementing model averaging, as the model selection process provided high certainty regarding the best rainfall lag-effect. Examination of parameter estimates and model predictions from the other highly-ranked models with different lag-periods did not lead to meaningful differences in the inferences, giving us confidence that reliance on the single, best-ranked model has not lead to any erroneous conclusions.
-
 
 ##Determinants of the rate of increase of rabbits
 
@@ -218,9 +227,14 @@ We thank the landholders who provided access to the monitoring transects located
 All data, and *JAGS* and *R* code necessary to implement the state-space model and reproduce the numerical results presented in this paper are available at [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, a snapshot of the code and data will be deposited in the Zenodo digital archive.
 
 \newpage
+#References
 
-Table 2. Summary statistics for posterior distributions of parameters of the most parsimonious state-space model for rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence.
-```{r echo=FALSE, message=FALSE, results="asis"}
+<div id = "refs"></div>
+
+\newpage
+
+Table 1. Summary statistics for posterior distributions of parameters of the most parsimonious state-space model for rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence.
+```{r echo=FALSE, message=FALSE, results="asis", warning=FALSE}
 require(dplyr)
 require(rjags)
 require(knitr)
@@ -235,34 +249,40 @@ param.names<-c("$\\beta_{1}$",
 			"$\\beta_{8}$",
                "$\\bar{r}_{fox}$", 
 			"$\\bar{r}_{rabbit}$",
+			 "$k_{fox}$",
+			 "$k_{rabbit}$",
+			 "$kNR_{fox}$",
                "$\\sigma_{process}^{fox}$", 
 			"$\\sigma_{process}^{rabbit}$",
                "$\\sigma_{transect}^{fox}$", 
 			"$\\sigma_{transect}^{rabbit}$")
 
-df<-cbind(samp$sims.list$beta, samp$sims.list$r.mean, samp$sims.list$r.mean.rabbits, samp$sims.list$sigma)
+df<-cbind(samp$sims.list$beta, samp$sims.list$r.mean, samp$sims.list$r.mean.rabbits, 
+		samp$sims.list$fox.lag, samp$sims.list$rabbit.lag, samp$sims.list$food.lag,
+		samp$sims.list$sigma)
 
 stats<-data.frame("Mean"=colMeans(df), 
 			   "SD"=apply(df, 2, sd),
-			   "Median"=apply(df, 2, median),
-			   "q2.5"=apply(df, 2, quantile, 0.025),
-			   "q97.5"=apply(df, 2, quantile, 0.975))
+			   "Median"=apply(df, 2, median), 
+                  "CI"=paste(format(apply(df, 2, quantile, 0.025), digits=2), ", ",
+                  		    format(apply(df, 2, quantile, 0.975), digits=2)))
+			   #"q2.5"=apply(df, 2, quantile, 0.025),
+			   #"q97.5"=apply(df, 2, quantile, 0.975))
 
-#tab1<-data.frame( summary(samp)$statistics[1:14,])
 
-#tab2<-data.frame( summary(samp)$quantiles[1:14,])
 
 Meaning<-c("Fox - NR", "Fox - DD", "Fox - Rain", "Fox - Winter", 
 		 "Rabbit - DD", "Rabbit- Rain", "Rabbit - Winter", "Rabbit - Ripping",
 		 "Fox - Intercept", "Rabbit - Intercept",
+		 "Fox - lag period on rain", "Rabbit - lag period on rain", "Fox - lag period on NR",
 		 "Fox - residual error", "Rabbit - residual error", "Fox - transect effect", "Rabbit - transect effect")
 
 tabout<-cbind(param.names, Meaning, stats)
-  names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "q2.5", "q97.5")
+  names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "CI")
   row.names(tabout)<-param.names
 
 kable(tabout, caption=NULL,
-	align=c("l", "l", "r", "r", "r", "r", "r"), digits=3, row.names=FALSE )
+	align=c("l", "l", "c", "c", "c", "c"), digits=3, row.names=FALSE )
 ```
 
 \newpage
@@ -271,9 +291,9 @@ kable(tabout, caption=NULL,
 
 ![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low (186 mm), mean (265 mm) and high (330 mm) half-yearly rainfalls.  The dashed lines denote the combinations of rabbit and fox abundance for which *r* = 0.](Figures/predicted_fox_r.png)
 
-![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 sites during the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that y-axes are $log_{10}$ transformed.](Figures/fox_abund.png)
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 sites during the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical black lines denote the time of major rabbit control operations that were conducted at 18 of the sites. Note that y-axes are $log_{10}$ transformed.](Figures/fox_abund.png)
 
-![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 sites during the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Note that y-axes are $log_{10}$ transformed.](Figures/rabbit_abund.png)
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 sites during the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical black lines denote the time of major rabbit control operations that were conducted at 18 of the sites. Note that y-axes are $log_{10}$ transformed.](Figures/rabbit_abund.png)
 
 \newpage
 #Supporting Information
@@ -297,7 +317,7 @@ Additional Supporting Information to be included in the online version of the ar
 
 
 
-#References
+
 
 
 
