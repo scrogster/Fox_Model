@@ -2,10 +2,10 @@ require("jagsUI")
 NADAPT=1000
 NITER=40000
 NBURN=20000
-THIN=5
+THIN=10
 NCHAINS=4
 
-set.seed(45454545)
+set.seed(454)
 
 prepped_data="prepped_data.Rdata"
 modelfile="R/GHR_distlag_rain.txt"
