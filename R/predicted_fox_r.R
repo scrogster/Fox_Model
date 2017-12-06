@@ -8,17 +8,9 @@ out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-#mean_rain<-mean(stack(data.frame(rain_mat))[,1], na.rm=TRUE)
-#low_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.25, na.rm=TRUE)
-#high_rain<-quantile(stack(data.frame(rain_mat))[,1], 0.75, na.rm=TRUE)
-
-#mean_rain_real<-(mean_rain*100)+250
-#low_rain_real<-(low_rain*100)+250
-#high_rain_real<-(high_rain*100)+250
-
-mean_rain=30
-low_rain=10
-high_rain=45
+mean_rain=30  #30 mm a month
+low_rain=10   #10 mm a month
+high_rain=50  #50 mm a month
 
 #posterior means of the betas
 post.means.beta<-colMeans(samp$sims.list$beta)
@@ -42,8 +34,8 @@ predFOX_r<-function(R, F, rr, ww){
 #print(predFOX_r(R=50, F=5, rr=mean_rain, ww=0) )
 
 
-rab_levels<-seq(0.01, 20, by=0.1)
-fox_levels<-seq(0.01, 1.0, by=0.01)
+rab_levels<-seq(0.01, 20, by=0.005)
+fox_levels<-seq(0.01, 0.5, by=0.01)
 rain_levels<-c(low_rain, mean_rain, high_rain)
 winter_levels=c(0, 1)
 
@@ -54,11 +46,11 @@ pred.r<-apply(preddf, 1,
 		    function(x) {predFOX_r(R=x[1], F=x[2], rr=x[3], ww=x[4])})
 preddf<-data.frame(preddf, "r"=pred.r)
 
-preddf$Rain[preddf$Rainfall==low_rain] <- "Low"
-preddf$Rain[preddf$Rainfall==mean_rain] <- "Mean"
-preddf$Rain[preddf$Rainfall==high_rain] <- "High"
+preddf$Rain[preddf$Rainfall==low_rain] <- "10 mm"
+preddf$Rain[preddf$Rainfall==mean_rain] <- "30 mm"
+preddf$Rain[preddf$Rainfall==high_rain] <- "50 mm"
 
-preddf$Rain <- factor(preddf$Rain, levels = c("Low", "Mean", "High"))
+preddf$Rain <- factor(preddf$Rain, levels = c("10 mm", "30 mm", "50 mm"))
 
 preddf$Rainfall<-preddf$Rain
 
@@ -70,13 +62,8 @@ b <- c(-1.5,-1,-0.5, 0, 0.5, 1, 1.5)
 ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	facet_grid(Rainfall ~ Season, labeller="label_both") +
 	geom_raster(interpolate = TRUE) +
-#	scale_colour_continuous(limits=c(-1.7, 1.7), low="red", high="green")+
 	stat_contour(breaks=c(0), lty=2)+  #contour where r=0
-	scale_fill_gradientn(limits = c(-1.7,1.7),
-					 colours=c("firebrick","red", "orange", "yellow2",
-					 		"white", 
-					 		"green", "limegreen", "chartreuse4", "darkgreen"),
-					 breaks=b,labels=format(b) )+
+	scale_fill_gradient2(low="firebrick", mid="white", high="royalblue3")+
 	guides(fill = guide_colorbar(draw.ulim = FALSE,draw.llim = FALSE, tick=FALSE))+
 	labs(x = expression(paste("Foxes km",phantom(0)^{-1})), 
 		y = expression(paste("Rabbits km",phantom(0)^{-1}))) +
@@ -86,9 +73,6 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 		 panel.border = element_rect(colour = "black"),
            axis.text.x=element_text(angle=90, vjust=0.5, hjust=0)) +
 	theme(legend.title.align=0.25, legend.title=element_text(face="italic"))
-
-
-	
 
 ggsave(out_pdf)
 ggsave(out_png, dpi=300)
