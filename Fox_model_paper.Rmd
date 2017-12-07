@@ -4,7 +4,7 @@ header-includes:
    - \usepackage[nolists,tablesfirst, nomarkers]{endfloat}
    - \usepackage{setspace}\doublespacing
    - \usepackage{lineno}
-   - \usepackage{todonotes}
+   - \usepackage[textsize=tiny, backgroundcolor=white]{todonotes}
    - \linenumbers
 date: '`r format(Sys.time(), "%e %B %Y")`'
 output:
@@ -293,6 +293,8 @@ kable(tabout, caption=NULL,
 \newpage
 
 ![Location of the 21 monitoring sites within the State of Victoria, showing variation in mean annual rainfall. Inset: Location of the State of Victoria (shaded black) in south-eastern Australia.](Figures/Site-map.png)
+
+![A. Posterior distributions of the regression parameters of the state-space model of rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence. B. posterior distributions of the maximum lag periods for the effects of rainfall on fox and rabbit populations, and the effect of rabbit abundance on rates of increase of fox populations.](Figures/beta_posterior_density.png)
 
 ![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low (186 mm), mean (265 mm) and high (330 mm) half-yearly rainfalls.  The dashed lines denote the combinations of rabbit and fox abundance for which *r* = 0.](Figures/predicted_fox_r.png)
 
