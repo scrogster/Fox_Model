@@ -16,9 +16,7 @@ out_png=gsub("pdf", "png", out_pdf)
 	
 load(file.path(model_data))
 
-beta_result<-data.frame(cbind(samp$sims.list$beta, 
-						 samp$sims.list$r.mean.rabbits, 
-						 samp$sims.list$r.mean
+beta_result<-data.frame(cbind(samp$sims.list$beta
 						)) %>%
 	               rename('beta[1]'=X1, 
 	               	  'beta[2]'=X2, 
@@ -27,38 +25,18 @@ beta_result<-data.frame(cbind(samp$sims.list$beta,
 	               	  'beta[5]'=X5, 
 	               	  'beta[6]'=X6,
 	               	  'beta[7]'=X7, 
-	               	  'beta[8]'=X8,
-	               	  'bar(r)[rabbit]' =X9,
-	               	  'bar(r)[fox]' = X10
+	               	  'beta[8]'=X8
 	               	  ) %>%
 					gather()	%>%
 	                    rename(Parameter=key)
 				
-
-#code to put proper math notation in facet labels of plot
-#pname<-as_labeller(c(
-#	'beta[1]'="beta[1]",   #NR rabbit density
-#	'beta[2]'="beta[2]",   #DD fox
-#	'beta[3]'="beta[3]",   #rain fox
-#	'beta[4]'="beta[4]",   #winter fox
-#	'beta[5]'="beta[5]",   #DD rabbit
-#	'beta[6]'="beta[6]",   #rain rabbit
-#	'beta[7]'="beta[7]",   #winter rabbit
-#	'beta[8]'="beta[8]",   #ripping rabbit
-#	'bar(r)[rabbit]'="bar(r)[rabbit]",
-#	'bar(r)[fox]'="bar(r)[fox]")
-#	, label_parsed
-#)
-
 SS<-beta_result %>%
 	group_by(Parameter) %>%
 	summarise(mean=mean(value), sd=sd(value), lwr=quantile(value, 0.025), upp=quantile(value, 0.975))
 
 beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value)) +
 	geom_violin(scale="width", fill=gray(0.7)) +
-	scale_x_discrete(labels=expression(bar(r)[fox], 
-								bar(r)[rabbit], 
-								atop(beta[1], NR(fox)), 
+	scale_x_discrete(labels=expression(atop(beta[1], NR(fox)), 
 								atop(beta[2], DD(fox)), 
 								atop(beta[3], rain(fox)), 
 								atop(beta[4], winter(fox)), 
@@ -93,11 +71,11 @@ lag_graph<-ggplot(lag_result, aes(x=value)) +
 	theme_bw()
 
 
-pdf(paste(out_pdf), width=9, height=8)
+pdf(paste(out_pdf), width=8, height=8)
 grid.arrange(beta_graph, lag_graph, ncol=1, nrow=2)
 dev.off()
 
-png(paste(out_png), width=9, height=8, units="in", res=300)
+png(paste(out_png), width=8, height=8, units="in", res=300)
 grid.arrange(beta_graph, lag_graph, ncol=1, nrow=2)
 dev.off()
 
