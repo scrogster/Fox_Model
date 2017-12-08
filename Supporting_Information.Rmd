@@ -64,7 +64,7 @@ kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects 
 cat(readLines('R/GHR_distlag_rain.txt'), sep = '\n')
 ```
 
-![Figure S1. Half-yearly rainfall at the 21 sites during the study.](Figures/rain_graph.png)
+![Figure S1. Monthly rainfall at the study sites. Black lines are the raw monthly totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas delimit the approximate dates of the south-eastern Australian Millenium Drought of 2001-2009. Sites are arranged in order of increasing monthly mean rainfall.](Figures/rain_graph.pdf)
 
 ![Figure S2. Posterior densities of the error terms of the state-space model $(\sigma)$.](Figures/sigma_posterior_density.png) 
 
