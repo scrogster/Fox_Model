@@ -314,9 +314,9 @@ Additional Supporting Information to be included in the online version of the ar
 
 **Figure S3.** Posterior densities of the error terms $(\sigma)$.
 
-**Figure S4.** Posterior densities for the site-level random effects terms for rates of increase of rabbits.
+**Figure S4.** Posterior densities for the site-level random effects terms for rates of increase of rabbits and foxes.
 
-**Figure S5.** Posterior densities for the site-level random effects terms for rates of increase of foxes.
+
 
 
 
