@@ -6,7 +6,6 @@
 *.docx
 *.pdf
 RabbitFoxModel_II.Rproj
-Data/SOI.txt
 Data/kasey.xls
 Data/TabulatedRainHalfYearly.csv
 Figures/*
