@@ -1,48 +1,51 @@
+
+library(lubridate)
 library(dplyr)
-library(ggplot2)
-library(ggthemes)
+library(readr)
 library(tidyr)
+library(stringr)
+library(ggplot2)
+library(zoo)
 
 args=commandArgs(trailingOnly=TRUE)
 
 model_data=args[1]
-out_pdf=file.path(args[2])
+file_loc=args[2]
+
+out_pdf=file.path(file_loc)
 out_png=gsub("pdf", "png", out_pdf)
 
-load(file.path(model_data))
+#read and tidy the rain data
+allrain<-read_csv("Data/AllRain.csv") %>%
+	select(-X1 , -Spring) %>%
+	filter(Site != "Avalon" & Site != "Sunbury")
 
-rain_dat2<-rain_summary
+allrain_pentland<-allrain %>%
+	filter(Site=="Ingliston") %>%
+	mutate(Site=replace(Site, Site=="Ingliston", "Pentland Hills"))
+allrain<-rbind(allrain, allrain_pentland)
+rm(allrain_pentland)
+allrain<-distinct(allrain) %>% #drop duplicate rows!!!
+	mutate(Deemed_date=ymd(paste(Year, Month, 15))) %>%
+	mutate(Site=replace(Site, Site=="BlackRange", "Black Range")) %>%
+	mutate(Site=replace(Site, Site=="SwiftsCreek", "Swifts Creek")) %>%
+	mutate(Site=replace(Site, Site=="Yarram/Woodside", "Yarram")) %>%
+	group_by(Site) %>%
+	mutate(meanrain=mean(Rain)) %>%
+	mutate(roll_mean6 = rollmean(Rain, 6, fill=NA, align="right"), roll_mean12 = rollmean(Rain, 12, fill=NA, align="right")) %>%
+	ungroup() %>%
+	mutate(Site=factor(Site)) %>%
+	mutate(Site =forcats::fct_reorder(Site, meanrain, fun=mean))
 
-#rain_dat2<-data.frame("SiteName"=row.names(rain_dat2), rain_dat2)
-#row.names(rain_dat2)<-1:21
+ggplot(allrain, aes(y=Rain, x=Deemed_date))+
+	geom_rect(aes(xmin=ymd("2001-01-01"), xmax=ymd("2009-12-30"), ymin=0, ymax=Inf), col=NA, fill="gray",alpha=0.4)+
+	geom_line(colour="black", lwd=0.2)+
+	geom_line(aes(y=roll_mean12), lwd=0.4, col="red")+
+	geom_hline(aes(yintercept=meanrain), col="black", alpha=0.9, lwd=0.5) +
+	facet_wrap(~Site, nrow=7, ncol=3) +
+	xlab("Date")+
+	ylab("Monthly rainfall (mm)")+
+	theme_bw()
 
-rain_dat2<-tbl_df(rain_dat2)
-
-#Manual editing and overwrite of a few site names
-NewSiteNames<-as.character(rain_dat2$Site)
-NewSiteNames[NewSiteNames=="BlackRange"]<-"Black Range"
-NewSiteNames[NewSiteNames=="SpringHill"]<-"Spring Hill"
-NewSiteNames[NewSiteNames=="SwiftsCreek"]<-"Swifts Creek"
-NewSiteNames[NewSiteNames=="TelopeaDowns"]<-"Telopea Downs"
-
-rain_dat2$Site<-NewSiteNames
-
-#re-arrange and tidy the data
-rain_tidy<-rain_dat2 %>% 
-	gather("TimeCode", "Rainfall", 2:43) %>%
-	separate("TimeCode", into=c("Year", "Semester"), sep="--") %>%
-	mutate(Time= as.numeric(Year) + as.numeric(Semester)*0.5)
-
-#plot time series of half-yearly rainfall for each site.
-ggplot(rain_tidy, aes(x=Time, y=Rainfall))+
-	geom_line(col="blue")+
-	facet_wrap(~Site, ncol=3, nrow=7)+
-	xlim(1995, 2016.5)+
-	ylab("Rainfall (mm)")+
-	theme_bw()+
-	theme(strip.background = element_blank(), 
-		 strip.text.x=element_text(hjust=0.1),
-		 panel.border = element_rect(colour = "black"))
-
-ggsave(out_pdf, width=6, height=9)
-ggsave(out_png, width=6, height=9)
+ggsave(out_pdf, width=6, height=7.5)
+ggsave(out_png, width=6, height=7.5)
