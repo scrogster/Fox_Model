@@ -66,10 +66,8 @@ cat(readLines('R/GHR_distlag_rain.txt'), sep = '\n')
 
 ![Figure S1. Monthly rainfall at the study sites. Black lines are the raw monthly totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas delimit the approximate dates of the south-eastern Australian Millenium Drought of 2001-2009. Sites are arranged in order of increasing monthly mean rainfall.](Figures/rain_graph.pdf)
 
-![Figure S2. Posterior densities of the error terms of the state-space model $(\sigma)$.](Figures/sigma_posterior_density.png) 
+![Figure S2. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin.png)
 
-
-![Figure S3. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin.png)
-
+![Figure S3. Posterior predictive check of the model, based on $\chi^2$ discrepancy between real and simulated counts of foxes and rabbits. Bayesian p-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$](Figures/PPcheck.png)
 
 

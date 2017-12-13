@@ -260,7 +260,9 @@ param.names<-c("$\\beta_{1}$",
                "$\\sigma_{process}^{fox}$", 
 			"$\\sigma_{process}^{rabbit}$",
                "$\\sigma_{transect}^{fox}$", 
-			"$\\sigma_{transect}^{rabbit}$")
+			"$\\sigma_{transect}^{rabbit}$",
+			"$\\sigma_{survey}^{fox}$", 
+			"$\\sigma_{survey}^{rabbit}$")
 
 df<-cbind(samp$sims.list$beta, samp$sims.list$r.mean, samp$sims.list$r.mean.rabbits, 
 		samp$sims.list$fox.lag, samp$sims.list$rabbit.lag, samp$sims.list$food.lag,
@@ -280,7 +282,8 @@ Meaning<-c("Fox - NR", "Fox - DD", "Fox - Rain", "Fox - Winter",
 		 "Rabbit - DD", "Rabbit- Rain", "Rabbit - Winter", "Rabbit - Ripping",
 		 "Fox - Intercept", "Rabbit - Intercept",
 		 "Fox - lag period on rain", "Rabbit - lag period on rain", "Fox - lag period on NR",
-		 "Fox - residual error", "Rabbit - residual error", "Fox - transect effect", "Rabbit - transect effect")
+		 "Fox - process error", "Rabbit - process error", "Fox - transect error", "Rabbit - transect error",
+		 "Fox - survey error", "Rabbit - survey error")
 
 tabout<-cbind(param.names, Meaning, stats)
   names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "CI")
@@ -296,11 +299,11 @@ kable(tabout, caption=NULL,
 
 ![A. Posterior distributions of the regression parameters of the state-space model of rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence. B. posterior distributions of the maximum lag periods for the effects of rainfall on fox and rabbit populations, and the effect of rabbit abundance on rates of increase of fox populations.](Figures/beta_posterior_density.png)
 
-![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low (186 mm), mean (265 mm) and high (330 mm) half-yearly rainfalls.  The dashed lines denote the combinations of rabbit and fox abundance for which *r* = 0.](Figures/predicted_fox_r.png)
+![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Separate predictions are given for the austral summer and winter half-yearly intervals, under low (10 mm), medium (25 mm) and high (50 mm) monthly rainfalls.  The dashed lines denote the combinations of rabbit and fox abundance at which *r* = 0.](Figures/predicted_fox_r.png)
 
-![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 sites during the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical black lines denote the time of major rabbit control operations that were conducted at 18 of the sites. Note that y-axes are $log_{10}$ transformed.](Figures/fox_abund.png)
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 sites during the study. Sites are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of major rabbit control operations that were conducted at 18 of the sites. The shaded region of the graph denotes the approximate limits of the historically severe Millenium Drought in south-eastern Australia (2001-2009). Note that y-axes are log scale.](Figures/fox_abund.png)
 
-![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 sites during the study. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical black lines denote the time of major rabbit control operations that were conducted at 18 of the sites. Note that y-axes are $log_{10}$ transformed.](Figures/rabbit_abund.png)
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 sites during the study. Sites are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of major rabbit control operations that were conducted at 18 of the sites. The shaded region of the graph denotes the approximate limits of the historically severe Millenium Drought in south-eastern Australia (2001-2009). Note that y-axes are log scale.](Figures/rabbit_abund.png)
 
 \newpage
 #Supporting Information
@@ -310,11 +313,9 @@ Additional Supporting Information to be included in the online version of the ar
 
 **Appendix S1.** JAGS code for the Bayesian state-space model.
 
-**Figure S1.** Half-yearly rainfall at the study sites during the study.
+**Figure S1.** Monthly rainfalls at the 21 monitoring transects.
 
-**Figure S3.** Posterior densities of the error terms $(\sigma)$.
-
-**Figure S4.** Posterior densities for the site-level random effects terms for rates of increase of rabbits and foxes.
+**Figure S2.** Posterior densities for the site-level random effects terms for rates of increase of rabbits and foxes.
 
 
 
