@@ -13,7 +13,7 @@ out_png=gsub("pdf", "png", out_pdf)
 load(file.path(model_data))
 
 sigma_result<-data.frame(samp$sims.list$sigma) %>%
-	rename('sigma[1]'=X1, 'sigma[2]'=X2, 'sigma[3]'=X3, 'sigma[4]'=X4) %>%
+	rename('sigma[1]'=X1, 'sigma[2]'=X2, 'sigma[3]'=X3, 'sigma[4]'=X4, 'sigma[5]'=X5, 'sigma[6]'=X6) %>%
 	gather()	%>%
 	rename(Parameter=key)
 
@@ -22,7 +22,9 @@ pname<-as_labeller(c(
 	'sigma[1]'="sigma[process]^fox",
 	'sigma[2]'="sigma[process]^rabbit",
 	'sigma[3]'="sigma[transect]^fox",
-	'sigma[4]'="sigma[transect]^rabbit")
+	'sigma[4]'="sigma[transect]^rabbit",
+	'sigma[3]'="sigma[obs]^fox",
+	'sigma[4]'="sigma[obs]^rabbit")
 	, label_parsed
 )
 

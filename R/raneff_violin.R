@@ -30,15 +30,27 @@ raneff_result_rabbit<-data.frame(samp$sims.list$site.r.eff.rabbits.centered)
     	mutate(Species="Rabbit")
 
 raneffs<-rbind(raneff_result_fox, raneff_result_rabbit)
-    
+
+#reorder sites in approximate order of mean monthly rainfall
+siteorder<-c("Manangatang", "Cowangie", "Piambie", 
+	    "Telopea Downs", "Black Range", "Dunluce",
+	    "Landsborough", "Ararat", "Chatsworth",
+	    "Spring Hill", "Swifts Creek", "Ingliston",
+	    "Pentland Hills", "Rowsley", "Harcourt",
+	    "Yarram", "Skipton", "Lancefield",
+	    "Beechworth", "Yambuk", "Euroa")
+
+#reorder sites with increasing rainfall
+raneffs$key<-factor(raneffs$key, levels=siteorder)
+
 ggplot(raneffs, aes(y=value, x=key, fill=Species)) +
-	  	geom_violin(alpha=0.3)+
+	  	geom_violin(alpha=0.5)+
 	  	facet_grid(Species~.)+
 	geom_hline(yintercept=0, col="black", linetype = "longdash")+
 	ylab(expression(paste(zeta[i])))+
 	xlab("")+
 	theme_bw()+
-	scale_fill_manual(values=c("darkorange", "grey"))+
+	scale_fill_manual(values=c("darkorange", "blue"))+
 	theme(strip.background = element_blank(), 
 		 strip.text.x=element_text(hjust=0.5),
 		 panel.border = element_rect(colour = "black"))+

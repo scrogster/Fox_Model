@@ -10,13 +10,13 @@ for(k in 1:sites){
    #non-heirarchically centred versions of the random effects for plotting
    site.r.eff.centered[k]<-site.r.eff[k]-r.mean
    site.r.eff.rabbits.centered[k]<-site.r.eff.rabbits[k]-r.mean.rabbits
-   mu.fox[4, k]~dunif(0, 10)
+   mu.fox[5, k]~dunif(0, 10)
    mu.rabbits[1, k]~dunif(0, 100)
-for(t in 5:40){
+for(t in 6:40){
   ##-- process sub-model for foxes
   r.fox.expected[t, k]<- log(mu.rabbits[t-food.lag, k])* beta[1] #numerical response to rabbit abundance
                     +log(mu.fox[t-1, k])*beta[2] #dense depend.
-                    +rain_array[k,t,fox.lag] *beta[3]
+                    +rain_array[k,t,fox.lag]/10 *beta[3]
                     +winter[t]*beta[4]  #effect of winter on r
                     +site.r.eff[k]
   r.fox[t, k]~dnorm(r.fox.expected[t, k], tau.proc)
@@ -26,7 +26,7 @@ for(t in 5:40){
 for(tt in 2:40){
   ##---process sub-model for rabbits
   r.rabbits.expected[tt, k]<-  log(mu.rabbits[tt-1, k])* beta[5] 
-                    +rain_array[k,tt,rabbit.lag]*beta[6] #rain effect of r.
+                    +rain_array[k,tt,rabbit.lag]/10*beta[6] #rain effect of r.
                      +winter[tt]*beta[7] #effect of winter on rabbit r.
                      +postrip[tt]*beta[8]
                     +site.r.eff.rabbits[k]
@@ -40,12 +40,34 @@ for(tt in 2:40){
 #observation models
 ###################################
 for(i in 1:Nobs){
-expected.count[i]<-mu.fox[obs_time[i], site.code[i]] * (trans.length[i]/1000)
-fox.count[i]~dpois(expected.count[i]) #poisson obs model
 
-expected.rabbits[i]<-mu.rabbits[obs_time[i], site.code[i]] * (trans.length[i]/1000)
-rabbit.count[i]~dpois(expected.rabbits[i])
+surv.err.fox[i]  ~dnorm(0, tau.survey.fox)
+surv.err.rabbit[i] ~dnorm(0, tau.survey.rabbit)
+
+log(lambda.fox[i])<-log(mu.fox[obs_time[i], site.code[i]] ) +  log(trans.length[i]/1000) + surv.err.fox[i]
+fox.count[i]~dpois(lambda.fox[i]) #poisson obs model
+fox.fake[i]~dpois(lambda.fox[i]) #poisson obs model
+
+#real and fake chi-sq discrepancy
+chi2.fox.real[i]<-pow((fox.count[i]-lambda.fox[i]), 2)/(lambda.fox[i]+0.5)
+chi2.fox.fake[i]<-pow((fox.fake[i]-lambda.fox[i]), 2)/(lambda.fox[i]+0.5)
+
+log(lambda.rabbit[i])<-log(mu.rabbits[obs_time[i], site.code[i]] ) +  log(trans.length[i]/1000) + surv.err.rabbit[i]
+rabbit.count[i]~dpois(lambda.rabbit[i])
+rabbit.fake[i]~dpois(lambda.rabbit[i]) #poisson obs model
+
+#real and fake chi-sq discrepancy
+chi2.rabbit.real[i]<-pow((rabbit.count[i]-lambda.rabbit[i]), 2)/(lambda.rabbit[i]+0.5)
+chi2.rabbit.fake[i]<-pow((rabbit.fake[i]-lambda.rabbit[i]), 2)/(lambda.rabbit[i]+0.5)
+
 }#i
+###################################
+#test statistics of posterior predictive checks
+fit.fox<-sum(chi2.fox.real[])
+fit.fox.fake<-sum(chi2.fox.fake[])
+
+fit.rabbit<-sum(chi2.rabbit.real[])
+fit.rabbit.fake<-sum(chi2.rabbit.fake[])
 
 ###################################
 #lagging indicator variables
@@ -53,34 +75,41 @@ rabbit.count[i]~dpois(expected.rabbits[i])
 
 fox.lag~dcat(rep(1, 30))
 rabbit.lag~dcat(rep(1, 30))
-food.lag~dcat(rep(1, 4))
+food.lag~dcat(rep(1, 5))
 
 ###################################
 #other priors
 ###################################
 
-r.mean~dnorm(0, 0.001)
-r.mean.rabbits~dnorm(0, 0.001)
+r.mean~dt(0, pow(2.5, -2), 1)
+r.mean.rabbits~dt(0, pow(2.5, -2), 1)
 
-for(u in 1:8){
-beta[u]~dnorm(0, 0.001)
-}
+for(u in 1:8){beta[u]~dt(0, pow(2.5, -2), 1) }
 
-sigma.proc~dunif(0, 5)
+sigma.proc~dt(0, 1, 4)T(0, ) 
 tau.proc<-pow(sigma.proc, -2)
 
-sigma.proc.rabbits~dunif(0, 5)
+sigma.proc.rabbits~dt(0, 1, 4)T(0, ) 
 tau.proc.rabbits<-pow(sigma.proc.rabbits, -2)
 
-sigma.site~dunif(0, 5)
+sigma.site~dt(0, 1, 4)T(0, ) 
 tau.site<-pow(sigma.site, -2)
 
-sigma.site.rabbits~dunif(0, 5)
+sigma.site.rabbits~dt(0, 1, 4)T(0, ) 
 tau.site.rabbits<-pow(sigma.site.rabbits, -2)
 
+sigma.survey.fox~dt(0, 1, 4)T(0, ) 
+tau.survey.fox<-pow(sigma.survey.rabbit, -2)
+
+sigma.survey.rabbit~dt(0, 1, 4)T(0, ) 
+tau.survey.rabbit<-pow(sigma.survey.rabbit, -2)
+
+#storing sigmas in a vector for monitoring
 sigma[1]<-sigma.proc
 sigma[2]<-sigma.proc.rabbits
 sigma[3]<-sigma.site
 sigma[4]<-sigma.site.rabbits
+sigma[5]<-sigma.survey.fox
+sigma[6]<-sigma.survey.rabbit
 
 }

@@ -14,9 +14,20 @@ rip_data=file.path(args[2])
 #rip_data=file.path("Data/ripping_data.csv")
 out_png=gsub("pdf", "png", out_pdf)
 
+#preferred ordering of sites (increasing rainfall)
+siteorder<-c("Manangatang", "Cowangie", "Piambie", 
+		   "Telopea Downs", "Black Range", "Dunluce",
+		   "Landsborough", "Ararat", "Chatsworth",
+		   "Spring Hill", "Swifts Creek", "Ingliston",
+		   "Pentland Hills", "Rowsley", "Harcourt",
+		   "Yarram", "Skipton", "Lancefield",
+		   "Beechworth", "Yambuk", "Euroa")
+
 rip_dat<-read_csv(rip_data) %>%
 	rename(Sitename=MonitorSite) %>%
 	mutate(Time=year(RippedDate) + month(RippedDate)/12)
+
+rip_dat$Sitename<-factor(rip_dat$Sitename, levels=siteorder)
 
 load(file.path(model_data))
 
@@ -67,27 +78,28 @@ tidy_obs<-tidy_obs %>%
 #recode "Yarram/Woodside" to just "Yarram" in preddf and tidy_obs
 tempsites<-as.character(preddf$Sitename)
 tempsites[tempsites=="Yarram/Woodside"]<-"Yarram"
-preddf$Sitename<-factor(tempsites)
+preddf$Sitename<-factor(tempsites, levels=siteorder)
 
 tempsites<-as.character(tidy_obs$Sitename)
 tempsites[tempsites=="Yarram/Woodside"]<-"Yarram"
-tidy_obs$Sitename<-factor(tempsites)
+tidy_obs$Sitename<-factor(tempsites, levels=siteorder)
 
 ## ----fox_pred_graph, cache=FALSE, echo=FALSE, fig.height=9.5, fig.width=7.5, fig.cap='Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes at each of the 21 study sites over the course of the study. Solid line is the posterior median, and shaded polygons are the 95\\% credible intervals of the mean expected abundances.', fig.pos="p!"----
 #plotting estimated trajectories of all fox populations.
 preddf %>%
 	filter(Param=="mu.fox") %>%
 	ggplot(aes(x=time.orig, y=post.med))+
+	annotate("rect", xmin=2001, xmax=2010, ymin=0, ymax=Inf, fill="gray",alpha=0.5)+
 	geom_line(colour="black")+
 	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="darkorange3")+
 	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="darkorange3")+
 	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="darkorange3")+
-	ylab(expression(paste(log[10],"(Foxes k",m^{-1},")")))+
+	ylab(expression(paste("Foxes k",m^{-1})))+
 	xlab("Time")+
 	scale_y_log10(breaks=c(0.01, 0.1, 1, 10), lim=c(0.001, 10.1))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_point(data=tidy_obs, aes(x=Time, y=fox.count/(trans.length/1000)), cex=0.5) +
-	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.4)+
+	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.5, lty="dashed")+
 	facet_wrap(~Sitename,  ncol=3, nrow=7) +
 	theme_bw()+
 	theme(strip.background = element_blank(), 
@@ -97,24 +109,25 @@ preddf %>%
 		 panel.grid.minor=element_line(colour="grey80", size=0.05))
 
 
-ggsave(out_pdf, width=7, height=9)
-ggsave(out_png, width=7, height=9, dpi=300)
+ggsave(out_pdf, width=7, height=7.5)
+ggsave(out_png, width=7, height=7.5, dpi=300)
 
 ## ----rabbit_pred_graph, cache=FALSE, echo=FALSE, message=FALSE, fig.height=9.5, fig.width=7.5, fig.cap='Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of rabbits at each of the 21 study sites over the course of the study. Solid line is the posterior median, and shaded polygons are the 95\\% credible intervals of the mean expected abundances.', fig.pos="p!"----
 #plotting estimated trajectories of all rabbit populations.
 preddf %>%
 	filter(Param=="mu.rabbits") %>%
 	ggplot(aes(x=time.orig, y=post.med))+
+	annotate("rect", xmin=2001, xmax=2010, ymin=0, ymax=Inf, fill="gray",alpha=0.5)+
 	geom_line(colour="black")+
-	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="slategray3")+
-	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="slategray3")+
-	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="slategray3")+
-	ylab(expression(paste(log[10],"(Rabbits k",m^{-1},")")))+
+	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="blue")+
+	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="blue")+
+	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="blue")+
+	ylab(expression(paste("Rabbits k",m^{-1})))+
 	xlab("Time")+
 	scale_y_log10(breaks=c(0.1, 1, 10, 100), lim=c(0.003, NA))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_point(data=tidy_obs, aes(x=Time, y=rabbit.count/(trans.length/1000)), cex=0.8) +
-	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.4)+
+	geom_vline(data=rip_dat, aes(xintercept=Time), lwd=0.5, lty="dashed")+
 	facet_wrap(~Sitename, ncol=3, nrow=7)+
 	theme_bw()+
 	theme(strip.background = element_blank(), 
@@ -126,5 +139,5 @@ preddf %>%
 rabbit_pdf<-gsub("fox", "rabbit", out_pdf)
 rabbit_png<-gsub("fox", "rabbit", out_png)
 
-ggsave(rabbit_pdf, width=7, height=9)
-ggsave(rabbit_png, width=7, height=9, dpi=300)
+ggsave(rabbit_pdf, width=7, height=7.5)
+ggsave(rabbit_png, width=7, height=7.5, dpi=300)
