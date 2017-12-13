@@ -17,7 +17,9 @@ start.time<-Sys.time()
 
 
 params=c('beta', 'sigma', 'r.mean', 'r.mean.rabbits', 
-  'site.r.eff.centered', 'site.r.eff.rabbits.centered', 'fox.lag', 'rabbit.lag', 'food.lag')
+  'site.r.eff.centered', 'site.r.eff.rabbits.centered', 
+  'fox.lag', 'rabbit.lag', 'food.lag', 
+  'fit.fox', 'fit.fox.fake', 'fit.rabbit', 'fit.rabbit.fake')
 
 #assembling a big string of abundance predictions #we predict a little into the future and also hindcast a bit.
 st<-ifelse(start_times$start_times==5, 5, pmax(start_times$start_times-10, 5))
@@ -67,7 +69,10 @@ predparamstring<-c(paste0("mu.rabbits[",st[1]:fin[1],",1]"),
 
 
 
-samp<-jags(data=hier_dat, parameters.to.save=c(params, predparamstring), model.file=modelfile, parallel=TRUE,
+samp<-jags(data=hier_dat,
+		 parameters.to.save=c(params, predparamstring), 
+		 model.file=modelfile, 
+		 parallel=TRUE,
 		 n.chains=NCHAINS, n.adapt=NADAPT, n.iter=NITER, n.burnin=NBURN, n.thin=THIN)
 
 
