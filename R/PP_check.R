@@ -24,7 +24,7 @@ max_rab<-max(discreps[,3:4])+10
 foxpp<-ggplot(discreps, aes(x=fox.real, y=fox.fake)) +
 	geom_point(alpha=0.3, size=0.4)+
 	geom_abline(slope=1, intercept=0)+
-	xlab(expression(paste(chi[real]^2)))+
+	xlab(expression(paste(chi[obs]^2)))+
 	ylab(expression(paste(chi[rep]^2)))+
 	annotate("text", -Inf, Inf, label=paste("p =", format(p_val_fox, digits=3)), hjust=-0.15, vjust=1.3)+
 	xlim(min_fox, max_fox)+
@@ -37,7 +37,7 @@ foxpp<-ggplot(discreps, aes(x=fox.real, y=fox.fake)) +
 rabbitpp<-ggplot(discreps, aes(x=rabbit.real, y=rabbit.fake)) +
      geom_point(alpha=0.3, size=0.4)+
 	geom_abline(slope=1, intercept=0)+
-	xlab(expression(paste(chi[real]^2)))+
+	xlab(expression(paste(chi[obs]^2)))+
 	ylab(expression(paste(chi[rep]^2)))+
 	annotate("text", -Inf, Inf, label=paste("p =", format(p_val_rabbit, digits=3)), hjust=-0.15, vjust=1.3)+
 	xlim(min_rab, max_rab)+
