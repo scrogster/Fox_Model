@@ -38,8 +38,9 @@ allrain<-distinct(allrain) %>% #drop duplicate rows!!!
 	mutate(Site =forcats::fct_reorder(Site, meanrain, fun=mean))
 
 ggplot(allrain, aes(y=Rain, x=Deemed_date))+
-	geom_rect(aes(xmin=ymd("2001-01-01"), xmax=ymd("2009-12-30"), ymin=0, ymax=Inf), col=NA, fill="gray",alpha=0.4)+
-	geom_line(colour="black", lwd=0.2)+
+	#geom_rect(aes(xmin=ymd("2001-01-01"), xmax=ymd("2009-12-30"), ymin=0, ymax=Inf), col=NA, fill="gray",alpha=0.4)+
+	annotate("rect", xmin=ymd("2001-01-01"), xmax=ymd("2009-12-30"), ymin=0, ymax=Inf, fill="gray",alpha=0.6)+
+	geom_line(colour="blue", lwd=0.2)+
 	geom_line(aes(y=roll_mean12), lwd=0.4, col="red")+
 	geom_hline(aes(yintercept=meanrain), col="black", alpha=0.9, lwd=0.5) +
 	facet_wrap(~Site, nrow=7, ncol=3) +

@@ -22,7 +22,7 @@ max_rab<-max(discreps[,3:4])+10
 
 #FOX PP check
 foxpp<-ggplot(discreps, aes(x=fox.real, y=fox.fake)) +
-	geom_point(alpha=0.3, size=0.4)+
+	geom_point(alpha=0.3, size=0.4, colour="darkorange3", fill="darkorange3")+
 	geom_abline(slope=1, intercept=0)+
 	xlab(expression(paste(chi[obs]^2)))+
 	ylab(expression(paste(chi[rep]^2)))+
@@ -31,11 +31,13 @@ foxpp<-ggplot(discreps, aes(x=fox.real, y=fox.fake)) +
 	ylim(min_fox, max_fox)+
 	ggtitle("Fox")+
      theme_bw()+
-	theme(plot.title = element_text(hjust = 0.5))
+	theme(plot.title = element_text(hjust = 0.5), 
+		 axis.title.x=element_text(face="italic"),
+		 axis.title.y=element_text(face="italic"))
 
 #RABBIT PP check
 rabbitpp<-ggplot(discreps, aes(x=rabbit.real, y=rabbit.fake)) +
-     geom_point(alpha=0.3, size=0.4)+
+     geom_point(alpha=0.3, size=0.4, colour="blue", fill="blue")+
 	geom_abline(slope=1, intercept=0)+
 	xlab(expression(paste(chi[obs]^2)))+
 	ylab(expression(paste(chi[rep]^2)))+
@@ -44,7 +46,9 @@ rabbitpp<-ggplot(discreps, aes(x=rabbit.real, y=rabbit.fake)) +
 	ylim(min_rab, max_rab)+
 	ggtitle("Rabbit")+
      theme_bw()+
-	theme(plot.title = element_text(hjust = 0.5))
+	theme(plot.title = element_text(hjust = 0.5), 
+		 axis.title.x=element_text(face="italic"),
+		 axis.title.y=element_text(face="italic"))
 
 pdf("Figures/PPcheck.pdf", width=4, height=8)
 grid.arrange(foxpp, rabbitpp, ncol=1, nrow=2)

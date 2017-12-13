@@ -68,6 +68,6 @@ cat(readLines('R/GHR_distlag_rain.txt'), sep = '\n')
 
 ![Figure S2. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin.png)
 
-![Figure S3. Posterior predictive check of the model, based on $\chi^2$ discrepancy between real and simulated counts of foxes and rabbits. Bayesian p-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$](Figures/PPcheck.png)
+![Figure S3. Posterior predictive check of the state-space model of fox and rabbit abundances. The posterior predictive check is based on $\chi^2$ discrepancy between real and simulated counts of foxes and rabbits and the predicted values of the model. Bayesian p-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$.](Figures/PPcheck.png)
 
 
