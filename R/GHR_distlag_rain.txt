@@ -10,8 +10,8 @@ for(k in 1:sites){
    #non-heirarchically centred versions of the random effects for plotting
    site.r.eff.centered[k]<-site.r.eff[k]-r.mean
    site.r.eff.rabbits.centered[k]<-site.r.eff.rabbits[k]-r.mean.rabbits
-   mu.fox[5, k]~dunif(0, 10)
-   mu.rabbits[1, k]~dunif(0, 100)
+   mu.fox[5, k]~dlnorm(log(0.25), 1.5)
+   mu.rabbits[1, k]~dlnorm(log(3.5), 1)
 for(t in 6:40){
   ##-- process sub-model for foxes
   r.fox.expected[t, k]<- log(mu.rabbits[t-food.lag, k])* beta[1] #numerical response to rabbit abundance
