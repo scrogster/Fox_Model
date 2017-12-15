@@ -1,6 +1,5 @@
 
 model{
-
 for(k in 1:sites){
   #process model
    #starting abund (priors)
@@ -11,7 +10,7 @@ for(k in 1:sites){
    site.r.eff.centered[k]<-site.r.eff[k]-r.mean
    site.r.eff.rabbits.centered[k]<-site.r.eff.rabbits[k]-r.mean.rabbits
    mu.fox[5, k]~dlnorm(log(0.25), 1.5)
-   mu.rabbits[1, k]~dlnorm(log(3.5), 1)
+   mu.rabbits[1, k]~dlnorm(log(4), 2)
 for(t in 6:40){
   ##-- process sub-model for foxes
   r.fox.expected[t, k]<- log(mu.rabbits[t-food.lag, k])* beta[1] #numerical response to rabbit abundance
@@ -44,30 +43,36 @@ for(i in 1:Nobs){
 surv.err.fox[i]  ~dnorm(0, tau.survey.fox)
 surv.err.rabbit[i] ~dnorm(0, tau.survey.rabbit)
 
+zero.fox[i]~dbern(p_zinf.fox) #indicator for structural non-zero
 log(lambda.fox[i])<-log(mu.fox[obs_time[i], site.code[i]] ) +  log(trans.length[i]/1000) + surv.err.fox[i]
-fox.count[i]~dpois(lambda.fox[i]) #poisson obs model
-fox.fake[i]~dpois(lambda.fox[i]) #poisson obs model
+exp.fox[i]<-lambda.fox[i]*(1-zero.fox[i]) + 1e-10*zero.fox[i]
+fox.count[i]~dpois(exp.fox[i]) #poisson obs model
+fox.fake[i]~dpois(exp.fox[i])
 
 #real and fake chi-sq discrepancy
-chi2.fox.real[i]<-pow((fox.count[i]-lambda.fox[i]), 2)/(lambda.fox[i]+0.5)
-chi2.fox.fake[i]<-pow((fox.fake[i]-lambda.fox[i]), 2)/(lambda.fox[i]+0.5)
+chi2.fox.real[i]<-pow((fox.count[i]-exp.fox[i]), 2)/(exp.fox[i]+0.5)
+chi2.fox.fake[i]<-pow((fox.fake[i]-exp.fox[i]), 2)/(exp.fox[i]+0.5)
 
+zero.rabbit[i]~dbern(p_zinf.rabbit) #indicator for structural non-zero
 log(lambda.rabbit[i])<-log(mu.rabbits[obs_time[i], site.code[i]] ) +  log(trans.length[i]/1000) + surv.err.rabbit[i]
-rabbit.count[i]~dpois(lambda.rabbit[i])
-rabbit.fake[i]~dpois(lambda.rabbit[i]) #poisson obs model
+exp.rabbit[i]<-lambda.rabbit[i]*(1-zero.rabbit[i]) + 1e-10*zero.rabbit[i]
+rabbit.count[i]~dpois(exp.rabbit[i]) #poisson obs model
+rabbit.fake[i]~dpois(exp.rabbit[i]) 
 
 #real and fake chi-sq discrepancy
-chi2.rabbit.real[i]<-pow((rabbit.count[i]-lambda.rabbit[i]), 2)/(lambda.rabbit[i]+0.5)
-chi2.rabbit.fake[i]<-pow((rabbit.fake[i]-lambda.rabbit[i]), 2)/(lambda.rabbit[i]+0.5)
+chi2.rabbit.real[i]<-pow((rabbit.count[i]-exp.rabbit[i]), 2)/(exp.rabbit[i]+0.5)
+chi2.rabbit.fake[i]<-pow((rabbit.fake[i]-exp.rabbit[i]), 2)/(exp.rabbit[i]+0.5)
 
 }#i
 ###################################
 #test statistics of posterior predictive checks
 fit.fox<-sum(chi2.fox.real[])
 fit.fox.fake<-sum(chi2.fox.fake[])
+fox.fake.zeroes<-Nobs-sum(step(fox.fake[]-1))
 
 fit.rabbit<-sum(chi2.rabbit.real[])
 fit.rabbit.fake<-sum(chi2.rabbit.fake[])
+rabbit.fake.zeroes<-Nobs-sum(step(rabbit.fake[]-1))
 
 ###################################
 #lagging indicator variables
@@ -111,5 +116,9 @@ sigma[3]<-sigma.site
 sigma[4]<-sigma.site.rabbits
 sigma[5]<-sigma.survey.fox
 sigma[6]<-sigma.survey.rabbit
+
+#zero inflation parameter for observation
+p_zinf.fox~dbeta(1, 1)
+p_zinf.rabbit~dbeta(1, 1)
 
 }
