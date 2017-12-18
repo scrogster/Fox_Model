@@ -44,8 +44,8 @@ foxpp<-ggplot(discreps, aes(x=fox.real, y=fox.fake)) +
 #Fox excess zero check
 foxzerocheck<-ggplot(discreps, aes(x=fox.fake.zeroes))+
 	geom_histogram(fill="darkorange", colour=NA, alpha=0.8, bins=20)+
-	geom_vline(xintercept=sum(hier_dat$fox.count==0))+
-	geom_vline(xintercept=quantile(discreps$fox.fake.zeroes, c(0.025, 0.975)), linetype="dashed")+
+	geom_vline(xintercept=sum(hier_dat$fox.count==0), size=0.5)+
+	geom_vline(xintercept=quantile(discreps$fox.fake.zeroes, c(0.025, 0.975)), linetype="dashed", size=0.5, colour="gray")+
 	xlab("Number of zeroes")+
 	ggtitle("Fox")+
 	theme_bw()+
@@ -71,8 +71,8 @@ rabbitpp<-ggplot(discreps, aes(x=rabbit.real, y=rabbit.fake)) +
 #Rabbit excess zero check
 rabzerocheck<-ggplot(discreps, aes(x=rabbit.fake.zeroes))+
 	geom_histogram(fill="blue", colour=NA, alpha=0.8, bins=20)+
-	geom_vline(xintercept=sum(hier_dat$rabbit.count==0))+
-	geom_vline(xintercept=quantile(discreps$rabbit.fake.zeroes, c(0.025, 0.975)), linetype="dashed")+
+	geom_vline(xintercept=sum(hier_dat$rabbit.count==0), size=0.5)+
+	geom_vline(xintercept=quantile(discreps$rabbit.fake.zeroes, c(0.025, 0.975)), linetype="dashed", size=0.5, colour="gray")+
 	xlab("Number of zeroes")+
 	ggtitle("Rabbit")+
 	theme_bw()+
