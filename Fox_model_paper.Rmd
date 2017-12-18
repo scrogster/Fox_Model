@@ -15,7 +15,7 @@ output:
     reference_docx: Template.docx
 fontfamily: mathpazo
 fontsize: 11pt
-geometry: margin=1.0in
+geometry: margin=0.8in
 csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
