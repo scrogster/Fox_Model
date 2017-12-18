@@ -8,18 +8,15 @@ load("fitted_rain_model.Rdata")
 discreps<-data.frame(
 fox.real=samp$sims.list$fit.fox,
 fox.fake=samp$sims.list$fit.fox.fake,
-fox.fake.zeroes=samp$sims.list$fox.fake.zeroes/hier_dat$Nobs,
+fox.fake.zeroes=samp$sims.list$fox.fake.zeroes,
 rabbit.real=samp$sims.list$fit.rabbit,
 rabbit.fake=samp$sims.list$fit.rabbit.fake,
-rabbit.fake.zeroes=samp$sims.list$rabbit.fake.zeroes/hier_dat$Nobs)
+rabbit.fake.zeroes=samp$sims.list$rabbit.fake.zeroes)
 
 #Bayesian p-values of chi-sq discrepancy
 p_val_fox<-mean(discreps$fox.real>discreps$fox.fake)
 p_val_rabbit<-mean(discreps$rabbit.real>discreps$rabbit.fake)
 
-#Bayesian p-values for excess proportion of zeroes
-pval_fox_zeroes<-mean(discreps$fox.fake.zeroes>sum(hier_dat$fox.count==0)/hier_dat$Nobs)
-pval_rabbit_zeroes<-mean(discreps$rabbit.fake.zeroes>sum(hier_dat$rabbit.count==0)/hier_dat$Nobs)
 
 min_fox<-min(discreps[,1:2])-10
 max_fox<-max(discreps[,1:2])+10
@@ -47,9 +44,9 @@ foxpp<-ggplot(discreps, aes(x=fox.real, y=fox.fake)) +
 #Fox excess zero check
 foxzerocheck<-ggplot(discreps, aes(x=fox.fake.zeroes))+
 	geom_histogram(fill="darkorange", colour=NA, alpha=0.8, bins=20)+
-	geom_vline(xintercept=sum(hier_dat$fox.count==0)/hier_dat$Nobs)+
-	annotate("text", -Inf, Inf, label=paste("p =", format(pval_fox_zeroes, digits=4)), hjust=-0.15, vjust=1.3)+
-	xlab("Proportion of zeroes")+
+	geom_vline(xintercept=sum(hier_dat$fox.count==0))+
+	geom_vline(xintercept=quantile(discreps$fox.fake.zeroes, c(0.025, 0.975)), linetype="dashed")+
+	xlab("Number of zeroes")+
 	ggtitle("Fox")+
 	theme_bw()+
 	theme(plot.title = element_text(hjust = 0.5))
@@ -74,9 +71,9 @@ rabbitpp<-ggplot(discreps, aes(x=rabbit.real, y=rabbit.fake)) +
 #Rabbit excess zero check
 rabzerocheck<-ggplot(discreps, aes(x=rabbit.fake.zeroes))+
 	geom_histogram(fill="blue", colour=NA, alpha=0.8, bins=20)+
-	geom_vline(xintercept=sum(hier_dat$rabbit.count==0)/hier_dat$Nobs)+
-	annotate("text", -Inf, Inf, label=paste("p =", format(pval_rabbit_zeroes, digits=4)), hjust=-0.15, vjust=1.3)+
-	xlab("Proportion of zeroes")+
+	geom_vline(xintercept=sum(hier_dat$rabbit.count==0))+
+	geom_vline(xintercept=quantile(discreps$rabbit.fake.zeroes, c(0.025, 0.975)), linetype="dashed")+
+	xlab("Number of zeroes")+
 	ggtitle("Rabbit")+
 	theme_bw()+
 	theme(plot.title = element_text(hjust = 0.5))
