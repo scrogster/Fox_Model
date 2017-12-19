@@ -15,7 +15,7 @@ output:
     fig_caption: yes
     reference_docx: Template_Supporting.docx
     pandoc_args: ["--smart"]
-fontfamily: mathpazo
+#fontfamily: mathpazo
 fontsize: 10pt
 geometry: margin=1.0in
 bibliography: rabbit_refs.bib

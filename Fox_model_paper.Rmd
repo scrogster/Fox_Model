@@ -13,9 +13,9 @@ output:
   fig_caption: yes
   word_document:
     reference_docx: Template.docx
-fontfamily: mathpazo
-fontsize: 11pt
-geometry: margin=0.8in
+#fontfamily: mathpazo
+fontsize: 10pt
+geometry: margin=1.0in
 csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
