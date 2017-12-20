@@ -28,14 +28,18 @@ beta_result<-data.frame(cbind(samp$sims.list$beta
 	               	  'beta[8]'=X8
 	               	  ) %>%
 					gather()	%>%
-	                    rename(Parameter=key)
+	                    rename(Parameter=key) %>%
+	   mutate()
+
+beta_result$species[grep("[1234]", beta_result$Parameter)]<-"Fox"
+beta_result$species[grep("[5678]", beta_result$Parameter)]<-"Rabbit"
 				
 SS<-beta_result %>%
 	group_by(Parameter) %>%
 	summarise(mean=mean(value), sd=sd(value), lwr=quantile(value, 0.025), upp=quantile(value, 0.975))
 
-beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value)) +
-	geom_violin(scale="width", fill=gray(0.7)) +
+beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value, fill=species)) +
+	geom_violin(scale="width", alpha=0.6) +
 	scale_x_discrete(labels=expression(atop(beta[1], NR(fox)), 
 								atop(beta[2], DD(fox)), 
 								atop(beta[3], rain(fox)), 
@@ -44,10 +48,12 @@ beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value)) +
 								atop(beta[6], rain(rabbit)), 
 								atop(beta[7], winter(rabbit)), 
 								atop(beta[8], ripping(rabbit))))+
+	scale_fill_manual(values=c("darkorange3", "blue"))+
 	geom_hline(yintercept=0, col="black", linetype = "longdash")+
 	xlab("")+
 	ylab("Parameter value")+
 	theme_bw()+
+	theme(legend.position="none")+
 	theme(axis.text.x=element_text(size=9))
 
 ##############################################################################################################
@@ -56,19 +62,24 @@ lag_result<-data.frame(cbind(samp$sims.list$fox.lag,
 						samp$sims.list$rabbit.lag, 
 						samp$sims.list$food.lag*6
      )) %>%
-	rename('rain(fox)'=X1, 
-		  'rain(rabbit)'=X2, 
-		  'NR(fox)'=X3
+	rename('k[fox]'=X1, 
+		  'k[rabbit]'=X2, 
+		  'k[NR]'=X3
 	) %>%
 	gather()	%>%
 	rename(Parameter=key)
 
-lag_graph<-ggplot(lag_result, aes(x=value)) +
-	geom_histogram( fill=gray(0.3)) +
-	facet_grid(Parameter~.)+
+lag_result$species[grep("fox", lag_result$Parameter)]<-"Fox"
+lag_result$species[grep("rabbit", lag_result$Parameter)]<-"Rabbit"
+
+lag_graph<-ggplot(lag_result, aes(x=value, fill=species)) +
+	geom_histogram(alpha=0.6, binwidth=1) +
+	facet_grid(.~Parameter, labeller=label_parsed)+
+	scale_fill_manual(values=c("darkorange3", "blue"))+
 	xlab("Maximum lag period (months)")+
 	ylab("")+
-	theme_bw()
+	theme_bw()+
+	theme(legend.position="none")
 
 
 pdf(paste(out_pdf), width=8, height=8)
