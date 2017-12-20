@@ -27,7 +27,16 @@ load("Fitted_rain_model.Rdata")
 require(dplyr)
 require(xtable)
 require(lubridate)
-library(knitr)
+require(knitr)
+require(kableExtra)
+
+siteorder<-c("Manangatang", "Cowangie", "Piambie", 
+		   "Telopea Downs", "Black Range", "Dunluce",
+		   "Landsborough", "Ararat", "Chatsworth",
+		   "Spring Hill", "Swifts Creek", "Ingliston",
+		   "Pentland Hills", "Rowsley", "Harcourt",
+		   "Yarram", "Skipton", "Lancefield",
+		   "Beechworth", "Yambuk", "Euroa")
 
 trans_summary<-spotlight %>%
   mutate(Year=year(Date)) %>%
@@ -39,23 +48,86 @@ trans_summary<-spotlight %>%
   		  maxlength=max(TransectLength)/1000, 
   		  meanlength=round(mean(TransectLength)/1000, 2))
 
-names(trans_summary)<-c("Transect", "First Surv.", "Last Surv.", "Total Survs.", "Years with Survs.", "Length (km)", "Mean length (km)")
+names(trans_summary)<-c("Transect", "First Year", "Last Year", "Total Surveys", "Years with Surveys", "Length (km)", "Mean length (km)")
 
 #rename "Yarram/Woodside" to just "Yarram"
 trans_summary$Transect <-as.character(trans_summary$Transect)
 trans_summary$Transect[trans_summary$Transect=="Yarram/Woodside"] <- "Yarram"
 
-kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits. Mean length is the mean transect length actually surveyed across all surveys at each transect.",
-	align=c("c", "c", "c", "c", "c","c", "c", "c") )
-# tab<-xtable(trans_summary, 
-# 		  caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits.")
-# align(tab)<-c("c", "c", "c", "c", "c","c", "c", "c") 
-# print(tab, comment=FALSE, 
-# 	      floating=TRUE, 
-# 	      floating.environment="sidewaystable",
-# 	      include.rownames=FALSE
-# 	     )
+trans_summary$Transect<-factor(trans_summary$Transect, levels=siteorder)
+
+#put sites into rainfall order
+trans_summary<-trans_summary %>%
+	arrange(Transect)
+
+kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits. Mean length is the mean transect length actually surveyed across all surveys at each transect. Sites are arranged in order of increasing mean monthly rainfall.",
+	align=c("c", "c", "c", "c", "c","c", "c", "c") ) %>%
+	kable_styling(font_size=10)
 ```
+
+
+\newpage
+
+```{r echo=FALSE, message=FALSE, results="asis"}
+require(dplyr)
+require(rjags)
+require(knitr)
+require(dplyr)
+require(xtable)
+require(lubridate)
+
+load("Fitted_rain_model.Rdata")
+param.names<-c("$\\beta_{1}$", 
+			"$\\beta_{2}$", 
+			"$\\beta_{3}$", 
+			"$\\beta_{4}$", 
+			"$\\beta_{5}$",
+			"$\\beta_{6}$",
+			"$\\beta_{7}$",
+			"$\\beta_{8}$",
+               "$\\bar{r}_{fox}$", 
+			"$\\bar{r}_{rabbit}$",
+			 "$k_{fox}$",
+			 "$k_{rabbit}$",
+			 "$k_{NR}$",
+               "$\\sigma_{process}^{fox}$", 
+			"$\\sigma_{process}^{rabbit}$",
+               "$\\sigma_{transect}^{fox}$", 
+			"$\\sigma_{transect}^{rabbit}$",
+			"$\\sigma_{survey}^{fox}$", 
+			"$\\sigma_{survey}^{rabbit}$",
+			"$zinf^{fox}$",
+			"$zinf^{rabbit}$")
+
+df<-cbind(samp$sims.list$beta, samp$sims.list$r.mean, samp$sims.list$r.mean.rabbits, 
+		samp$sims.list$fox.lag, samp$sims.list$rabbit.lag, samp$sims.list$food.lag,
+		samp$sims.list$sigma, samp$sims.list$p_zinf.fox, samp$sims.list$p_zinf.rabbit)
+
+stats<-data.frame("Mean"=colMeans(df), 
+			   "SD"=apply(df, 2, sd),
+			   "Median"=apply(df, 2, median), 
+                  "CI"=paste(format(apply(df, 2, quantile, 0.025), digits=2), ", ",
+                  		    format(apply(df, 2, quantile, 0.975), digits=2)))
+			   #"q2.5"=apply(df, 2, quantile, 0.025),
+			   #"q97.5"=apply(df, 2, quantile, 0.975))
+
+
+
+Meaning<-c("Fox - NR", "Fox - DD", "Fox - Rain", "Fox - Winter", 
+		 "Rabbit - DD", "Rabbit- Rain", "Rabbit - Winter", "Rabbit - Ripping",
+		 "Fox - Intercept", "Rabbit - Intercept",
+		 "Fox - lag period on rain", "Rabbit - lag period on rain", "Fox - lag period on NR",
+		 "Fox - process error", "Rabbit - process error", "Fox - transect error", "Rabbit - transect error",
+		 "Fox - survey error", "Rabbit - survey error", "Fox - zero inflation parameter", "Rabbit - zero inflation parameter")
+
+tabout<-cbind(param.names, Meaning, stats)
+  names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "CI")
+  row.names(tabout)<-param.names
+
+kable(tabout, caption="Table S2. Summary statistics for posterior distributions of parameters of the state-space model for rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence.",
+	align=c("l", "l", "c", "c", "c", "c"), digits=3, row.names=FALSE )
+```
+
 
 
 \newpage
@@ -66,8 +138,8 @@ cat(readLines('R/GHR_distlag_rain.txt'), sep = '\n')
 
 ![Figure S1. Monthly rainfall at the study sites. Black lines are the raw monthly totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas delimit the approximate dates of the south-eastern Australian Millenium Drought of 2001-2009. Sites are arranged in order of increasing monthly mean rainfall.](Figures/rain_graph.pdf)
 
-![Figure S2. Posterior densities for the site-level random effects terms for rates of increase of rabbits.](Figures/raneff_violin.png)
+![Figure S2. Posterior densities for the site-level random effects terms for rates of increase of rabbits foxes (top) and rabbits (bottom). Sites are arranged from left to right in order of increasing mean monthly rainfall.](Figures/raneff_violin.png)
 
-![Figure S3. Posterior predictive check of the state-space model of fox and rabbit abundances. The posterior predictive check is based on $\chi^2$ discrepancy between real and simulated counts of foxes and rabbits and the predicted values of the model. Bayesian p-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$.](Figures/PPcheck.png)
+![Figure S3. Posterior predictive checks of the state-space model of fox and rabbit abundances. The panels on the left illustrate posterior predictive checks of observed and replicate (simulated) counts,  based on $\chi^2$ discrepancy calculated at each MCMC update of the model. The Bayesian p-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$ (points below the diagonal lines). Bayesian p-values close to 0.5 indicate good agreement between the model and the data. The panels on the right give the observed (vertical solid line) and simulated (histogram) numbers of zero-counts in each dataset. Dashed vertical lines denote the 95% credible intervals on the expected number of zeroes. .](Figures/PPcheck.png)
 
 
