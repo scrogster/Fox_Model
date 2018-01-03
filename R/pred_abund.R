@@ -96,7 +96,7 @@ preddf %>%
 	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="darkorange3")+
 	ylab(expression(paste("Foxes k",m^{-1})))+
 	xlab("Time")+
-	scale_y_log10(breaks=c(0.01, 0.1, 1, 10), lim=c(0.001, 10.1))+
+	scale_y_log10(breaks=c(0.001, 0.01, 0.1, 1), lim=c(0.001, NA))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_point(data=tidy_obs, aes(x=Time, y=fox.count/(trans.length/1000)), cex=0.5) +
 	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.5, lty="dashed")+
