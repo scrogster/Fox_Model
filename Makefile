@@ -10,7 +10,7 @@ clean:
 models: Fitted_rain_model.Rdata
 
 #metarule to make the figures
-figures: Figures/beta_posterior_density.pdf Figures/sigma_posterior_density.pdf Figures/raneff_violin.pdf  Figures/fox_abund.pdf Figures/rabbit_abund.pdf Figures/predicted_fox_r.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf Figures/PPcheck.pdf
+figures: Figures/beta_posterior_density.pdf Figures/sigma_posterior_density.pdf Figures/raneff_violin.pdf  Figures/fox_abund.pdf Figures/predicted_fox_r.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf Figures/PPcheck.pdf
 
 #metarule to make the paper
 paper: Fox_model_paper.docx Fox_model_paper.pdf
@@ -43,7 +43,7 @@ Figures/raneff_violin.pdf: R/raneff_violin.R $(PREF_RESULT)
 Figures/predicted_fox_r.pdf: R/predicted_fox_r.R $(PREF_RESULT) 
 	Rscript $^ $@
 	
-Figures/fox_abund.pdf Figures/rabbit_abund.pdf: R/pred_abund.R $(PREF_RESULT) Data/ripping_data.csv
+Figures/fox_abund.pdf: R/pred_abund.R $(PREF_RESULT) Data/ripping_data.csv
 	Rscript $^ $@
 	
 Figures/rain_graph.pdf: R/rain_graph.R $(PREF_RESULT)
