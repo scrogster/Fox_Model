@@ -62,9 +62,9 @@ b <- c(-1.5,-1,-0.5, 0, 0.5, 1, 1.5)
 ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	facet_grid(Rainfall ~ Season, labeller="label_both") +
 	geom_raster(interpolate = TRUE) +
-	stat_contour(breaks=c(0), lty=1, colour="black")+  #contour where r=0
+	stat_contour(breaks=c(0), linetype=1, colour="black")+  #contour where r=0
 	scale_fill_gradient2(low="firebrick", mid="white", high="royalblue3")+
-	guides(fill = guide_colorbar(draw.ulim = FALSE,draw.llim = FALSE, tick=FALSE))+
+	guides(fill = guide_colorbar(draw.ulim = FALSE,draw.llim = FALSE, tick=TRUE, label.vjust = 0))+
 	labs(x = expression(paste("Foxes km",phantom(0)^{-1})), 
 		y = expression(paste("Rabbits km",phantom(0)^{-1}))) +
 	theme_bw()+
