@@ -79,7 +79,10 @@ lag_graph<-ggplot(lag_result, aes(x=value, fill=species)) +
 	xlab("Maximum lag period (months)")+
 	ylab("")+
 	theme_bw()+
-	theme(legend.position="none")
+	theme(legend.position="none")+	
+	theme(strip.background = element_blank(), strip.text.x=element_text(hjust=0.1),
+								  panel.border = element_rect(colour = "black"),
+								  axis.text.x=element_text(angle=0, vjust=0.5, hjust=0)) 
 
 
 pdf(paste(out_pdf), width=8, height=8)
