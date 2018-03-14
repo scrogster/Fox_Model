@@ -52,9 +52,11 @@ beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value, fill=species)) +
 	geom_hline(yintercept=0, col="black", linetype = "longdash")+
 	xlab("")+
 	ylab("Parameter value")+
+	ggtitle("A")+
 	theme_bw()+
 	theme(legend.position="none")+
-	theme(axis.text.x=element_text(size=9))
+	theme(axis.text.x=element_text(size=9))+ 
+	theme(plot.title = element_text(lineheight=1.8, face="bold"))
 
 ##############################################################################################################
 #lag graph
@@ -78,11 +80,14 @@ lag_graph<-ggplot(lag_result, aes(x=value, fill=species)) +
 	scale_fill_manual(values=c("darkorange3", "blue"))+
 	xlab("Maximum lag period (months)")+
 	ylab("")+
+	ggtitle("B")+
 	theme_bw()+
 	theme(legend.position="none")+	
-	theme(strip.background = element_blank(), strip.text.x=element_text(hjust=0.1),
-								  panel.border = element_rect(colour = "black"),
-								  axis.text.x=element_text(angle=0, vjust=0.5, hjust=0)) 
+	theme(strip.background = element_blank(), 
+		 strip.text.x=element_text(face="italic"),
+	      panel.border = element_rect(colour = "black"),
+		axis.text.x=element_text(angle=0, vjust=0.5, hjust=0.5))+ 
+	theme(plot.title = element_text(lineheight=1.8, face="bold")) 
 
 
 pdf(paste(out_pdf), width=8, height=8)

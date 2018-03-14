@@ -103,8 +103,7 @@ preddf %>%
 	scale_y_log10(breaks=c(0.1, 1, 10, 100))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.5, lty="dashed")+
-	ylab(expression(paste("Spotlight count",km^{-1})))+
-	xlab("Time")+
+	labs(y=expression(Number~km^{-1}), x=expression(Time))+
 	facet_wrap(~Sitename,  ncol=3, nrow=7) +
 	theme_bw()+
 	theme(strip.background = element_blank(), 

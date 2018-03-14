@@ -8,7 +8,7 @@ out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
-mean_rain=25/10  #30 mm a month
+mean_rain=25/10  #25 mm a month
 low_rain=10/10   #10 mm a month
 high_rain=50/10  #50 mm a month
 
@@ -65,11 +65,12 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	stat_contour(breaks=c(0), linetype=1, colour="black")+  #contour where r=0
 	scale_fill_gradient2(low="firebrick", mid="white", high="royalblue3")+
 	guides(fill = guide_colorbar(draw.ulim = FALSE,draw.llim = FALSE, tick=TRUE, label.vjust = 0))+
-	labs(x = expression(paste("Foxes km",phantom(0)^{-1})), 
-		y = expression(paste("Rabbits km",phantom(0)^{-1}))) +
+	labs(x=expression(Foxes~km^{-1}), y=expression(Rabbits~km^{-1}))+
+	#labs(x = expression(paste("Foxes",km^{-1})), 
+	#	y = expression(paste("Rabbits km",phantom(0)^{-1}))) +
 	theme_bw()+
 	theme(strip.background = element_blank(), 
-		 strip.text.x=element_text(hjust=0.1),
+		 strip.text.x=element_text(hjust=0.5),
 		 panel.border = element_rect(colour = "black"),
            axis.text.x=element_text(angle=0, vjust=0.5, hjust=0)) +
 	theme(legend.title.align=0.25, legend.title=element_text(face="italic"))
