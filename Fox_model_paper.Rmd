@@ -1,5 +1,5 @@
 ---
-title: 'Invasive prey controlling invasive predators? Density-dependence and rainfall, but not European rabbit abundances determin red fox population dynamics'
+title: 'Invasive prey controlling invasive predators? Density-dependence and rainfall, but not European rabbit abundance determine red fox population dynamics'
 header-includes:
    - \usepackage[nolists,tablesfirst, nomarkers]{endfloat}
    - \usepackage{setspace}\doublespacing
@@ -122,47 +122,47 @@ We modelled the time-series of semi-annual observations of rabbit and fox abunda
 
 The prevailing transect-level abundances $(\rho_{jt})$ of rabbits at each transect over the course of the study were modelled as a stochastic, density-dependent process:
 
-$$
+\begin{align}
 \rho_{jt}=\rho_{jt-1} e^{r_{jt}^{rabbit}}
-$$
+\end{align}
 
 Where $\rho_{jt}$ is the expected mean spotlight count of rabbits at the $j^{th}$ transect at time $t$, and $r_{jt}^{rabbit}$ is the  rate-of-increase for the $j^{th}$ rabbit population during the interval $[t-1,t]$. We decomposed $r_{jt}^{rabbit}$ into components attributable to transect and time-level covariates using a linear model. The model accounted for density-dependence [a Gompertz model; @cruz2013modelling], rainfall (lagged, see below), season (summer or winter), and random transect effects and process errors:
 
-$$
-\begin{aligned}
+
+\begin{align}
 r_{jt}^{rabbit} &=\bar{r}_{rabbit}  + \beta_{5}\log{\rho_{t-1}} + \beta_{6}\mbox{rain}_{jt} +\beta_{7}\mbox{winter}_{t}+\beta_{8}\mbox{ripped}_{jt} +\zeta_{j}^{rabbit} +\epsilon_{t}^{rabbit}
-\end{aligned}
-$$
+\end{align}
+
 
 where $\bar{r}_{rabbit}$ is the mean rate of increase, and $\beta_{5}-\beta_{8}$ are regression parameters describing the, the strength of density dependence in the rate-of-increase of the rabbit population, the relationship between rate of increase and the lagged rainfall and whether or not the count was made in the second half of the calendar year (denoted as `winter' as such observations reflect population growth over the austral winter). $\zeta_{i}^{rabbit}$ are random transect-level effects with standard deviation $\sigma_{site}^{rabbit}$ on the rate of increase of the rabbit population and $\epsilon_{t}^{rabbit}$ are normally-distributed process errors with standard deviation $\sigma_{process}^{rabbit}$.
 
 The abundances of foxes ($\mu_{jt}$) were modelled simultaneously with those of rabbits, using a model similar to that used for rabbits, but including a term for the numerical response of fox populations to rabbit abundance:
 
-$$
-\begin{aligned}
-\mu_{t} &=\mu_{t-1} e^{r_{jt}^{fox}} 
-\end{aligned}
-$$
 
-$$
+\begin{align}
+\mu_{t} &=\mu_{t-1} e^{r_{jt}^{fox}} 
+\end{align}
+
+
+\begin{align}
 r_{jt}^{fox}=\bar{r}_{fox} + \beta_{1}\log{rab_{jt}} + \beta_{2}\log{\mu_{t-1}}+\beta_{3}\mbox{rain}_{jt}+\beta_{4}\mbox{winter}_{t}+ \zeta_{j}^{fox}+\epsilon_{t}^{fox}
-$$
+\end{align}
 
 where $\beta_1 - \beta_4$ are regression parameters, $\bar{r}_{fox}$ is the mean rate of increase, ($rab_{jt}$) are the lagged (see below) abundances of rabbits and $\mu_{t-1}$ is the estimated fox abundance at the previous time step. The other model terms (rain, winter) are equivalent to the comparable terms in the model of rabbit abundance. 
 
 For both rabbits and foxes, we estimated the appropriate lagging period for the effects of rainfall on rates of increase, and for the numerical response of foxes to the abundance of rabbits. Lagged rainfall was defined as:
 
-$$
+\begin{align}
 \mbox{rain}_{jt}=\sum_{m=0}^{m=k}  \frac{r_{jtm}}{k}
-$$
+\end{align}
 
 where $r_{jtm}$ are the series of rainfall totals at each transect in the months $(m)$ preceding each survey, and $k$ is the maximum lag period considered. Increasing values of $k$ imply averaging of antecedent rainfall over an increasingly long period prior to the survey. The maximum lag parameters $k$ were estimated separately for rabbits and foxes. Lagging periods between 1 and 30 months were considered in the model-fitting process.
 
 Lagged rabbit abundance was defined as:
 
-$$
+\begin{align}
 \mbox{rab}_{jt}=\sum_{m=0}^{m=k} \frac{\rho_{jtm}}{k}
-$$
+\end{align}
 
 where $\rho$ are the estimated rabbit abundances at each transect at the preceding $k$ half-yearly surveys. Lagging periods between 0 and 4 half-yearly intervals were considered (i.e. up to 2 calendar years).
 
@@ -172,24 +172,19 @@ An overdispersed, zero-inflated Poisson (ZIP) observation model was assumed for 
 
 Transect lengths were included as offset terms in the observation model to allow for both within- and between-transect variation in the lengths of the spotlight transects (transects varied in length, and some surveys did not cover the full transect length on every occasion, Table S1). For foxes, the observation model was:
 
-$$
-C_{ijt}^{fox} \sim \mbox{ZIP}(\lambda^{fox}_{ijt}, \mbox{zinf}^{fox})
-$$
-$$
+\begin{align}
+C_{ijt}^{fox} \sim \mbox{ZIP}(\lambda^{fox}_{ijt}, \mbox{zinf}^{fox}) \\
 log(\lambda^{fox}_{ijt}) = log(\mu_{jt}) + log(L_{ijt}) + \eta^{fox}_{ijt}
-$$
+\end{align}
 
 where $\lambda^{fox}_{ijt}$ is the expected number of foxes observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$, The corresponding length (in km) of transect surveyed was $L_{ijt}$, and $\eta^{fox}_{ijt}$ are normally distributed error terms, with standard deviation $\sigma^{fox}_{survey}$. The number of foxes counted on each survey was modelled as a zero-inflated Poisson, with expectation $\lambda^{fox}_{ijt}$, and zero-inflation probability $\mbox{zinf}^{fox}$. 
 
 A similar zero-inflated, and overdispersed Poisson observation model was assumed for counts of rabbits on the transects:
 
-$$
-C_{ijt}^{rabbit} \sim \mbox{ZIP}(\lambda^{rabbit}_{ijt}, \mbox{zinf}^{rabbit})
-$$
-
-$$
+\begin{align}
+C_{ijt}^{rabbit} \sim \mbox{ZIP}(\lambda^{rabbit}_{ijt}, \mbox{zinf}^{rabbit}) \\
 log(\lambda^{rabbit}_{ijt}) = log(\mu_{jt}) + log(L_{ijt}) + \eta^{rabbit}_{ijt}
-$$
+\end{align}
 
 where $\lambda^{rabbit}_{ijt}$ is the expected number of rabbits observed during the $i^{th}$ replicate spotlight count, at transect $j$, at time $t$, The corresponding length (in km) of transect surveyed was $L_{ijt}$, and $\eta^{fox}_{ijt}$ are normally distributed error terms, with standard deviation $\sigma^{rabbit}_{survey}$. The number of rabbits counted on each survey was modelled as a zero-inflated Poisson, with expectation $\lambda^{rabbit}_{ijt}$, and zero-inflation probability $\mbox{zinf}^{rabbit}$. 
 
