@@ -43,8 +43,12 @@ siteorder<-c("Manangatang", "Cowangie", "Piambie",
 #reorder sites with increasing rainfall
 raneffs$key<-factor(raneffs$key, levels=siteorder)
 
+raneff_summary<-raneffs %>%
+	  group_by(Species, key) %>%
+	  mutate(MEAN = mean(value), LWR=quantile(value, 0.025), UPP=quantile(value, 0.975))
+
 ggplot(raneffs, aes(y=value, x=key, fill=Species)) +
-	  	geom_violin(alpha=0.5)+
+	  	geom_violin(alpha=0.5, draw_quantiles = c(0.025, 0.5, 0.975))+
 	  	facet_grid(Species~.)+
 	geom_hline(yintercept=0, col="black", linetype = "longdash")+
 	ylab(expression(paste(zeta[i])))+

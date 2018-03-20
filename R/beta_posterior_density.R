@@ -39,7 +39,7 @@ SS<-beta_result %>%
 	summarise(mean=mean(value), sd=sd(value), lwr=quantile(value, 0.025), upp=quantile(value, 0.975))
 
 beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value, fill=species)) +
-	geom_violin(scale="width", alpha=0.6) +
+	geom_violin(scale="width", alpha=0.6, draw_quantiles = c(0.025, 0.5, 0.975)) +
 	scale_x_discrete(labels=expression(atop(beta[1], NR(fox)), 
 								atop(beta[2], DD(fox)), 
 								atop(beta[3], rain(fox)), 

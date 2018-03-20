@@ -106,10 +106,8 @@ df<-cbind(samp$sims.list$beta, samp$sims.list$r.mean, samp$sims.list$r.mean.rabb
 stats<-data.frame("Mean"=colMeans(df), 
 			   "SD"=apply(df, 2, sd),
 			   "Median"=apply(df, 2, median), 
-                  "CI"=paste(format(apply(df, 2, quantile, 0.025), digits=2), ", ",
-                  		    format(apply(df, 2, quantile, 0.975), digits=2)))
-			   #"q2.5"=apply(df, 2, quantile, 0.025),
-			   #"q97.5"=apply(df, 2, quantile, 0.975))
+                  "CI"=paste(round(apply(df, 2, quantile, 0.025), digits=3), ", ",
+                  		    round(apply(df, 2, quantile, 0.975), digits=3)))
 
 
 
@@ -121,7 +119,7 @@ Meaning<-c("Fox - NR", "Fox - DD", "Fox - Rain", "Fox - Winter",
 		 "Fox - survey error", "Rabbit - survey error", "Fox - zero inflation parameter", "Rabbit - zero inflation parameter")
 
 tabout<-cbind(param.names, Meaning, stats)
-  names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "CI")
+  names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "$95 \\% \\ \\text{CI}$")
   row.names(tabout)<-param.names
 
 kable(tabout, caption="Table S2. Summary statistics for posterior distributions of parameters of the state-space model for rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence.",
@@ -136,9 +134,9 @@ kable(tabout, caption="Table S2. Summary statistics for posterior distributions 
 cat(readLines('R/GHR_distlag_rain.txt'), sep = '\n')
 ```
 
-![Figure S1. Monthly rainfall at the study sites. Black lines are the raw monthly totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas delimit the approximate dates of the south-eastern Australian Millenium Drought of 2001-2009. Sites are arranged in order of increasing monthly mean rainfall.](Figures/rain_graph.pdf)
+![Figure S1. Monthly rainfall at the 21 transects. Black lines are the raw monthly totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas delimit the approximate dates of the south-eastern Australian Millennium Drought of 2001-2009. Sites are arranged in order of increasing monthly mean rainfall.](Figures/rain_graph.pdf)
 
-![Figure S2. Posterior densities for the site-level random effects terms for rates of increase of rabbits foxes (top) and rabbits (bottom). Sites are arranged from left to right in order of increasing mean monthly rainfall.](Figures/raneff_violin.png)
+![Figure S2. Posterior densities for the site-level random effects terms for rates of increase of foxes (upper) and rabbits (lower). Sites are arranged in order of increasing mean monthly rainfall.](Figures/raneff_violin.png)
 
 ![Figure S3. Posterior predictive checks of the state-space model of fox and rabbit abundances. The panels on the left illustrate posterior predictive checks of observed and replicate (simulated) counts,  based on $\chi^2$ discrepancy calculated at each MCMC update of the model. The Bayesian p-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$ (points below the diagonal lines). Bayesian p-values close to 0.5 indicate good agreement between the model and the data. The panels on the right give the observed (vertical solid line) and simulated (histogram) numbers of zero-counts in each dataset. Dashed vertical lines denote the 95% credible intervals on the expected number of zeroes. .](Figures/PPcheck.png)
 
