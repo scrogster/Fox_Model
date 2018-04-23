@@ -20,7 +20,7 @@ csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
 
-Michael P. Scroggie^1^, David M. Forsyth^2^, Steven R. McPhee^3^, John Matthews^4^, Ivor G. Stuart^1^, Kasey A. Stamation^1^, Michael Lindeman^1^, David S.L. Ramsey^1^
+Michael P. Scroggie^1^, David M. Forsyth^2^, Steven R. McPhee^3^, John Matthews^4^, Ivor G. Stuart^1^, Kasey A. Stamation^1^, Michael Lindeman^1^, David S.L. Ramsey^1^.
 
 ^1^*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, Heidelberg, Victoria, Australia.*
 
@@ -38,13 +38,13 @@ Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; 
 
 1. Invasive mammalian predators commonly co-exist with invasive mammalian herbivore prey. Managers often advocate controlling invasive prey in the belief that this will also reduce invasive predator abundance. Such an outcome would have desirable ecological and financial benefits, but there have been few tests of this hypothesis. 
 
-2. We used large-scale and long-term monitoring data to test the prediction that invasive red fox *(Vulpes vulpes)* populations decline following control of invasive European rabbit *(Oryctolagus cuniculus)* populations in Australia. Both species severely impact natural and agricultural ecosystems, and significant resources are expended reducing these impacts. We fitted a hierarchical state-space model to spotlight counts of both species conducted at 21 transects between 1998 and 2016. The effects of rainfall and density dependence on the population growth rates of both species were also evaluated.
+2. We used large-scale and long-term monitoring data to test the prediction that invasive red fox *(Vulpes vulpes)* populations decline following control of invasive European rabbit *(Oryctolagus cuniculus)* populations in Australia. Both species severely impact natural and agricultural ecosystems, and significant resources are expended reducing these impacts. We fitted a hierarchical state-space model to spotlight counts of both species conducted at 21 transects between 1998 and 2016. The effects of rainfall, contol activities (warren ripping and surface harbor removal) and density dependence on the population growth rates of both species were also evaluated.
 
-3. Control activities (warren ripping and surface harbor removal) at 18 of the sites substantially reduced the average abundance rabbit populations. Rabbit populations showed little response to rainfall, but exhibited negative density-dependence and greater rates of increase during the autumn-spring interval.
+3. Control activities at 18 of the sites substantially reduced the average abundance rabbit populations. Rabbit populations showed little response to rainfall, but exhibited negative density-dependence and greater rates of increase during the autumn-spring interval.
 
 4. There was no numerical response of foxes to changes in rabbit abundance. Rather, fox populations increased rapidly after high rainfall, and exhibited negative density-dependence. The equilibrium abundance of foxes varied with rainfall and season, but was always < 0.2 foxes per spotlight km.
 
-5. *Synthesis and applications* We conclude that controlling rabbits to low abundances does not substantially reduce fox abundances in south-eastern Australia. Rather, managers wanting to reduce fox abundances should conduct targeted control of fox populations. Managers of invasive predator -- invasive prey systems should not assume that controlling prey will, by itself, reduce predator abundances. Quantifying the numerical response is critical for understanding the likely response of predators to changes in prey abundance.
+5. *Synthesis and applications* We conclude that controlling rabbits to low abundances does not substantially reduce fox abundances in south-eastern Australia. Rather, efforts to reduce fox abundance should directly target fox populations. Managers of invasive predator -- invasive prey systems should not assume that controlling prey will, by itself, reduce predator abundances. Quantifying the numerical response is critical for understanding the likely response of predators to changes in prey abundance.
 
 **Keywords:** biological invasions, density dependence, invasive species, *Oryctolagus cuniculus*, predator-prey dynamics, rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
 
@@ -52,10 +52,10 @@ Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; 
 
 *Word Counts:* 
 
-Title page: 172;
+Title page: 102;
 Abstract: 290; 
 Introduction: 906
-Methods: 1544
+Methods: 1552
 Results: 498
 Discussion: 1250
 Authors' contributions: 50;
@@ -64,7 +64,7 @@ Data Accessibility: 38;
 References: 1708; 
 Figure Legends: 263;
 
-Total Words: 6949;
+Total Words: 6887;
 Target Words: 7000;
 
 Number of Tables: 0;
@@ -79,9 +79,9 @@ Invasive mammalian predators commonly co-exist with invasive mammalian herbivore
 
 There are usually insufficient resources to conduct sustained control of multiple invasive taxa over large areas, and hence a key question for managers is the extent to which controlling the predator or the prey affects the abundance of the other species [@bergstrom2009indirect; @bode2015eradicating]. Because of the typically much smaller home-ranges of mammalian prey compared to predators, this question can be addressed using field experiments in which free-living predators have access to some experimental units containing prey but not others [@pech1992limits].  Field experiments that exclude mammalian predators sometimes demonstrate significant increases in mammalian prey [@krebs1995impact; @salo2010predator], although the responses in invasive predator-prey systems are often weak or non-existent  [@pech1992limits; @davey2006exotic]. Bottom-up processes such as food availability, often have stronger positive effects on mammalian prey abundances than the negative effect of mammalian predators [@krebs1995impact].
 
-In contrast, the abundance of mammalian predators is believed to be primarily determined by food availability ("bottom-up"), although there could be a ceiling on this effect due to territorial spacing or other behavioural constraints on abundance at high densities [@lindstrom1989food; @cariappa2011reappraisal]. If bottom-up processes truly dominate the growth of invasive predator populations, then this mechanism could be exploited to achieve management control of predator abundance by first controlling prey abundances to low levels, which in turn will limit the ability of predators to increase in numbers, or at least make predator populations more susceptible to other control actions [@norbury2017bottomup; @courchamp1999control].
+In contrast, the abundance of mammalian predators is believed to be primarily determined by food availability, although there could be a ceiling on this effect due to territorial spacing or other behavioural constraints on abundance at high densities [@lindstrom1989food; @cariappa2011reappraisal]. If bottom-up processes truly dominate the growth of invasive predator populations, then this mechanism could be exploited to achieve management control of predator abundance by first controlling prey abundances to low levels, which in turn will limit the ability of predators to increase in numbers, or at least make predator populations more susceptible to other control actions [@norbury2017bottomup; @courchamp1999control].
 
-Mammalian predators often operate at large spatial and temporal scales, and hence experiments to test hypotheses about the ecological processes driving their abundances are practically and financially difficult to implement [@krebs1995impact]. Statistical analysis of long-term monitoring data from predator-prey systems provides an alternative approach to testing hypotheses about the outcomes of predator-prey interaction [e.g. @dennis2000joint]. These monitoring data can be used to quantify the numerical response between predator and prey [@bayliss2002numerical]. An advantage of this approach is that other potentially important population processes such as density-dependence [@brook2006strength], effects of management interventions, and temporally and spatially varying influences such as rainfall [@dennis2000joint] can be included.
+Mammalian predators often operate at large spatial and temporal scales, and hence experiments to test hypotheses about the ecological processes driving their abundances are practically and financially difficult to implement [@krebs1995impact]. Statistical analysis of long-term monitoring data from predator-prey systems provides an alternative approach to testing hypotheses about the outcomes of predator-prey interaction [e.g. @dennis2000joint]. These monitoring data can be used to quantify the numerical response between predator and prey [@bayliss2002numerical]. An advantage of this approach is that other potentially important population processes such as density-dependence [@brook2006strength], effects of management interventions, and temporally and spatially varying influences such as rainfall [@dennis2000joint] can also be evaluated.
 
 The European rabbit *(Oryctolagus cuniculus)*  and red fox *(Vulpes vulpes)* were introduced to Australia in the 19th century, and are now sympatric over the majority of mainland Australia, with both species being serious threats to agriculture and biodiversity [@cooke2012rabbits; @saunders2010impacts]. Substantial effort is expended on the control of both species using conventional control [@reddiex2007control]. Two biological control agents (myxoma virus and rabbit haemorrhagic disease virus, hereafter RHDV) have also been established to control rabbits [@mutze2008geographic; @mutze2010effect].  Because rabbits are a major component of fox diet in south-eastern Australia [@davis_foxdiet] there is much interest in understanding the interactions between these species [@Pech_alternativeprey; @norbury2015pests], and in exploiting these interactions to maximise the effectiveness of management for achieving agricultural production and native biodiversity outcomes [@pedler2016rabbit].
 
@@ -89,7 +89,7 @@ Of particular management interest is the effect of controlling rabbits to low de
 
 Rainfall is an important driver of soil moisture, and hence pasture growth on grazing lands in south-eastern Australia [@sanford2003sgs; @RPGOT]. Low rainfall could therefore limit food availability for mammalian herbivores and their predators [@letnic2004responses]. Current population density may also partly determine the future growth rates of rabbit [@fordham2012european] and fox [@lindstrom1989food] populations through density-dependent mechanisms. 
 
-Computational advances mean that complex population dynamics, including interactions between species, can be evaluated from noisy, complex datasets by fitting hierarchical models to population time series [@buckland2004state]. Such methods have also been applied to predator-prey systems [@hobbs2012native; @sundell2013numerical]. Here, we use a long-term (1998--2016) and spatially extensive monitoring dataset collected from 21 transects in south-eastern Australia occupied by both European rabbits and red foxes to test these hypotheses about the relationships between predator and prey abundances, together with the effects of rainfall, management and density dependence on population growth rates.
+Computational advances mean that complex population dynamics, including interactions between species, can be evaluated from noisy, complex datasets by fitting hierarchical models to population time series [@buckland2004state]. Such methods have also been used analyse time-series data from predator-prey systems [@hobbs2012native; @sundell2013numerical]. Here, we use a long-term (1998--2016) and spatially extensive monitoring dataset collected from 21 transects in south-eastern Australia occupied by both European rabbits and red foxes to examine the influence of rabbit abundance on populations or red foxes, together with the effects of rainfall, management and density dependence.
 
 #Materials and methods
 
@@ -195,7 +195,7 @@ Weakly informative $\mbox{half-}t_{4}$ priors [@gelman2006prior] were specified 
 
 ### Model fitting and checking
 
-The state-space model was fitted to the data using the Bayesian Markov chain Monte Carlo (MCMC) software \textsc{JAGS} [@plummerJAGSmanual]. The model's code is provided in Appendix S1. A burn-in of $`r round(NBURN)`$ iterations was undertaken, followed by sampling from four independent Markov chains with different starting values for $`r NITER-NBURN`$ further iterations, retaining every $`r paste0(toOrdinal::toOrdinal(THIN))`$ value. After thinning, a total of $`r (NITER-NBURN)/THIN`$ samples from each chain were retained for inference. The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic $(\hat R)$ of @brooks1998general, and by visual inspection of parameter trace plots. The fit of the state-space model of fox and rabbit abundances was assessed using posterior predictive checks and Bayesian *p*-values [@gelman1996posterior]. Fo further details see Appendix S2.  
+The state-space model was fitted to the data using the Bayesian Markov chain Monte Carlo (MCMC) software \textsc{JAGS} [@plummerJAGSmanual]. The model's code is provided in Appendix S1. A burn-in of $`r round(NBURN)`$ iterations was undertaken, followed by sampling from four independent Markov chains with different starting values for $`r NITER-NBURN`$ further iterations, retaining every $`r paste0(toOrdinal::toOrdinal(THIN))`$ value. After thinning, a total of $`r (NITER-NBURN)/THIN`$ samples from each chain were retained for inference. The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic $(\hat R)$ of @brooks1998general, and by visual inspection of parameter trace plots. The fit of the state-space model of fox and rabbit abundances was assessed using posterior predictive checks and Bayesian *p*-values [@gelman1996posterior]. For further details see Appendix S2.  
 
 #Results
 
@@ -271,7 +271,7 @@ All data, and code necessary to implement the state-space model and reproduce th
 
 ![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Predictions are given for the austral summer and winter half-yearly intervals, and under low (10 mm), medium (25 mm) and high (50 mm) monthly rainfalls.  The solid lines denote combinations of rabbit and fox abundances at which *r* = 0. The red regions of the graph are conditions in which fox populations are predicted to decline.](Figures/predicted_fox_r.png)
 
-![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes (lower orange line/ open triangles) and rabbits (upper blue line / closed circles) at each of the 21 transects during the study. Transects are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of major rabbit control operations at 18 of the transects. The shaded region of the graph denotes the approximate limits of the historically severe Millenium Drought in south-eastern Australia (2001-2009). Note that y-axes are of logarithmic scale.](Figures/fox_abund.png)
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes (lower orange line/ open triangles) and rabbits (upper blue line / closed circles) at each of the 21 transects during the study. Transects are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of major rabbit control operations at 18 of the transects. The shaded region of the graph denotes the approximate limits of the historically severe Millenium Drought in south-eastern Australia (2001-2009). Note that the y-axes are logarithmic scale.](Figures/fox_abund.png)
 
 
 \newpage

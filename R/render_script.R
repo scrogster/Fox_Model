@@ -25,7 +25,6 @@ if(out_format=="word_document"){
 if(out_format=="word_document"){render("Supporting_Information.Rmd", "word_document")}
 
 
-if(out_format=="pdf_document") {render("Fox_model_paper.Rmd", "pdf_document")}
+if(out_format=="pdf_document") {render("Fox_model_paper.Rmd", "pdf_document"); file.remove("Fox_model_paper.fff")}
 if(out_format=="pdf_document") {render("Supporting_Information.Rmd", "pdf_document")}
 
-file.remove("Fox_model_paper.fff")
