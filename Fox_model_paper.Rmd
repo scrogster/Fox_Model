@@ -20,32 +20,17 @@ csl: journal-of-applied-ecology.csl
 bibliography: rabbit_refs.bib
 ---
 
-Michael P. Scroggie [^1] -
-*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, Heidelberg, Victoria, Australia.*
+Michael P. Scroggie^1^, David M. Forsyth^2^, Steven R. McPhee^3^, John Matthews^4^, Ivor G. Stuart^1^, Kasey A. Stamation^1^, Michael Lindeman^1^, David S.L. Ramsey^1^
 
-David M. Forsyth -
-*Vertebrate Pest Research Unit, NSW Department of Primary Industries, Orange NSW, Australia*
+^1^*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, Heidelberg, Victoria, Australia.*
 
-Steven R. McPhee -
-*Agricultural Technical Services Pty Ltd, Yorketown SA Australia*
+^2^*Vertebrate Pest Research Unit, NSW Department of Primary Industries, Orange NSW, Australia*
 
-John Matthews -
-*Department of Economic Development, Jobs, Transport and Resources, Hamilton, Victoria, Australia*
+^3^*Agricultural Technical Services Pty Ltd, Yorketown SA Australia*
 
-Ivor G. Stuart -
-*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, Heidelberg, Victoria,  Australia*
+^4^*Department of Economic Development, Jobs, Transport and Resources, Hamilton, Victoria, Australia*
 
-Kasey A. Stamation -
-*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, Heidelberg, Victoria,  Australia*
-
-Michael Lindeman -
-*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, Heidelberg, Victoria,  Australia*
-
-David S.L. Ramsey -
-*Arthur Rylah Institute for Environmental Research, Department of Environment, Land, Water and Planning, Heidelberg, Victoria,  Australia*
-
-[^1]: Corresponding author: Email: michael.scroggie@delwp.vic.gov.au; Phone: +61 3 9450 8643; Fax: +61 3 9450 8799;  ORCID: http://orcid.org/0000-0001-9441-6565.
-
+Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; Phone: +61 3 9450 8643; Fax: +61 3 9450 8799;  ORCID: http://orcid.org/0000-0001-9441-6565.
 
 \newpage
 
@@ -60,8 +45,6 @@ David S.L. Ramsey -
 4. There was no numerical response of foxes to changes in rabbit abundance. Rather, fox populations increased rapidly after high rainfall, and exhibited negative density-dependence. The equilibrium abundance of foxes varied with rainfall and season, but was always < 0.2 foxes per spotlight km.
 
 5. *Synthesis and applications* We conclude that controlling rabbits to low abundances does not substantially reduce fox abundances in south-eastern Australia. Rather, managers wanting to reduce fox abundances should conduct targeted control of fox populations. Managers of invasive predator -- invasive prey systems should not assume that controlling prey will, by itself, reduce predator abundances. Quantifying the numerical response is critical for understanding the likely response of predators to changes in prey abundance.
-
-\newpage
 
 **Keywords:** biological invasions, density dependence, invasive species, *Oryctolagus cuniculus*, predator-prey dynamics, rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
 
