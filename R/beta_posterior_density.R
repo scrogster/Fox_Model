@@ -75,9 +75,17 @@ lag_result$species[grep("rabbit", lag_result$Parameter)]<-"Rabbit"
 
 lag_result$Parameter<-factor(lag_result$Parameter, levels=c("k[rabbit]", "k[fox]", "k[NR]"))
 
+ann_text<-lag_result %>%
+	group_by(Parameter) %>%
+	summarize(Param=first(Parameter)) %>%ungroup() %>%
+	select(Parameter) %>%
+	mutate(value=c(1L, 1L, 1L), species=c("Rabbit", "Fox", "Fox")) %>%
+	mutate(Param2=c("italic(k[rabbit])", "italic(k[fox])", "italic(k[NR])"))
+
 lag_graph<-ggplot(lag_result, aes(x=value, fill=species)) +
 	geom_histogram(alpha=0.6, binwidth=1) +
 	facet_grid(.~Parameter, labeller=label_parsed)+
+	geom_text(data=ann_text, aes(x=15, y=3000, label=Param2), fontface="italic", parse = TRUE)+
 	scale_fill_manual(values=c("darkorange3", "blue"))+
 	xlab("Maximum lag period (months)")+
 	ylab("")+
@@ -85,7 +93,7 @@ lag_graph<-ggplot(lag_result, aes(x=value, fill=species)) +
 	theme_bw()+
 	theme(legend.position="none")+	
 	theme(strip.background = element_blank(), 
-		 strip.text.x=element_text(face="italic"),
+		 strip.text.x=element_blank(), #element_text(face="italic"),
 	      panel.border = element_rect(colour = "black"),
 		axis.text.x=element_text(angle=0, vjust=0.5, hjust=0.5))+ 
 	theme(plot.title = element_text(lineheight=1.8, face="bold")) 

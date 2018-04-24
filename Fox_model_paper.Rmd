@@ -38,7 +38,7 @@ Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; 
 
 1. Invasive mammalian predators commonly co-exist with invasive mammalian herbivore prey. Managers often advocate controlling invasive prey in the belief that this will also reduce invasive predator abundance. Such an outcome would have desirable ecological and financial benefits, but there have been few tests of this hypothesis. 
 
-2. We used large-scale and long-term monitoring data to test the prediction that invasive red fox *(Vulpes vulpes)* populations decline following control of invasive European rabbit *(Oryctolagus cuniculus)* populations in Australia. Both species severely impact natural and agricultural ecosystems, and significant resources are expended reducing these impacts. We fitted a hierarchical state-space model to spotlight counts of both species conducted at 21 transects between 1998 and 2016. The effects of rainfall, contol activities (warren ripping and surface harbor removal) and density dependence on the population growth rates of both species were also evaluated.
+2. We used large-scale and long-term monitoring data to test the prediction that invasive red fox *(Vulpes vulpes)* populations decline following control of invasive European rabbit *(Oryctolagus cuniculus)* populations in Australia. Both species severely impact natural and agricultural ecosystems, and significant resources are expended reducing these impacts. We fitted a hierarchical state-space model to spotlight counts of both species conducted at 21 transects between 1998 and 2016. The effects of rainfall, control activities (warren ripping and surface harbor removal) and density dependence on the population growth rates of both species were also evaluated.
 
 3. Control activities at 18 of the sites substantially reduced the average abundance rabbit populations. Rabbit populations showed little response to rainfall, but exhibited negative density-dependence and greater rates of increase during the autumn-spring interval.
 
@@ -53,18 +53,18 @@ Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; 
 *Word Counts:* 
 
 Title page: 102;
-Abstract: 290; 
-Introduction: 906
+Abstract: 289; 
+Introduction: 905
 Methods: 1552
 Results: 498
-Discussion: 1250
+Discussion: 1251
 Authors' contributions: 50;
 Acknowledgements: 55; 
 Data Accessibility: 38;
 References: 1708; 
-Figure Legends: 263;
+Figure Legends: 236;
 
-Total Words: 6887;
+Total Words: 6895;
 Target Words: 7000;
 
 Number of Tables: 0;
@@ -129,7 +129,7 @@ where $\rho_{jt}$ is the expected mean spotlight count of rabbits at the $j^{th}
 r_{jt}^{rabbit} &=\bar{r}_{rabbit}  + \beta_{1}\log{\rho_{t-1}} + \beta_{2}\mbox{rain}_{jt} +\beta_{3}\mbox{winter}_{t}+\beta_{4}\mbox{ripped}_{jt} +\zeta_{j}^{rabbit} +\epsilon_{t}^{rabbit}
 \end{align}
 
-where $\bar{r}_{rabbit}$ is the mean rate of increase, and $\beta_{1}-\beta_{4}$ are regression parameters describing the strength of density dependence in the rate-of-increase of the rabbit population, the relationship between rate of increase and the lagged rainfall and whether or not the count was made in the second half of the calendar year (denoted as `winter' as such observations reflect population growth over the austral winter). $\zeta_{i}^{rabbit}$ are random transect-level effects with standard deviation $\sigma_{site}^{rabbit}$ on the rate of increase of the rabbit population and $\epsilon_{t}^{rabbit}$ are normally-distributed process errors with standard deviation $\sigma_{process}^{rabbit}$. As  disease impacts on the rate of increase of rabbit populations in south-eastern Australia are at least partially explained by season and climate [e.g. @mutze2008geographic], and density-dependence [@mutze2010effect, @henzell2002factors], we did not explicitly include the influence of disease in our model of rabbit population dynamics.
+where $\bar{r}_{rabbit}$ is the mean rate of increase, and $\beta_{1}-\beta_{4}$ are regression parameters describing the strength of density dependence in the rate-of-increase of the rabbit population, the relationship between rate of increase and the lagged rainfall and whether or not the count was made in the second half of the calendar year (denoted as `winter' as such observations reflect population growth over the austral winter). The model includes transect-level random effects $\zeta_{i}^{rabbit}$, with standard deviation $\sigma_{site}^{rabbit}$ on the rate of increase of the rabbit population and normally-distributed process errors $\epsilon_{t}^{rabbit}$ with standard deviation $\sigma_{process}^{rabbit}$. As  disease impacts on the rate of increase of rabbit populations in south-eastern Australia are at least partially explained by season and climate [e.g. @mutze2008geographic], and density-dependence [@mutze2010effect, @henzell2002factors], we did not explicitly include the influence of disease in our model of rabbit population dynamics.
 
 The abundances of foxes ($\mu_{jt}$) were modelled simultaneously with those of rabbits, using a model similar to that used for rabbits, but including the numerical response of fox populations to rabbit abundance:
 
@@ -233,7 +233,7 @@ Previous studies of fox populations in Australia, and in their native range have
 
 Rainfall is a major driver of the abundances of both mammalian herbivores and predators [@dennis2000joint; @letnic2004responses]. Our monitoring transects spanned a gradient from semi-arid to temperate climates. Contrary to expectations [@Pech_alternativeprey], antecedent rainfall had little effect on the rates of increase of rabbit populations. Our analysis cannot elucidate the mechanism(s) generating this result, but there are several possibilities. First, rabbits were subject to other sources of mortality, including infection with RHDV and myxomavirus. Outbreaks of disease could have limited the potential for rabbit populations to increase rapidly under high rainfall conditions, especially as periods of heightened mortality due to RHDV are known to coincide with rabbits' peak breeding season [i.e., late winter and spring @mutze2008geographic; @wells2015timing]. Second, most transects were subject to rabbit control activities. The combined impacts of disease, climatic extremes and rabbit control may have constrained the ability of the rabbit populations to increase in response to high rainfall.  
 
-In contrast to rabbits, antecedent rainfall had a markedly positive effect on rates of increase of fox populations. The effect of rainfall on fox populations was strongly lagged, with a lag-period of 21 months being best supported by the data. Foxes eat a wide range of mammals, reptiles, birds, insectsand plant materials [see @davis_foxdiet], and readily switch food sources as availability changes [@davey2006exotic; @Leckie_preyswitch]. High rainfall may increase the availability of many of these foods, and this in turn may have increased survival and recruitment of foxes. 
+In contrast to rabbits, antecedent rainfall had a markedly positive effect on rates of increase of fox populations. The effect of rainfall on fox populations was strongly lagged, with a lag-period of 21 months being best supported by the data. Foxes eat a wide range of mammals, reptiles, birds, insects and plant materials [see @davis_foxdiet], and readily switch food sources as availability changes [@davey2006exotic; @Leckie_preyswitch]. High rainfall may increase the availability of many of these foods, and this in turn may have increased survival and recruitment of foxes. 
 
 ##Density-dependence in fox and rabbit populations
 
@@ -253,7 +253,7 @@ MPS, DMF and DSLR conceived the ideas and designed the methodology; JM, DMF, SRM
 
 #Acknowledgements
 
-We thank the landholders who provided access to their properties, and all of the staff who conducted the spotlight counts. The Victorian Department of Economic Development, Jobs, Transport and Resources funded this work. A. Bennett, C. Liu, D. Lucas, L. Lumsden, M. Bode and two anonymous reviewers provided commments that greatly improved the manuscript.
+We thank the landholders who provided access to their properties, and all of the staff who conducted the spotlight counts. The Victorian Department of Economic Development, Jobs, Transport and Resources funded this work. A. Bennett, C. Liu, D. Lucas, L. Lumsden, M. Bode and two anonymous reviewers provided comments that greatly improved the manuscript.
 
 #Data Accessibility
 All data, and code necessary to implement the state-space model and reproduce the results presented in this manuscript are available at  [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, the code and data will be deposited in the Zenodo digital archive.
@@ -267,11 +267,11 @@ All data, and code necessary to implement the state-space model and reproduce th
 
 ![Location of the 21 monitoring transects within the State of Victoria, showing variation in mean annual rainfall. Inset: Location of the State of Victoria (shaded black) in south-eastern Australia.](Figures/Site-map.png)
 
-![A. Posterior distributions of the regression parameters of the state-space model of rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence. B. Posterior distributions of the maximum lag periods (k) for the effects of rainfall on fox and rabbit populations, and the effect of rabbit abundance on rates of increase of fox populations.](Figures/beta_posterior_density.png)
+![A. Posterior distributions of the regression parameters of the state-space model of rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence. B. Posterior distributions of the maximum lag periods $(k)$ for the effects of rainfall on fox and rabbit populations $(k_{rabbit}$ and $k_{fox})$, and the effect of rabbit abundance on rates of increase of fox populations $(k_{\mathit{NR}})$. ](Figures/beta_posterior_density.png)
 
-![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Predictions are given for the austral summer and winter half-yearly intervals, and under low (10 mm), medium (25 mm) and high (50 mm) monthly rainfalls.  The solid lines denote combinations of rabbit and fox abundances at which *r* = 0. The red regions of the graph are conditions in which fox populations are predicted to decline.](Figures/predicted_fox_r.png)
+![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Predictions are given for the austral summer and winter half-yearly intervals, and under low (10 mm), medium (25 mm) and high (50 mm) monthly rainfalls.  The solid lines denote combinations of rabbit and fox abundances at which the rate of increase $(r)$ of fox populations is predicted to be zero. The red regions of the graph are conditions in which fox populations are predicted to decline.](Figures/predicted_fox_r.png)
 
-![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes (lower orange line/ open triangles) and rabbits (upper blue line / closed circles) at each of the 21 transects during the study. Transects are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of major rabbit control operations at 18 of the transects. The shaded region of the graph denotes the approximate limits of the historically severe Millenium Drought in south-eastern Australia (2001-2009). Note that the y-axes are logarithmic scale.](Figures/fox_abund.png)
+![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes (lower orange line/open triangles) and rabbits (upper blue line/closed circles) at each of the 21 transects during the study. Transects are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of major rabbit control operations at 18 of the transects. The shaded region denotes the approximate limits of the historically severe Millenium Drought in south-eastern Australia (2001-2009). The scale of the y-axis is logarithmic.](Figures/fox_abund.png)
 
 
 \newpage
@@ -288,7 +288,7 @@ Additional Supporting Information to be included in the online version of the ar
 
 **Figure S2.** Posterior densities for the transect-level random effects terms for rates of increase of rabbits and foxes.
 
-**Appendix S2** Explanation of posterior predictive checks.
+**Appendix S2** Model evaluation using posterior predictive checks.
 
 **Figure S3.** Results of posterior predictive checks.
 
