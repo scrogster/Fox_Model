@@ -46,7 +46,12 @@ ggplot(allrain, aes(y=Rain, x=Deemed_date))+
 	facet_wrap(~Site, nrow=7, ncol=3) +
 	xlab("Date")+
 	ylab("Monthly rainfall (mm)")+
-	theme_bw()
+	theme_bw()+
+      theme(strip.background = element_blank(), 
+	 strip.text.x=element_text(hjust=0.05),
+	 panel.border = element_rect(colour = "black"),
+	 panel.grid.major=element_line(colour="grey50", size=0.15),
+	 panel.grid.minor=element_line(colour="grey80", size=0.05))
 
 ggsave(out_pdf, width=6, height=7.5)
 ggsave(out_png, width=6, height=7.5)
