@@ -52,16 +52,16 @@ Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; 
 
 **Word Counts:** Title page: 102;
 Abstract: 285; 
-Introduction: 794
+Introduction: 793
 Methods: 1556
-Results: 500
+Results: 503
 Discussion: 1223
 Authors' contributions: 50;
 Acknowledgements: 55; 
 Data Accessibility: 38;
 References: 1730; 
 Figure Legends: 270.
-**Total Words**: 6775.
+**Total Words**: 6777.
 
 Number of Tables: 0;
 Number of Figures: 4;
