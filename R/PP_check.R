@@ -29,7 +29,7 @@ foxpp<-ggplot(discreps, aes(x=fox.real, y=fox.fake)) +
 	geom_abline(slope=1, intercept=0)+
 	xlab(expression(paste(chi[obs]^2)))+
 	ylab(expression(paste(chi[rep]^2)))+
-	annotate("text", -Inf, Inf, label=paste("p =", format(p_val_fox, digits=4)), hjust=-0.15, vjust=1.3)+
+	annotate("text", -Inf, Inf, label=paste("italic(p)" ,"==", format(p_val_fox, digits=4)), hjust=-0.15, vjust=1.3, parse=TRUE)+
 	xlim(min_fox, max_fox)+
 	ylim(min_fox, max_fox)+
 	ggtitle("Fox")+
@@ -59,7 +59,7 @@ rabbitpp<-ggplot(discreps, aes(x=rabbit.real, y=rabbit.fake)) +
 	geom_abline(slope=1, intercept=0)+
 	xlab(expression(paste(chi[obs]^2)))+
 	ylab(expression(paste(chi[rep]^2)))+
-	annotate("text", -Inf, Inf, label=paste("p =", format(p_val_rabbit, digits=4)), hjust=-0.15, vjust=1.3)+
+	annotate("text", -Inf, Inf, label=paste("italic(p)" ,"==", format(p_val_rabbit, digits=4)), hjust=-0.15, vjust=1.3, parse=TRUE)+
 	xlim(min_rab, max_rab)+
 	ylim(min_rab, max_rab)+
 	ggtitle("Rabbit")+
