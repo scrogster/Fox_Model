@@ -62,11 +62,9 @@ Data Accessibility: 38;
 References: 1730; 
 Figure Legends: 270.
 **Total Words**: 6777.
-
 Number of Tables: 0;
 Number of Figures: 4;
-Number of References: 59.
-
+Number of References: 59
 \newpage
 
 #Introduction
