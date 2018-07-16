@@ -21,14 +21,6 @@ allrain<-distinct(allrain) %>% #drop duplicate rows!!!
      mutate(Site=replace(Site, Site=="SwiftsCreek", "Swifts Creek")) %>%
      mutate(Site=replace(Site, Site=="Yarram/Woodside", "Yarram")) 
 
-
-#read and tidy the SOI data. Note months are as three letter strings.
-SOI<-read_table("data/SOI.txt") %>%
-	gather("month", "SOI", 2:13) %>%
-	mutate(Deemed_date=ymd(paste(Year, month, 15)))  #just puts the assumed date midmonth
-
-
-
 func<-function(x){
 	incr=0
 	out<-numeric(length(x))
@@ -113,58 +105,6 @@ for(i in 1:21){  #sites
 }; rm(i); rm(j);  rm(k)
 
 ###############################################################################
-#   MAKING LAGGED SOI ARRAY.
-############################################################################### 
-
-preds_soi<-expand.grid(time_idx=1:42 , lag=1:30) %>%
-	left_join(time.key, by="time_idx") %>% 
-	select(time_idx,  Year, Semester, lag) 
-
-
-get_soi<-function(Year=1998, Sem=1, lag=0){
-	if(Sem==1){month=4} else {month=11} #we'll assume April and November surveys
-	DD<-ymd(paste(Year, month, 15)) %m-% months(as.numeric(lag))
-	outsoi<-SOI %>%
-		filter(Deemed_date==DD) %>%
-		head(1)
-	outval<-outsoi
-	if(length(outsoi$SOI==1))  {return(outval$SOI)} else {return(NA)}
-}
-
-get_soi2<-function(x){
-	out<-get_soi( Year=x[,"Year"], Sem=x[,"Semester"], lag=x[,"lag"])
-	return(out)
-}
-
-
-soipred<-numeric(nrow(preds_soi))
-for(i in 1:nrow(preds_soi)){
-	soipred[i]<-get_soi2(preds_soi[i,])
-}; rm(i)
-
-#append rain vector to pred dataframe
-preds_soi<-data.frame(preds_soi, "soi"=soipred)
-
-soi_lag_array<-tapply(preds_soi$soi, preds_soi[,c(1, 4)], min, na.rm=FALSE)
-
-soi_array2<-soi_lag_array  #this will be a version with cumulative means over increasing lags
-
-#sweep out cumulative means along increasing lags...
-
-	for(j in 1:42){  #times
-		for(k in 1:30){ #lags
-			soi_array2[j,k]<-mean(soi_lag_array[j,1:k], na.rm=TRUE)	
-		}	
-	}; rm(j);  rm(k)
-
-
-###############################################################################
-#   INSERT CODE HERE FOR LAGGED NDVI ARRAYS
-###############################################################################
-
-
-
-###############################################################################
 #   MAKNG DATA OBJECT (LIST) FOR MODELLING IN JAGS
 ###############################################################################
 #tidy this up with new variables, and all good.
@@ -174,14 +114,11 @@ hier_dat<-list(
 	rabbit.count=spotlight$Rabbits,
 	trans.length=spotlight$TransectLength,
 	obs_time=spotlight$time_idx,
-#	start=start_times$start_times,
-#	end=  end_times$end_times,
 	sites=max(as.numeric(factor(spotlight$Site))),
 	Nobs=nrow(spotlight),
 	winter=spotlight$winter,
 	postrip=as.numeric(spotlight$PostRipped),
-     rain_array = rain_array2,  #site by time by lag matrix
-     soi_array  = soi_array2   #time by lag matrix
+     rain_array = rain_array2  #site by time by lag matrix
 )
 
 save.image("prepped_data.Rdata")
