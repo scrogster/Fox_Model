@@ -22,7 +22,7 @@ prepped_data.Rdata: Data/spotlight_data.csv Data/AllRain.csv R/prep_data.R
 	Rscript R/prep_data.R
 
 ###############################################################################	
-#Run the state-space models and save the results                               #
+#Run the state-space model and save the results                               #
 ###############################################################################
 Fitted_rain_model.Rdata: R/run_model_rain.R prepped_data.Rdata  R/GHR_distlag_rain.txt 
 	Rscript $^ $@    
@@ -30,32 +30,32 @@ Fitted_rain_model.Rdata: R/run_model_rain.R prepped_data.Rdata  R/GHR_distlag_ra
 ###############################################################################	
 #generate the figures as pdfs                                                 #
 ###############################################################################
-Figures/beta_posterior_density.pdf: R/beta_posterior_density.R Fitted_rain_model.Rdata
+  #Figure 2
+Figures/beta_posterior_density.pdf: R/beta_posterior_density.R Fitted_rain_model.Rdata  
 	Rscript $^ $@
-	
+  #Figure 3	
 Figures/predicted_fox_r.pdf: R/predicted_fox_r.R Fitted_rain_model.Rdata
 	Rscript $^ $@
-	
+  #Figure 4
 Figures/fox_abund.pdf: R/pred_abund.R Fitted_rain_model.Rdata Data/ripping_data.csv
 	Rscript $^ $@
 	
 ###############################################################################	
-#generate the supplementary figures                                           #
+#generate the supplementary figures as pdfs                                   #
 ###############################################################################
-
+  #Figure S1
 Figures/rain_graph.pdf: R/rain_graph.R Fitted_rain_model.Rdata
 	Rscript $^ $@
-	
+  #Figure S2	
 Figures/raneff_violin.pdf: R/raneff_violin.R Fitted_rain_model.Rdata
 	Rscript $^ $@
-
+  #Figure S3
 Figures/PPcheck.pdf: R/PP_check.R  Fitted_rain_model.Rdata
 	Rscript $^
 	
 ###############################################################################	
-#generate diagnostic plots                                                    #
+#generate the diagnostic plots                                                #
 ###############################################################################
-
 Figures/beta_traceplots.pdf: R/diagnostic_plots.R Fitted_rain_model.Rdata
 	Rscript $^
 
