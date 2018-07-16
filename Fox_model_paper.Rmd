@@ -246,16 +246,6 @@ Data and source code necessary to reproduce the analysis are available via the Z
 
 **Figure 4.** Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes (lower orange line/open triangles) and rabbits (upper blue line/closed circles) at each of the 21 transects during the study. Transects are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of rabbit control activities at 18 of the transects. The shaded region denotes the approximate limits of the historically severe Millennium Drought in south-eastern Australia (2001--2009). The scale of the y-axis is logarithmic.
 
-
-![Location of the 21 monitoring transects within the State of Victoria, showing variation in mean annual rainfall. Inset: Location of the State of Victoria (shaded black) in south-eastern Australia.](Figures/Site-map.png)
-
-![A. Posterior distributions of the regression parameters of the state-space model of rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence. B. Posterior distributions of the maximum lag periods $(k)$ for the effects of rainfall on fox and rabbit populations $(k_{rabbit}$ and $k_{fox})$, and the effect of rabbit abundance on rates of increase of fox populations $(k_{\mathit{NR}})$. ](Figures/beta_posterior_density.png)
-
-![Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Predictions are given for the austral summer and winter half-yearly intervals, and for low (10 mm), medium (25 mm) and high (50 mm) monthly rainfalls.  The solid lines denote combinations of rabbit and fox abundances at which the rate of increase of fox populations is predicted to be zero. The red regions of the graph are conditions in which fox populations are predicted to decline.](Figures/predicted_fox_r.png)
-
-![Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes (lower orange line/open triangles) and rabbits (upper blue line/closed circles) at each of the 21 transects during the study. Transects are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of rabbit control activities at 18 of the transects. The shaded region denotes the approximate limits of the historically severe Millennium Drought in south-eastern Australia (2001--2009). The scale of the y-axis is logarithmic.](Figures/fox_abund.png)
-
-
 \newpage
 #Supporting Information
 Additional Supporting Information to be included in the online version of the article:
