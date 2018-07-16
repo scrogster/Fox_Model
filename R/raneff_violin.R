@@ -62,4 +62,3 @@ ggplot(raneffs, aes(y=value, x=key, fill=Species)) +
 	guides(colour=FALSE, fill=FALSE)
 
 ggsave(out_pdf, width=6, height=5)
-ggsave(out_png, width=6, height=5)

@@ -54,4 +54,4 @@ ggplot(allrain, aes(y=Rain, x=Deemed_date))+
 	 panel.grid.minor=element_line(colour="grey80", size=0.05))
 
 ggsave(out_pdf, width=6, height=7.5)
-ggsave(out_png, width=6, height=7.5)
+
