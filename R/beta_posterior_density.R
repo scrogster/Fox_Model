@@ -54,7 +54,7 @@ beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value, fill=species)) +
 	ggtitle("A")+
 	theme_bw()+
 	theme(legend.position="none")+
-	theme(axis.text.x=element_text(size=9))+ 
+	theme(axis.text.x=element_text(size=8))+ 
 	theme(plot.title = element_text(lineheight=1.8, face="bold"))
 
 ##############################################################################################################
@@ -93,17 +93,13 @@ lag_graph<-ggplot(lag_result, aes(x=value, fill=species)) +
 	theme_bw()+
 	theme(legend.position="none")+	
 	theme(strip.background = element_blank(), 
-		 strip.text.x=element_blank(), #element_text(face="italic"),
+		 strip.text.x=element_blank(), 
 	      panel.border = element_rect(colour = "black"),
 		axis.text.x=element_text(angle=0, vjust=0.5, hjust=0.5))+ 
 	theme(plot.title = element_text(lineheight=1.8, face="bold")) 
 
 
-pdf(paste(out_pdf), width=8, height=8)
-grid.arrange(beta_graph, lag_graph, ncol=1, nrow=2)
-dev.off()
-
-png(paste(out_png), width=8, height=8, units="in", res=300)
+pdf(paste(out_pdf), width=160/25.4, height=160/25.4)
 grid.arrange(beta_graph, lag_graph, ncol=1, nrow=2)
 dev.off()
 

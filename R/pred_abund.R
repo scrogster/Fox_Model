@@ -90,6 +90,8 @@ preddf %>%
 	ggplot(aes(x=time.orig, y=post.med))+
 	annotate("rect", xmin=2001, xmax=2010, ymin=0, ymax=Inf, fill="gray",alpha=0.5)+
 	geom_line(colour="black")+
+	geom_point(data=tidy_obs %>% filter(rabbit.count>0.01), aes(x=Time, y=rabbit.count/(trans.length/1000), size=0.2), cex=0.8, shape=16) +
+	geom_point(data=tidy_obs %>% filter(fox.count>0.01), aes(x=Time, y=fox.count/(trans.length/1000), size=0.2), cex=0.8, shape=2) +
 	geom_ribbon(aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="darkorange3")+
 	geom_ribbon(aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="darkorange3")+
 	geom_ribbon(aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="darkorange3")+
@@ -97,9 +99,6 @@ preddf %>%
 	geom_ribbon(data=preddf %>% filter(Param=="mu.rabbits"), aes(ymin=q5,ymax=q95, colour=NULL),alpha=0.25, fill="blue")+
 	geom_ribbon(data=preddf %>% filter(Param=="mu.rabbits"), aes(ymin=q10,ymax=q90, colour=NULL),alpha=0.45, fill="blue")+
 	geom_ribbon(data=preddf %>% filter(Param=="mu.rabbits"), aes(ymin=q25,ymax=q75, colour=NULL),alpha=0.65, fill="blue")+
-	
-	geom_point(data=tidy_obs %>% filter(rabbit.count>0.01), aes(x=Time, y=rabbit.count/(trans.length/1000), size=0.2), cex=0.8, shape=16) +
-	geom_point(data=tidy_obs %>% filter(fox.count>0.01), aes(x=Time, y=fox.count/(trans.length/1000), size=0.2), cex=0.8, shape=2) +
 	scale_y_log10(breaks=c(0.1, 1, 10, 100))+
 	scale_x_continuous(breaks=seq(1995, 2017, 5), minor_breaks=seq(1995, 2016, 1), lim=c(1995, 2017) )+
 	geom_vline(data=rip_dat, aes(xintercept=Time), col="black", lwd=0.5, lty="dashed")+
@@ -107,9 +106,16 @@ preddf %>%
 	facet_wrap(~Sitename,  ncol=3, nrow=7) +
 	theme_bw()+
 	theme(strip.background = element_blank(), 
-		 strip.text.x=element_text(hjust=0.05),
+		 strip.text.x=element_text(hjust=0.05, size=8),
+		 strip.text.y=element_text( size=8),
+		 axis.text.x=element_text( size=8),
+		 axis.text.y=element_text( size=8),
+		 axis.title.x=element_text( size=8),
+		 axis.title.y=element_text( size=8),
 		 panel.border = element_rect(colour = "black"),
+		 panel.spacing.x=unit(0.5, "mm"),
+		 panel.spacing.y=unit(0, "mm"),
 		 panel.grid.major=element_line(colour="grey50", size=0.15),
 		 panel.grid.minor=element_line(colour="grey80", size=0.05))
-ggsave(out_pdf, width=6.5, height=8)
-ggsave(out_png, width=6.5, height=8, dpi=300)
+ggsave(out_pdf, width=160/25.4, height=8)
+
