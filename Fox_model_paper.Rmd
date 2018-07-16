@@ -8,12 +8,12 @@ header-includes:
    - \linenumbers
 output:
   pdf_document: 
+      keep_tex: true
       latex_engine: xelatex
   fig_width: 5.5
   fig_caption: yes
   word_document:
     reference_docx: Template.docx
-#fontfamily: mathpazo
 fontsize: 10pt
 geometry: margin=1.0in
 csl: journal-of-applied-ecology.csl
@@ -38,7 +38,7 @@ Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; 
 
 1. Invasive mammalian predators commonly co-exist with invasive mammalian herbivore prey. Managers often advocate controlling invasive prey in the belief that this will also reduce invasive predator abundance. Such an outcome would have desirable ecological and financial benefits, but there have been few tests of this hypothesis. 
 
-2. We used large-scale and long-term monitoring data to test the prediction that invasive red fox (*Vulpes vulpes*) populations decline following control of invasive European rabbit (*Oryctolagus cuniculus*) populations in Australia. Both species severely impact natural and agricultural ecosystems, and significant resources are expended reducing these impacts. We fitted a hierarchical state-space model to spotlight counts of both species conducted at 21 transects between 1998 and 2015. The effects of rainfall, control activities (warren ripping and surface harbor removal) and density dependence on the population growth rates of both species were also evaluated.
+2. We used large-scale and long-term monitoring data to test the prediction that invasive red fox (*Vulpes vulpes*) populations decline following control of invasive European rabbit (*Oryctolagus cuniculus*) populations in Australia. Both species severely impact natural and agricultural ecosystems, and significant resources are expended to reduce these impacts. We fitted a hierarchical state-space model to spotlight counts of both species conducted at 21 transects between 1998 and 2015. The effects of rainfall, control activities (warren ripping and surface harbor removal) and density dependence on the population growth rates of both species were also evaluated.
 
 3. Control activities at 18 transects substantially reduced average rabbit abundances. Rabbit populations showed little response to rainfall, but exhibited negative density-dependence and higher rates of increase during the autumn-spring interval.
 
@@ -46,25 +46,10 @@ Correspondence: Michael P. Scroggie.  Email: michael.scroggie@delwp.vic.gov.au; 
 
 5. *Synthesis and applications.* We conclude that controlling rabbits to low abundances does not substantially reduce fox abundances in south-eastern Australia. Rather, efforts to reduce fox abundance should directly target fox populations. Managers of invasive predator -- invasive prey systems should not assume that controlling prey will, by itself, reduce predator abundances. Quantifying the numerical response is critical for understanding the likely response of predators to changes in prey abundance.
 
-**Keywords:** biological invasions, density dependence, invasive species, *Oryctolagus cuniculus*, predator-prey dynamics, rate of increase, spotlight counts, state-space model, *Vulpes vulpes*.
+**Keywords:** biological invasions, density dependence, invasive species, numerical response, predator-prey dynamics, spotlight counts, state-space model.
 
 **Running title:** *Do invasive prey control invasive predators?*
 
-**Word Counts:** Title page: 102;
-Abstract: 285; 
-Introduction: 793
-Methods: 1556
-Results: 503
-Discussion: 1223
-Authors' contributions: 50;
-Acknowledgements: 55; 
-Data Accessibility: 38;
-References: 1730; 
-Figure Legends: 270.
-**Total Words**: 6777.
-Number of Tables: 0;
-Number of Figures: 4;
-Number of References: 59
 \newpage
 
 #Introduction
@@ -181,7 +166,7 @@ Weakly informative $\mbox{half-}t_{4}$ priors [@gelman2006prior] were specified 
 
 ###Model fitting and checking
 
-The state-space model was fitted to the data using the Bayesian Markov chain Monte Carlo (MCMC) software \textsc{JAGS} [@plummerJAGSmanual]. The model's code is provided in Appendix S1. A burn-in of $`r round(NBURN)`$ iterations was undertaken, followed by sampling from four independent Markov chains with different starting values for $`r NITER-NBURN`$ further iterations, retaining every $`r paste0(toOrdinal::toOrdinal(THIN))`$ value. After thinning a total of $`r (NITER-NBURN)/THIN`$ samples from each chain were retained for inference. The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic $(\hat R)$ of @brooks1998general, and by visual inspection of parameter trace plots. The fit of the state-space model of fox and rabbit abundances was assessed using posterior predictive checks and Bayesian *p*-values [@gelman1996posterior]. For further details see Appendix S2.  
+The state-space model was fitted to the data using the Bayesian Markov chain Monte Carlo (MCMC) software \textsc{JAGS} [@plummerJAGSmanual]. The code for the model is archived at @FoxCodeData. A burn-in of $`r round(NBURN)`$ iterations was undertaken, followed by sampling from four independent Markov chains with different starting values for $`r NITER-NBURN`$ further iterations, retaining every $`r paste0(toOrdinal::toOrdinal(THIN))`$ value. After thinning a total of $`r (NITER-NBURN)/THIN`$ samples from each chain were retained for inference. The convergence of the MCMC algorithm was assessed using the scale-reduction diagnostic $(\hat R)$ of @brooks1998general, and by visual inspection of parameter trace plots. The fit of the state-space model of fox and rabbit abundances was assessed using posterior predictive checks and Bayesian *p*-values [@gelman1996posterior]. For further details see Appendix S1.  
 
 #Results
 
@@ -242,7 +227,7 @@ MPS, DMF and DSLR conceived the ideas and designed the methodology; JM, DMF, SRM
 We thank the landholders who provided access to their properties, and all of the staff who conducted the spotlight counts. The Victorian Department of Economic Development, Jobs, Transport and Resources funded this work. A. Bennett, C. Liu, D. Lucas, L. Lumsden, M. Bode and two anonymous reviewers provided comments that greatly improved the manuscript.
 
 #Data Accessibility
-All data, and code necessary to implement the state-space model and reproduce the results presented in this manuscript are available at  [https://github.com/scrogster/Fox_Model](https://github.com/scrogster/Fox_Model). Upon acceptance, the code and data will be deposited in the Zenodo digital archive.
+Data and source code necessary to reproduce the analysis are available via the Zenodo Digital Repository https://doi.org/XXXXXXXXXX [@FoxCodeData].
 
 \newpage
 #References
@@ -250,6 +235,17 @@ All data, and code necessary to implement the state-space model and reproduce th
 <div id = "refs"></div>
 
 \newpage
+
+#Figure Legends
+
+**Figure 1.** Location of the 21 monitoring transects within the State of Victoria, showing variation in mean annual rainfall. Inset: Location of the State of Victoria (shaded black) in south-eastern Australia.
+
+**Figure 2.** A. Posterior distributions of the regression parameters of the state-space model of rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence. B. Posterior distributions of the maximum lag periods $(k)$ for the effects of rainfall on fox and rabbit populations $(k_{rabbit}$ and $k_{fox})$, and the effect of rabbit abundance on rates of increase of fox populations $(k_{\mathit{NR}})$
+
+**Figure 3.** Predicted rates of increase *(r)* for fox populations under varying rabbit and fox abundances (counts per spotlight km). Predictions are given for the austral summer and winter half-yearly intervals, and for low (10 mm), medium (25 mm) and high (50 mm) monthly rainfalls.  The solid lines denote combinations of rabbit and fox abundances at which the rate of increase of fox populations is predicted to be zero. The red regions of the graph are conditions in which fox populations are predicted to decline.
+
+**Figure 4.** Predicted (line) and observed (points) relative abundances (spotlight counts per transect km) of foxes (lower orange line/open triangles) and rabbits (upper blue line/closed circles) at each of the 21 transects during the study. Transects are arranged in order of increasing rainfall. Solid lines are posterior medians, and shaded polygons are the 95% credible intervals of expected abundances. Vertical dashed lines denote the time of completion of rabbit control activities at 18 of the transects. The shaded region denotes the approximate limits of the historically severe Millennium Drought in south-eastern Australia (2001--2009). The scale of the y-axis is logarithmic.
+
 
 ![Location of the 21 monitoring transects within the State of Victoria, showing variation in mean annual rainfall. Inset: Location of the State of Victoria (shaded black) in south-eastern Australia.](Figures/Site-map.png)
 
@@ -268,13 +264,11 @@ Additional Supporting Information to be included in the online version of the ar
 
 **Table S2.** Summary statistics for the posterior distributions of the parameters of the state-space model of rabbit and fox abundances.
 
-**Appendix S1.** JAGS code for the Bayesian state-space model.
-
 **Figure S1.** Monthly rainfalls at the 21 monitoring transects.
 
 **Figure S2.** Posterior densities for the transect-level random effects terms for rates of increase of rabbits and foxes.
 
-**Appendix S2** Model evaluation using posterior predictive checks.
+**Appendix S1** Model evaluation using posterior predictive checks.
 
 **Figure S3.** Results of posterior predictive checks.
 
