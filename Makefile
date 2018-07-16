@@ -3,17 +3,19 @@ all: prepped_data.Rdata models figures  paper
 
 clean:
 	rm -f *.Rdata;\
-	rm -f Figures/raneff_violin_foxes.pdf Figures/beta_posterior_density.pdf Figures/sigma_posterior_density.pdf Figures/raneff_violin_rabbits.pdf  Figures/predicted_fox_r.pdf Figures/fox_abund.pdf Figures/rabbit_abund.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf;\
+	rm -f Figures/raneff_violin_foxes.pdf Figures/beta_posterior_density.pdf Figures/raneff_violin_rabbits.pdf Figures/predicted_fox_r.pdf \
+	Figures/fox_abund.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf;\
 	rm -f Fox_model_paper.pdf
 
 #metarule to fit the models
 models: Fitted_rain_model.Rdata
 
 #metarule to make the figures
-figures: Figures/beta_posterior_density.pdf Figures/predicted_fox_r.pdf Figures/fox_abund.pdf Figures/rain_graph.pdf Figures/raneff_violin.pdf  Figures/beta_traceplots.pdf Figures/PPcheck.pdf
+figures: Figures/beta_posterior_density.pdf Figures/predicted_fox_r.pdf Figures/fox_abund.pdf \
+Figures/rain_graph.pdf Figures/raneff_violin.pdf  Figures/beta_traceplots.pdf Figures/PPcheck.pdf
 
 #metarule to make the paper
-paper: Fox_model_paper.docx Fox_model_paper.pdf
+paper: Fox_model_paper.pdf
 
 ###############################################################################	
 #clean and tidy the data, and save to an Rdata file                           #
