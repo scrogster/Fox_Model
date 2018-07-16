@@ -15,7 +15,6 @@ output:
     fig_caption: yes
     reference_docx: Template_Supporting.docx
     pandoc_args: ["--smart"]
-#fontfamily: mathpazo
 fontsize: 10pt
 geometry: margin=1.0in
 bibliography: rabbit_refs.bib
@@ -134,10 +133,7 @@ kable(tabout, caption="Table S2. Summary statistics for posterior distributions 
 
 
 \newpage
-##Appendix S1. JAGS code for the Bayesian state-space model
-```{r jagsmodel, echo=FALSE, results="markup", comment="", warning=FALSE, tidy=TRUE}
-cat(readLines('R/GHR_distlag_rain.txt'), sep = '\n')
-```
+
 
 ![Figure S1. Monthly rainfall at the 21 transects. Blue lines are the raw monthly rainfall totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas indicate the timing of the south-eastern Australian Millennium Drought (2001-2009). Sites are arranged in order of increasing monthly mean rainfall.](Figures/rain_graph.pdf)
 
