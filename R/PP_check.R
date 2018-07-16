@@ -83,6 +83,3 @@ pdf("Figures/PPcheck.pdf", width=8, height=8)
 grid.arrange(foxpp, foxzerocheck, rabbitpp, rabzerocheck, ncol=2, nrow=2)
 dev.off()
 
-png("Figures/PPcheck.png", width=8, height=8, units="in", res=300)
-grid.arrange(foxpp, foxzerocheck, rabbitpp, rabzerocheck, ncol=2, nrow=2)
-dev.off()
