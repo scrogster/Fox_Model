@@ -2,6 +2,7 @@ require(ggmcmc)
 require(dplyr)
 require(readr)
 require(lubridate)
+dir.create("Figures", showWarnings = FALSE)
 
 args=commandArgs(trailingOnly=TRUE)
 

@@ -3,6 +3,7 @@ require(ggmcmc)
 require(grid)
 require(gridExtra)
 require(dplyr)
+dir.create("Figures", showWarnings = FALSE)
 
 args=commandArgs(trailingOnly=TRUE)
 

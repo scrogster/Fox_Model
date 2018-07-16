@@ -1,7 +1,7 @@
 require(ggplot2)
 require(ggmcmc)
 require(dplyr)
-
+dir.create("Figures", showWarnings = FALSE)
 args=commandArgs(trailingOnly=TRUE)
 
 

@@ -6,6 +6,7 @@ library(tidyr)
 library(stringr)
 library(ggplot2)
 library(zoo)
+dir.create("Figures", showWarnings = FALSE)
 
 args=commandArgs(trailingOnly=TRUE)
 
