@@ -27,7 +27,6 @@ prepped_data.Rdata: Data/spotlight_data.csv Data/AllRain.csv R/prep_data.R
 Fitted_rain_model.Rdata: R/run_model_rain.R prepped_data.Rdata  R/GHR_distlag_rain.txt 
 	Rscript $^ $@    
 	
-PREF_RESULT = Fitted_rain_model.Rdata
 ###############################################################################	
 #generate the figures as pdfs                                                 #
 ###############################################################################
@@ -61,7 +60,7 @@ Figures/beta_traceplots.pdf: R/diagnostic_plots.R Fitted_rain_model.Rdata
 	Rscript $^
 
 ###############################################################################	
-#generate the paper as a pdf document                                         #
+#generate the manuscript as a pdf document                                    #
 ###############################################################################
 Fox_model_paper.pdf: R/render_script.R Fox_model_paper.Rmd rabbit_refs.bib models figures 
 	Rscript R/render_script.R pdf_document
