@@ -5,7 +5,7 @@ clean:
 	rm -f *.Rdata;\
 	rm -f Figures/Figure_2.pdf Figures/Figure_3.pdf Figures/Figure_4.pdf Figures/raneff_violin.pdf  \
 	rm -f Figures/Figure_S1.pdf Figures/Figure_S2.pdf Figures/Figure_S3.pdf Figures/Diagnostic_plots.pdf \
-	rm -f Fox_model_paper.pdf JAEscroggieST1.pdf JAEscroggieST2.pdf JAEscroggieSF1.pdf JAEscroggieSF2.pdf JAEscroggieSA1.pdf
+	rm -f Fox_model_paper.pdf JAEscroggieST1.pdf JAEscroggieST2.pdf JAEscroggieSF1.pdf JAEscroggieSF2.pdf JAEscroggieSA1.pdf Fox_model_paper.tex
 
 #metarule to fit the models
 models: Fitted_rain_model.Rdata
