@@ -65,7 +65,8 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	facet_grid(Rainfall ~ Season, labeller="label_both") +
 	geom_raster(interpolate = TRUE) +
 	stat_contour(breaks=c(0), linetype=1, colour="black")+  #contour where r=0
-	scale_fill_gradient2(low="firebrick", mid="white", high="royalblue3")+
+	#scale_fill_gradient2(low="firebrick", mid="white", high="royalblue3")+
+	scale_fill_gradient2(low="#ef8a62", mid="#f7f7f7", high="#67a9cf")+
 	guides(fill = guide_colorbar(draw.ulim = TRUE,draw.llim = TRUE, ticks=TRUE, label.hjust = 1))+
 	labs(x=expression(Foxes~km^{-1}), y=expression(Rabbits~km^{-1}))+
 	scale_x_continuous(expand=c(0, 0))+
@@ -76,6 +77,6 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 		 panel.border = element_rect(colour = "black")
           # axis.text.x=element_text(angle=0, vjust=0.5, hjust=0.5)
 		 ) +
-	theme(legend.justification = c(1, 1), legend.position = c(1, 1), legend.box.margin = margin(c(5, 5, 5, 5)))+
+	theme(legend.justification = c(1, 1), legend.position = c(1, 1), legend.box.margin = margin(c(2, 2, 2, 2)))+
 	theme(legend.title.align=0.25, legend.title=element_text(face="italic"))
 ggsave(out_pdf, width=160/25.4, height=8)
