@@ -260,8 +260,6 @@ Additional Supporting Information to be included in the online version of the ar
 
 **Appendix S1** Model evaluation using posterior predictive checks.
 
-**Figure S3.** Results of posterior predictive checks.
-
 
 
 
