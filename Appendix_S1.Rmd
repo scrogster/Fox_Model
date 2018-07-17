@@ -10,7 +10,7 @@ output:
       latex_engine: xelatex  	
   fig_width: 7
   fig_caption: yes
-fontsize: 10pt
+fontsize: 11pt
 geometry: margin=1.0in
 bibliography: rabbit_refs.bib
 csl: journal-of-applied-ecology.csl
@@ -46,4 +46,4 @@ The Bayesian p-values, computed from the $\chi^2$ discrepancies (Fig. S3) were `
 
 \newpage
 
-![Figure S3. Posterior predictive checks of the state-space model of fox and rabbit abundances. The panels on the left illustrate posterior predictive checks of observed and replicate (simulated) counts,  based on the $\chi^2$ discrepancy calculated at each MCMC update of the model. The Bayesian $p$-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$ (points below the diagonal lines). Bayesian $p$-values close to zero or one indicate good agreement between the model and the data. The panels on the right give the observed (vertical solid line) and simulated (histogram) numbers of zero-counts in each dataset. Dashed vertical lines denote the 95% credible intervals on the expected number of zeros.](Figures/Figure_S3.pdf)
+![Fig. S3. Posterior predictive checks of the state-space model of fox and rabbit abundances. The panels on the left illustrate posterior predictive checks of observed and replicate (simulated) counts,  based on the $\chi^2$ discrepancy calculated at each MCMC update of the model. The Bayesian $p$-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$ (points below the diagonal lines). Bayesian $p$-values close to zero or one indicate good agreement between the model and the data. The panels on the right give the observed (vertical solid line) and simulated (histogram) numbers of zero-counts in each dataset. Dashed vertical lines denote the 95% credible intervals on the expected number of zeros.](Figures/Figure_S3.pdf)

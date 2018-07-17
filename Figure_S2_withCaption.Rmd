@@ -14,4 +14,4 @@ fontsize: 10pt
 geometry: margin=1.0in
 ---
 
-![Figure S2. Posterior densities for the transect-level random effects terms for rates of increase of foxes (upper) and rabbits (lower). Transects are arranged in order of increasing mean monthly rainfall.](Figures/Figure_S2.pdf)
+![Fig. S2. Posterior densities for the transect-level random effects terms for rates of increase of foxes (upper) and rabbits (lower). Transects are arranged in order of increasing mean monthly rainfall.](Figures/Figure_S2.pdf)
