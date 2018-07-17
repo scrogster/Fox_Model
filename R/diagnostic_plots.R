@@ -11,35 +11,22 @@ load(file.path(model_data))
 
 mcmc_result<-ggs(samp$samples)
 
-## ----traceplot_beta----
-ggs_traceplot(mcmc_result, family = "^beta|^r.mean") + theme_classic() #BGR diagnostics
-ggsave("Figures/beta_traceplots.pdf", height=10, width=7)
+## TRACEPLOTS
+beta_traceplot<-ggs_traceplot(mcmc_result, family = "^beta|^r.mean") + theme_bw() 
+sigma_traceplot<-ggs_traceplot(mcmc_result, family = "^sigma") + theme_classic() 
+lag_traceplot<-ggs_traceplot(mcmc_result, family = "fox.lag|rabbit.lag|food.lag") + theme_bw() 
 
+## R-hat diagnostics
+betaRhat<-ggs_Rhat(mcmc_result, family = "^beta|^r.mean") + xlab(expression(paste(hat(R))))+ theme_bw() #BGR diagnostics
+sigmaRHat<-ggs_Rhat(mcmc_result, family = "^sigma") + xlab(expression(paste(hat(R))))+ theme_bw() #BGR diagnostics
+lagRhat<-ggs_Rhat(mcmc_result, family = "fox.lag|rabbit.lag|food.lag") + xlab(expression(paste(hat(R))))+ theme_bw() #BGR diagnostics
 
-## ----traceplot_sigma----
-ggs_traceplot(mcmc_result, family = "^sigma") + theme_classic() #BGR diagnostics
-ggsave("Figures/sigma_traceplots.pdf", height=10, width=7)
-
-
-## ----traceplot_lags----
-ggs_traceplot(mcmc_result, family = "fox.lag|rabbit.lag|food.lag") + theme_classic() #BGR diagnostics
-ggsave("Figures/lag_traceplots.pdf", height=10, width=7)
-
-
-
-## ----gelman_diag_beta----
-ggs_Rhat(mcmc_result, family = "^beta|^r.mean") + xlab(expression(paste(hat(R))))+ theme_classic() #BGR diagnostics
-ggsave("Figures/beta_gelman_diag.pdf")
-
-
-
-## ----gelman_diag_sigma----
-ggs_Rhat(mcmc_result, family = "^sigma") + xlab(expression(paste(hat(R))))+ theme_classic() #BGR diagnostics
-ggsave("Figures/sigma_gelman_diag.pdf")
-
-
-## ----gelman_diag_lags----
-ggs_Rhat(mcmc_result, family = "fox.lag|rabbit.lag|food.lag") + xlab(expression(paste(hat(R))))+ theme_classic() #BGR diagnostics
-ggsave("Figures/lag_gelman.pdf", height=10, width=7)
-
+pdf("Figures/Diagnostic_plots.pdf", width=8, height=11, onefile = TRUE)
+beta_traceplot
+sigma_traceplot
+lag_traceplot
+betaRhat
+sigmaRHat
+lagRhat
+dev.off()
 
