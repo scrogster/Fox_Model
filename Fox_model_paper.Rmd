@@ -227,7 +227,7 @@ MPS, DMF and DSLR conceived the ideas and designed the methodology; JM, DMF, SRM
 We thank the landholders who provided access to their properties, and all of the staff who conducted the spotlight counts. The Victorian Department of Economic Development, Jobs, Transport and Resources funded this work. A. Bennett, C. Liu, D. Lucas, L. Lumsden, M. Bode and two anonymous reviewers provided comments that greatly improved the manuscript.
 
 #Data Accessibility
-Data and source code are available via the Zenodo Digital Repository https://doi.org/XXXXXXXXXX [@FoxCodeData].
+Data and source code are available from the Zenodo Digital Repository https://doi.org/10.5281/zenodo.1313890 [@FoxCodeData].
 
 \newpage
 #References
