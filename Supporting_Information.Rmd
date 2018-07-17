@@ -11,10 +11,6 @@ output:
       latex_engine: xelatex  	
   fig_width: 7
   fig_caption: yes
-  word_document:
-    fig_caption: yes
-    reference_docx: Template_Supporting.docx
-    pandoc_args: ["--smart"]
 fontsize: 10pt
 geometry: margin=1.0in
 bibliography: rabbit_refs.bib
@@ -135,9 +131,9 @@ kable(tabout, caption="Table S2. Summary statistics for posterior distributions 
 \newpage
 
 
-![Figure S1. Monthly rainfall at the 21 transects. Blue lines are the raw monthly rainfall totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas indicate the timing of the south-eastern Australian Millennium Drought (2001-2009). Sites are arranged in order of increasing monthly mean rainfall.](Figures/rain_graph.pdf)
+![Figure S1. Monthly rainfall at the 21 transects. Blue lines are the raw monthly rainfall totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas indicate the timing of the south-eastern Australian Millennium Drought (2001-2009). Sites are arranged in order of increasing monthly mean rainfall.](Figures/Figure_S1.pdf)
 
-![Figure S2. Posterior densities for the transect-level random effects terms for rates of increase of foxes (upper) and rabbits (lower). Transects are arranged in order of increasing mean monthly rainfall.](Figures/raneff_violin.pdf)
+![Figure S2. Posterior densities for the transect-level random effects terms for rates of increase of foxes (upper) and rabbits (lower). Transects are arranged in order of increasing mean monthly rainfall.](Figures/Figure_S2.pdf)
 
 \newpage
 ##Appendix S2. Model evaluation using posterior predictive checks
@@ -170,6 +166,6 @@ The Bayesian p-values, computed from the $\chi^2$ discrepancies (Fig. S3) were `
 
 \newpage
 
-![Figure S3. Posterior predictive checks of the state-space model of fox and rabbit abundances. The panels on the left illustrate posterior predictive checks of observed and replicate (simulated) counts,  based on the $\chi^2$ discrepancy calculated at each MCMC update of the model. The Bayesian $p$-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$ (points below the diagonal lines). Bayesian $p$-values close to zero or one indicate good agreement between the model and the data. The panels on the right give the observed (vertical solid line) and simulated (histogram) numbers of zero-counts in each dataset. Dashed vertical lines denote the 95% credible intervals on the expected number of zeros.](Figures/PPcheck.pdf)
+![Figure S3. Posterior predictive checks of the state-space model of fox and rabbit abundances. The panels on the left illustrate posterior predictive checks of observed and replicate (simulated) counts,  based on the $\chi^2$ discrepancy calculated at each MCMC update of the model. The Bayesian $p$-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$ (points below the diagonal lines). Bayesian $p$-values close to zero or one indicate good agreement between the model and the data. The panels on the right give the observed (vertical solid line) and simulated (histogram) numbers of zero-counts in each dataset. Dashed vertical lines denote the 95% credible intervals on the expected number of zeros.](Figures/Figure_S3.pdf)
 
 
