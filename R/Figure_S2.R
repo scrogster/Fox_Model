@@ -4,12 +4,10 @@ require(dplyr)
 dir.create("Figures", showWarnings = FALSE)
 args=commandArgs(trailingOnly=TRUE)
 
-
+pdf(NULL)
 model_data=args[1]
 out_pdf=file.path(args[2])
 #model_data="Fitted_rain_model.Rdata"
-#out_pdf = "Figures/raneff_violin_foxes.pdf"
-out_png=gsub("pdf", "png", out_pdf)
 
 load(file.path(model_data))
 
@@ -47,7 +45,7 @@ raneff_summary<-raneffs %>%
 	  group_by(Species, key) %>%
 	  mutate(MEAN = mean(value), LWR=quantile(value, 0.025), UPP=quantile(value, 0.975))
 
-ggplot(raneffs, aes(y=value, x=key, fill=Species)) +
+raneffplot<-ggplot(raneffs, aes(y=value, x=key, fill=Species)) +
 	  	geom_violin(alpha=0.5, draw_quantiles = c(0.025, 0.5, 0.975))+
 	  	facet_grid(Species~.)+
 	geom_hline(yintercept=0, col="black", linetype = "longdash")+

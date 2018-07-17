@@ -1,7 +1,7 @@
 require(jagsUI)
 require(ggplot2)
 require(gridExtra)
-
+pdf(NULL)
 load("Fitted_rain_model.Rdata")
 
 #tabulate discrepancies
@@ -79,7 +79,7 @@ rabzerocheck<-ggplot(discreps, aes(x=rabbit.fake.zeroes))+
 	theme(plot.title = element_text(hjust = 0.5))
 
 
-pdf("Figures/PPcheck.pdf", width=8, height=8)
+pdf("Figures/Figure_S3.pdf", width=8, height=8)
 grid.arrange(foxpp, foxzerocheck, rabbitpp, rabzerocheck, ncol=2, nrow=2)
 dev.off()
 
