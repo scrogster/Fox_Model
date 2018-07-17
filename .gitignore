@@ -11,3 +11,6 @@ Data/TabulatedRainHalfYearly.csv
 Figures/*
 !Figures/Figure_1.pdf
 *.tex
+R/query_database.R
+R/get_rip_dates.R
+
