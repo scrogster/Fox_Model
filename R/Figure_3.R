@@ -61,12 +61,13 @@ preddf$Season[preddf$Winter==1] <-"Winter"
 preddf$Season[preddf$Winter==0] <-"Summer"
 
 b <- c(-1.5,-1,-0.5, 0, 0.5, 1, 1.5)
-ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
+rplot<-ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	facet_grid(Rainfall ~ Season, labeller="label_both") +
 	geom_raster(interpolate = TRUE) +
-	stat_contour(breaks=c(0), linetype=1, colour="black")+  #contour where r=0
-	#scale_fill_gradient2(low="firebrick", mid="white", high="royalblue3")+
 	scale_fill_gradient2(low="#ef8a62", mid="#f7f7f7", high="#67a9cf")+
+	stat_contour(breaks=c(log(0.5^(0.5))), linetype=2, colour="black", size=0.25)+ 
+	stat_contour(breaks=c(0), linetype=1, colour="black")+  #contour where r=0
+	stat_contour(breaks=c(log(2^(0.5))), linetype=2, colour="black", size=0.25)+ 
 	guides(fill = guide_colorbar(draw.ulim = TRUE,draw.llim = TRUE, ticks=TRUE, label.hjust = 1))+
 	labs(x=expression(Foxes~km^{-1}), y=expression(Rabbits~km^{-1}))+
 	scale_x_continuous(expand=c(0, 0))+
@@ -75,7 +76,6 @@ ggplot(preddf, aes(x=Foxes, y=Rabbits, fill=r, z=r))+
 	theme(strip.background = element_blank(), 
 		 strip.text.x=element_text(hjust=0),
 		 panel.border = element_rect(colour = "black")
-          # axis.text.x=element_text(angle=0, vjust=0.5, hjust=0.5)
 		 ) +
 	theme(legend.justification = c(1, 1), legend.position = c(1, 1), legend.box.margin = margin(c(2, 2, 2, 2)))+
 	theme(legend.title.align=0.25, legend.title=element_text(face="italic"))
