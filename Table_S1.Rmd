@@ -1,0 +1,62 @@
+---
+title: ""
+header-includes:
+   - \usepackage{caption}
+   - \captionsetup[figure]{labelformat=empty}
+   - \captionsetup[table]{labelformat=empty}
+   - \usepackage{lineno}
+   - \linenumbers
+output:
+  pdf_document:
+      latex_engine: xelatex
+  fig_width: 7
+  fig_caption: yes
+fontsize: 10pt
+bibliography: rabbit_refs.bib
+csl: journal-of-applied-ecology.csl
+classoption: 
+  landscape  
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results="asis"}
+load("Fitted_rain_model.Rdata")
+require(dplyr)
+require(xtable)
+require(lubridate)
+require(knitr)
+require(kableExtra)
+
+siteorder<-c("Manangatang", "Cowangie", "Piambie", 
+		   "Telopea Downs", "Black Range", "Dunluce",
+		   "Landsborough", "Ararat", "Chatsworth",
+		   "Spring Hill", "Swifts Creek", "Ingliston",
+		   "Pentland Hills", "Rowsley", "Harcourt",
+		   "Yarram", "Skipton", "Lancefield",
+		   "Beechworth", "Yambuk", "Euroa")
+
+trans_summary<-spotlight %>%
+  mutate(Year=year(Date)) %>%
+  group_by(Site) %>%
+  summarise(firstsamp=round(min(Year)), 
+  		  lastsamp=round(max(Year)), 
+  		  total_surv=length(Foxes), 
+  		  years_samped=n_distinct(Year), 
+  		  maxlength=max(TransectLength)/1000, 
+  		  meanlength=round(mean(TransectLength)/1000, 2))
+
+names(trans_summary)<-c("Transect", "First Year", "Last Year", "Total Surveys", "Years with Surveys", "Length (km)", "Mean length (km)")
+
+#rename "Yarram/Woodside" to just "Yarram"
+trans_summary$Transect <-as.character(trans_summary$Transect)
+trans_summary$Transect[trans_summary$Transect=="Yarram/Woodside"] <- "Yarram"
+
+trans_summary$Transect<-factor(trans_summary$Transect, levels=siteorder)
+
+#put sites into rainfall order
+trans_summary<-trans_summary %>%
+	arrange(Transect)
+
+kable(trans_summary, caption="Table S1. Summary statistics for the 21 transects surveyed for abundance of foxes and rabbits. Mean length is the mean transect length actually surveyed across all surveys at each transect. Transects are arranged in order of increasing mean monthly rainfall.",
+	align=c("c", "c", "c", "c", "c","c", "c", "c") ) %>%
+	kable_styling(font_size=10)
+```

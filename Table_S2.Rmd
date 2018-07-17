@@ -1,0 +1,82 @@
+---
+title: ""
+header-includes:
+   - \usepackage{caption}
+   - \captionsetup[figure]{labelformat=empty}
+   - \captionsetup[table]{labelformat=empty}
+   - \usepackage{lineno}
+   - \linenumbers
+output:
+  pdf_document:
+      latex_engine: xelatex
+  fig_width: 7
+  fig_caption: yes
+fontsize: 10pt
+bibliography: rabbit_refs.bib
+csl: journal-of-applied-ecology.csl
+classoption: 
+  landscape  
+---
+
+```{r echo=FALSE, message=FALSE, results="asis"}
+require(dplyr)
+require(rjags)
+require(knitr)
+require(dplyr)
+require(xtable)
+require(lubridate)
+
+load("Fitted_rain_model.Rdata")
+param.names<-c("$\\beta_{5}$", 
+			"$\\beta_{6}$", 
+			"$\\beta_{7}$", 
+			"$\\beta_{8}$", 
+			"$\\beta_{1}$",
+			"$\\beta_{2}$",
+			"$\\beta_{3}$",
+			"$\\beta_{4}$",
+               "$\\bar{r}_{fox}$", 
+			"$\\bar{r}_{rabbit}$",
+			 "$k_{fox}$",
+			 "$k_{rabbit}$",
+			 "$k_{NR}$",
+               "$\\sigma_{process}^{fox}$", 
+			"$\\sigma_{process}^{rabbit}$",
+               "$\\sigma_{transect}^{fox}$", 
+			"$\\sigma_{transect}^{rabbit}$",
+			"$\\sigma_{survey}^{fox}$", 
+			"$\\sigma_{survey}^{rabbit}$",
+			"$zinf^{fox}$",
+			"$zinf^{rabbit}$")
+
+ord<-c(5, 6, 7, 8, 1, 2, 3, 4, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
+
+df<-cbind(samp$sims.list$beta, samp$sims.list$r.mean, samp$sims.list$r.mean.rabbits, 
+		samp$sims.list$fox.lag, samp$sims.list$rabbit.lag, samp$sims.list$food.lag,
+		samp$sims.list$sigma, samp$sims.list$p_zinf.fox, samp$sims.list$p_zinf.rabbit)
+
+stats<-data.frame("Mean"=colMeans(df), 
+			   "SD"=apply(df, 2, sd),
+			   "Median"=apply(df, 2, median), 
+                  "CI"=paste(round(apply(df, 2, quantile, 0.025), digits=3), ", ",
+                  		    round(apply(df, 2, quantile, 0.975), digits=3)))
+
+
+
+Meaning<-c("Fox - NR", "Fox - DD", "Fox - Rain", "Fox - Winter", 
+		 "Rabbit - DD", "Rabbit- Rain", "Rabbit - Winter", "Rabbit - Ripping",
+		 "Fox - Intercept", "Rabbit - Intercept",
+		 "Fox - lag period on rain", "Rabbit - lag period on rain", "Fox - lag period on NR",
+		 "Fox - process error", "Rabbit - process error", "Fox - transect error", "Rabbit - transect error",
+		 "Fox - survey error", "Rabbit - survey error", "Fox - zero inflation parameter", "Rabbit - zero inflation parameter")
+
+tabout<-cbind(param.names, Meaning, stats, ord)
+  names(tabout)<-c("Parameter","Interpretation", "Mean", "SD", "Median", "$95 \\% \\ \\text{CI}$", "ord")
+  row.names(tabout)<-param.names
+
+  tabout <-tabout %>%
+         arrange(ord) %>%
+  	    select(-ord)
+kable(tabout, caption="Table S2. Summary statistics for posterior distributions of the parameters of the state-space model of rabbit and fox abundances. Abbreviations: NR, numerical response; DD, density dependence.",
+	align=c("l", "l", "c", "c", "c", "c"), digits=3, row.names=FALSE, escape=FALSE)
+```

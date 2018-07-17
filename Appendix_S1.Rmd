@@ -1,0 +1,50 @@
+---
+title: ""
+header-includes:
+   - \usepackage{caption}
+   - \captionsetup[figure]{labelformat=empty}
+   - \captionsetup[table]{labelformat=empty}
+   - \usepackage{lineno}
+   - \linenumbers
+output:
+  pdf_document:
+      latex_engine: xelatex  	
+  fig_width: 7
+  fig_caption: yes
+fontsize: 10pt
+geometry: margin=1.0in
+bibliography: rabbit_refs.bib
+csl: journal-of-applied-ecology.csl
+---
+
+##Appendix S1. Model evaluation using posterior predictive checks
+
+```{r pvals, echo=FALSE, warning=FALSE, message=FALSE}
+load("Fitted_rain_model.Rdata")
+
+#tabulate discrepancies
+discreps<-data.frame(
+fox.real=samp$sims.list$fit.fox,
+fox.fake=samp$sims.list$fit.fox.fake,
+fox.fake.zeroes=samp$sims.list$fox.fake.zeroes,
+rabbit.real=samp$sims.list$fit.rabbit,
+rabbit.fake=samp$sims.list$fit.rabbit.fake,
+rabbit.fake.zeroes=samp$sims.list$rabbit.fake.zeroes)
+
+#Bayesian p-values of chi-sq discrepancy
+p_val_fox<-mean(discreps$fox.real>discreps$fox.fake)
+p_val_rabbit<-mean(discreps$rabbit.real>discreps$rabbit.fake)
+```
+
+
+The fit of the state-space model of fox and rabbit abundances was assessed using posterior predictive checks and Bayesian p-values [@gelman1996posterior; @gelman2000diagnostic]. Separate discrepancy estimates and Bayesian p-values were calculated for rabbits and foxes to assess the fit of both components of the model.  At each MCMC update simulated rabbit and fox counts were generated, based on the current estimates of the model's parameters. The $\chi^2$ discrepancies between the simulated counts and the expected counts $(\chi_{rep}^2)$, and between the observed counts and the expected counts $(\chi_{obs}^2)$ were calculated at each MCMC iteration, and plotted against each other (Fig. S3). Bayesian p-values were calculated based on the proportion of cases where $\chi_{rep}^2 > \chi_{obs}^2$. Proportions close to zero or one are indicative of poor model fit. To test the adequacy of the model with respect to zero-inflation, the numbers of zero counts of each species in the observed data were compared to the distributions of the numbers of zeros in the simulated counts (Fig. S3).
+
+The Bayesian p-values, computed from the $\chi^2$ discrepancies (Fig. S3) were `r format(p_val_fox, digits=4)` and `r format(p_val_rabbit, digits=4)` for foxes and rabbits respectively. These values indicate no significant departure from expectations in the fit of the model to the data. The observed numbers of zero counts for foxes and rabbits were also within the range of values expected under the respective posterior predictive distributions. Collectively, these results are indicative of adequate fit of the model to the data.
+
+#References
+
+<div id = "refs"></div>
+
+\newpage
+
+![Figure S3. Posterior predictive checks of the state-space model of fox and rabbit abundances. The panels on the left illustrate posterior predictive checks of observed and replicate (simulated) counts,  based on the $\chi^2$ discrepancy calculated at each MCMC update of the model. The Bayesian $p$-values are the proportion of simulations where $\chi_{obs}^{2}>\chi_{rep}^{2}$ (points below the diagonal lines). Bayesian $p$-values close to zero or one indicate good agreement between the model and the data. The panels on the right give the observed (vertical solid line) and simulated (histogram) numbers of zero-counts in each dataset. Dashed vertical lines denote the 95% credible intervals on the expected number of zeros.](Figures/Figure_S3.pdf)
