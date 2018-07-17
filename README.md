@@ -1,3 +1,4 @@
+![zenodo doi badge](https://zenodo.org/badge/DOI/10.5281/zenodo.1313890.svg)
 
 Data and code from: 
 
