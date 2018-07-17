@@ -1,6 +1,7 @@
 library(ggplot2)
 library(ggmcmc)
 library(jagsUI)
+dir.create("Figures", showWarnings = FALSE)
 
 args=commandArgs(trailingOnly=TRUE)
 

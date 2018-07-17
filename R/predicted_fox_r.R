@@ -1,4 +1,5 @@
 require(ggplot2)
+dir.create("Figures", showWarnings = FALSE)
 
 args=commandArgs(trailingOnly=TRUE)
 

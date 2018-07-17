@@ -1,19 +1,8 @@
 
-# Testing the numerical response of Red Fox populations to Rabbit abundance
+Data and code from: 
 
-This repository contains all data and code necessary to replicate the results of the analysis. 
+Scroggie, M.P., Forsyth, D.F., McPhee, S., Matthews, J., Stuart, I.G., Stamation, K.A., Lindeman, M. & Ramsey, D.S.L. (2018) Invasive prey controlling invasive predators? European rabbit abundance does not determine red fox population dynamics. *Journal of Applied Ecology*
 
-The models are fitted using *R* and *JAGS* so installation of current versions of those software packages will be necessary, along with several *R* packages such as *dplyr, ggplot2, ggmcmc, gridExtra, knitr, rmarkdown, readr, tidyr, stringr, rjags and jagsUI*.
+This repository contains all data and code necessary to replicate the results of the analysis presented in the paper. 
 
-To fit the models and generate other associated outputs (figures, tables, manuscript) take the following steps:
-## 1. Clone the repository
-
-	git clone https://github.com/scrogster/Fox_Model
-
-## 2. Run the analysis 
-
-
-    cd Fox_Model
-	make
-
-*make* will format the data, fit the model using JAGS, generate a variety of graphs (stored in /Figures), and generate .pdf manuscript documenting the results.
+The model is fitted using *R* and *JAGS* so installation of current versions of those software packages will be necessary, along with several *R* packages such as *dplyr, ggplot2, ggmcmc, gridExtra, knitr, rmarkdown, readr, tidyr, stringr, rjags and jagsUI*.

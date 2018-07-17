@@ -2,7 +2,7 @@ require(jagsUI)
 require(ggplot2)
 require(gridExtra)
 
-load("fitted_rain_model.Rdata")
+load("Fitted_rain_model.Rdata")
 
 #tabulate discrepancies
 discreps<-data.frame(
