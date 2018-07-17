@@ -13,7 +13,6 @@ rip_data=file.path(args[2])
 #model_data="Fitted_rain_model.Rdata"
 #out_pdf = "Figures/fox_abund.pdf"
 #rip_data=file.path("Data/ripping_data.csv")
-out_png=gsub("pdf", "png", out_pdf)
 
 #preferred ordering of sites (increasing rainfall)
 siteorder<-c("Manangatang", "Cowangie", "Piambie", 

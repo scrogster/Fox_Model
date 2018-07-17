@@ -3,15 +3,15 @@ all: prepped_data.Rdata models figures  paper
 
 clean:
 	rm -f *.Rdata;\
-	rm -f Figures/raneff_violin_foxes.pdf Figures/beta_posterior_density.pdf Figures/raneff_violin_rabbits.pdf Figures/predicted_fox_r.pdf \
-	Figures/fox_abund.pdf Figures/beta_traceplots.pdf Figures/rain_graph.pdf;\
+	rm -f Figures/Figure_2.pdf Figures/Figure_3.pdf Figures/Figure_4.pdf Figures/raneff_violin.pdf  \
+	Figures/rain_graph.pdf Figures/raneff_violin.pdf Figures/beta_traceplots.pdf Figures/PPcheck.pdf;\
 	rm -f Fox_model_paper.pdf
 
 #metarule to fit the models
 models: Fitted_rain_model.Rdata
 
 #metarule to make the figures
-figures: Figures/beta_posterior_density.pdf Figures/predicted_fox_r.pdf Figures/fox_abund.pdf \
+figures: Figures/Figure_2.pdf Figures/Figure_3.pdf Figures/Figure_4.pdf \
 Figures/rain_graph.pdf Figures/raneff_violin.pdf  Figures/beta_traceplots.pdf Figures/PPcheck.pdf
 
 #metarule to make the paper
@@ -32,14 +32,14 @@ Fitted_rain_model.Rdata: R/run_model_rain.R prepped_data.Rdata  R/GHR_distlag_ra
 ###############################################################################	
 #generate the figures as pdfs                                                 #
 ###############################################################################
-  #Figure 2
-Figures/beta_posterior_density.pdf: R/beta_posterior_density.R Fitted_rain_model.Rdata  
+  #Figure 2 --posterior densities
+Figures/Figure_2.pdf: R/Figure_2.R Fitted_rain_model.Rdata  
 	Rscript $^ $@
-  #Figure 3	
-Figures/predicted_fox_r.pdf: R/predicted_fox_r.R Fitted_rain_model.Rdata
+  #Figure 3 --predicted r for fox populations	
+Figures/Figure_3.pdf: R/Figure_3.R Fitted_rain_model.Rdata
 	Rscript $^ $@
-  #Figure 4
-Figures/fox_abund.pdf: R/pred_abund.R Fitted_rain_model.Rdata Data/ripping_data.csv
+  #Figure 4 --fox and rabbit abundances
+Figures/Figure_4.pdf: R/Figure_4.R Fitted_rain_model.Rdata Data/ripping_data.csv
 	Rscript $^ $@
 	
 ###############################################################################	
