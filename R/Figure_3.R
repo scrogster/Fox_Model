@@ -1,4 +1,5 @@
 require(ggplot2)
+pdf(NULL)
 dir.create("Figures", showWarnings = FALSE)
 
 args=commandArgs(trailingOnly=TRUE)
