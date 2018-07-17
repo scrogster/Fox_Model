@@ -4,7 +4,7 @@ all: prepped_data.Rdata models figures  paper
 clean:
 	rm -f *.Rdata;\
 	rm -f Figures/Figure_2.pdf Figures/Figure_3.pdf Figures/Figure_4.pdf Figures/raneff_violin.pdf  \
-	Figures/rain_graph.pdf Figures/raneff_violin.pdf Figures/PPcheck.pdf Figures/Diagnostic_plots.pdf;\
+	Figures/Figure_S1.pdf Figures/Figure_S2.pdf Figures/Figure_S3.pdf Figures/Diagnostic_plots.pdf;\
 	rm -f Fox_model_paper.pdf
 
 #metarule to fit the models
@@ -12,7 +12,7 @@ models: Fitted_rain_model.Rdata
 
 #metarule to make the figures
 figures: Figures/Figure_2.pdf Figures/Figure_3.pdf Figures/Figure_4.pdf \
-Figures/rain_graph.pdf Figures/raneff_violin.pdf Figures/PPcheck.pdf Figures/Diagnostic_plots.pdf
+Figures/Figure_S1.pdf Figures/Figure_S2.pdf Figures/Figure_S3.pdf Figures/Diagnostic_plots.pdf
 
 #metarule to make the paper
 paper: Fox_model_paper.pdf
@@ -45,14 +45,14 @@ Figures/Figure_4.pdf: R/Figure_4.R Fitted_rain_model.Rdata Data/ripping_data.csv
 ###############################################################################	
 #generate the supplementary figures as pdfs                                   #
 ###############################################################################
-  #Figure S1
-Figures/rain_graph.pdf: R/rain_graph.R Fitted_rain_model.Rdata
+  #Figure S1 - rainfall time series
+Figures/Figure_S1.pdf: R/Figure_S1.R Data/AllRain.csv
 	Rscript $^ $@
-  #Figure S2	
-Figures/raneff_violin.pdf: R/raneff_violin.R Fitted_rain_model.Rdata
+  #Figure S2 - random effects density plots
+Figures/Figure_S2.pdf: R/Figure_S2.R Fitted_rain_model.Rdata
 	Rscript $^ $@
-  #Figure S3
-Figures/PPcheck.pdf: R/PP_check.R  Fitted_rain_model.Rdata
+  #Figure S3 - Posterior Predictive Checks
+Figures/Figure_S3.pdf: R/Figure_S3.R  Fitted_rain_model.Rdata
 	Rscript $^
 	
 ###############################################################################	
