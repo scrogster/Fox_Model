@@ -143,7 +143,7 @@ kable(tabout, caption="Table S2. Summary statistics for posterior distributions 
 ##Appendix S2. Model evaluation using posterior predictive checks
 
 ```{r pvals, echo=FALSE, warning=FALSE, message=FALSE}
-load("fitted_rain_model.Rdata")
+load("Fitted_rain_model.Rdata")
 
 #tabulate discrepancies
 discreps<-data.frame(
