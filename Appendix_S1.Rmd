@@ -4,8 +4,7 @@ header-includes:
    - \usepackage{caption}
    - \captionsetup[figure]{labelformat=empty}
    - \captionsetup[table]{labelformat=empty}
-   - \usepackage{lineno}
-   - \linenumbers
+   - \pagenumbering{gobble}
 output:
   pdf_document:
       latex_engine: xelatex  	

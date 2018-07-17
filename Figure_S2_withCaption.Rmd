@@ -1,0 +1,17 @@
+---
+title: ""
+header-includes:
+   - \usepackage{caption}
+   - \captionsetup[figure]{labelformat=empty}
+   - \captionsetup[table]{labelformat=empty}
+   - \pagenumbering{gobble}
+output:
+  pdf_document:
+      latex_engine: xelatex  	
+  fig_width: 7
+  fig_caption: yes
+fontsize: 10pt
+geometry: margin=1.0in
+---
+
+![Figure S2. Posterior densities for the transect-level random effects terms for rates of increase of foxes (upper) and rabbits (lower). Transects are arranged in order of increasing mean monthly rainfall.](Figures/Figure_S2.pdf)

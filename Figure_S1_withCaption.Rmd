@@ -1,0 +1,17 @@
+---
+title: ""
+header-includes:
+   - \usepackage{caption}
+   - \captionsetup[figure]{labelformat=empty}
+   - \captionsetup[table]{labelformat=empty}
+   - \pagenumbering{gobble}
+output:
+  pdf_document:
+      latex_engine: xelatex  	
+  fig_width: 7
+  fig_caption: yes
+fontsize: 10pt
+geometry: margin=1.0in
+---
+
+![Figure S1. Monthly rainfall at the 21 transects. Blue lines are the raw monthly rainfall totals, red lines are 12 month moving averages, and horizontal lines are each site's monthly mean rainfall. The shaded areas indicate the timing of the south-eastern Australian Millennium Drought (2001-2009). Sites are arranged in order of increasing monthly mean rainfall.](Figures/Figure_S1.pdf)
