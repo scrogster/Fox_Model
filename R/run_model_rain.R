@@ -1,11 +1,11 @@
 require("jagsUI")
 NADAPT=5000
-NITER=100000
-NBURN= 50000
-THIN=20
+NITER= 100000
+NBURN=  50000
+THIN= 20
 NCHAINS=4
 
-set.seed(454)
+set.seed(453)
 
 prepped_data="prepped_data.Rdata"
 modelfile="R/GHR_distlag_rain.txt"
@@ -65,27 +65,21 @@ predparamstring<-c(paste0("mu.rabbits[",st[1]:fin[1],",1]"),
 			    paste0("mu.fox[",st[21]:fin[21],",21]"))
 
 inits<-function(){
-	pz.rabbit<-pz.fox<-numeric(length(hier_dat$Nobs))
-	pz.fox[hier_dat$fox.count>0]<-0
-	pz.fox[hier_dat$fox.count==0]<-0.5
-	pz.rabbit[hier_dat$rabbit.count>0]<-0
-	pz.rabbit[hier_dat$rabbit.count==0]<-0.05
 	list(
-	  beta=rnorm(8, 0, 0.1),
-	  sigma=runif(6, 0.01, 1),
-	  zero.fox=rbinom(hier_dat$Nobs, 1, pz.fox),
-	  zero.rabbit=rbinom(hier_dat$Nobs, 1, pz.rabbit),
-	  p_zinf.fox=runif(1, 0, 0.05),
-	  p_zinf.rabbit=runif(1, 0, 0.05)
-     )
+		beta=runif(8, 0, 0.02),
+		sigma=runif(6, 0.01, 1),
+		p_zinf.fox=runif(1, 0, 0.05),
+		p_zinf.rabbit=runif(1, 0, 0.05)
+	)
 }
+
 
 samp<-jags(data=hier_dat,
 		 parameters.to.save=c(params, predparamstring), 
 		 model.file=modelfile, 
-		 inits=inits,
 		 parallel=TRUE,
-		 n.chains=NCHAINS, n.adapt=NADAPT, n.iter=NITER, n.burnin=NBURN, n.thin=THIN)
+		 inits=inits,
+		 n.chains=NCHAINS, n.adapt=NADAPT, n.iter=NITER, n.burnin=NBURN, n.thin=THIN, seed=453)
 
 end.time<-Sys.time()
 duration_run<-end.time-start.time
