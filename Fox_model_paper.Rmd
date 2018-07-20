@@ -176,7 +176,7 @@ A total of `r nrow(spotlight)` spotlight counts were conducted across the 21 tra
 
 ##Model convergence and fit
 
-Convergence of the model's parameters was judged to be adequate, with all $\hat{R}\leq$ `r round(max(samp$Rhat$beta, samp$Rhat$sigma, samp$Rhat$fox.lag, samp$Rhat$rabbit.lag, samp$Rhat$food.lag ), digits=2)`. Posterior predictive checks showed good agreement between the model and the data (Appendix S2, Fig. S3).
+Convergence of the model's parameters was judged to be adequate, with all $\hat{R}\leq$ `r round(max(samp$Rhat$beta, samp$Rhat$sigma, samp$Rhat$fox.lag, samp$Rhat$rabbit.lag, samp$Rhat$food.lag ), digits=2)`. Posterior predictive checks showed good agreement between the model and the data (Appendix S1).
 
 ##Rabbit population dynamics
 
