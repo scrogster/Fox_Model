@@ -41,16 +41,19 @@ SS<-beta_result %>%
 
 beta_graph<-ggplot(beta_result, aes(x=Parameter, y=value, fill=species)) +
 	geom_violin(scale="width", alpha=0.6, draw_quantiles = c(0.025, 0.5, 0.975)) +
-	scale_x_discrete(labels=expression(atop(beta[1], DD(rabbit)), 
-								atop(beta[2], rain(rabbit)), 
-								atop(beta[3], winter(rabbit)), 
-								atop(beta[4], ripping(rabbit)), 
-								atop(beta[5], NR(fox)), 
-								atop(beta[6], DD(fox)), 
-								atop(beta[7], rain(fox)),
-								atop(beta[8], winter(fox))))+
+	scale_x_discrete(labels=expression(atop(beta[1], `DD`), 
+								atop(beta[2], `rain`), 
+								atop(beta[3], `winter`), 
+								atop(beta[4], `ripping`), 
+								atop(beta[5], `NR`), 
+								atop(beta[6], `DD`), 
+								atop(beta[7], `rain`),
+								atop(beta[8], `winter`)))+
 	scale_fill_manual(values=c("darkorange3", "blue"))+
-	geom_hline(yintercept=0, col="black", linetype = "longdash")+
+	geom_hline(yintercept=0, col="black", linetype = "dashed")+
+	geom_vline(xintercept=4.5)+
+	annotate("text", x = 1, y = 0.35, label = "Rabbit")+
+	annotate("text", x = 5, y = 0.35, label = "Fox")+
 	xlab("")+
 	ylab("Parameter value")+
 	ggtitle("A")+
