@@ -9,3 +9,7 @@ This repository contains all data and code necessary to replicate the results of
 The model is fitted using *R* and *JAGS* so installation of current versions of those software packages will be necessary, along with several *R* packages such as *dplyr, ggplot2, ggmcmc, gridExtra, knitr, rmarkdown, readr, tidyr, stringr, rjags and jagsUI*.
 
 The manuscript is compiled to a pdf from Rmarkdown using pandoc and latex, so these will be required also.
+
+**Notes** 
+
+*25 June 2019* This version implements a minor bugfix: an error in the indexing of covariate values related to season and warren ripping has been corrected, leading to some minor changes in some parameter estimates, but no change to the overall conclusions of the analysis. Thanks to Nick Golding for detecting this error. 

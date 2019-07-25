@@ -56,6 +56,17 @@ end_times = spotlight %>% group_by(Site) %>% summarise(end_times=max(time_idx), 
 #key for matching time_idx with Year/Semester designation...
 time.key<-data.frame("time_idx"=seq(1:42), "Year"=rep(1996:2016, each=2), "Semester"=c(1:2))
 
+#dates of site ripping
+ripdate<-read_csv("Data/ripping_data.csv")
+
+riptime<-ripdate %>% 
+	mutate(Year=year(RippedDate)) %>%
+	mutate(Semester=semester(RippedDate)) %>%
+	left_join(time.key) %>%
+	mutate(time_idx=ifelse(is.na(time_idx), 500, time_idx)) %>% #makes unripped sites ostensibly ripped at time=500.
+	pull(time_idx)
+
+
 ###############################################################################
 #   MAKING LAGGED RAINFALL ARRAYS..
 ###############################################################################
@@ -116,9 +127,9 @@ hier_dat<-list(
 	obs_time=spotlight$time_idx,
 	sites=max(as.numeric(factor(spotlight$Site))),
 	Nobs=nrow(spotlight),
-	winter=spotlight$winter,
-	postrip=as.numeric(spotlight$PostRipped),
-     rain_array = rain_array2  #site by time by lag matrix
+	winter=rep(c(0, 1), 21),
+	riptime=riptime,
+     rain_array = rain_array2  #site by time by lag array
 )
 
 save.image("prepped_data.Rdata")

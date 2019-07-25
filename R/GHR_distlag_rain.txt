@@ -27,7 +27,7 @@ for(tt in 2:40){
   r.rabbits.expected[tt, k]<-  log(mu.rabbits[tt-1, k])* beta[5] 
                     +rain_array[k,tt,rabbit.lag]/10*beta[6] #rain effect of r.
                      +winter[tt]*beta[7] #effect of winter on rabbit r.
-                     +postrip[tt]*beta[8] #ripping effect on rabbit r.
+                     +step(tt-riptime[k])*beta[8] #ripping effect on rabbit r.
                     +site.r.eff.rabbits[k]
 
   r.rabbits[tt, k]~dnorm(r.rabbits.expected[tt, k], tau.proc.rabbits)
